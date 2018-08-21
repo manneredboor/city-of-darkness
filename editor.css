@@ -1,0 +1,31 @@
+.editor-window {
+  position: fixed;
+  border: 2px solid #f3f3f3;
+  border-radius: 2px;
+  user-select: none;
+  background-color: #fff;
+}
+
+.editor-drag {
+  min-width: 45px;
+  width: 100%;
+  height: 10px;
+  cursor: -webkit-grab;
+  background-color: #eee;
+}
+
+.editor-drag.active {
+  cursor: -webkit-grabbing;
+  background-color: #ddd;
+}
+
+.editor-button {
+  cursor: pointer;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.editor-hierarchy-item {
+  padding: 10px 15px;
+  font-size: 12px;
+}
