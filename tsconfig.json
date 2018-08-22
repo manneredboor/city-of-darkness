@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "declaration": false,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react",
+    "lib": ["dom", "es6", "es2015", "es2017", "es2018"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "newLine": "LF",
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "strictFunctionTypes": false,
+    "target": "es5",
+    "strict": true,
+    "outDir": "./dist"
+  },
+  "exclude": ["node_modules", "dist"],
+  "include": ["src/**/*"]
+}

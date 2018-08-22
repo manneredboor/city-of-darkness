@@ -28,4 +28,19 @@
 .editor-hierarchy-item {
   padding: 10px 15px;
   font-size: 12px;
+  cursor: pointer;
+}
+
+.editor-props-grp {
+  padding: 5px 5px 0 5px;
+}
+
+.editor-props-grp input {
+  width: 100px;
+  margin: 0 5px 5px;
+}
+
+.editor-props-btn {
+  text-align: center;
+  cursor: pointer;
 }

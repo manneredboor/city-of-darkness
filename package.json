@@ -1,0 +1,26 @@
+{
+  "name": "kwc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "editor.js",
+  "scripts": {
+    "clean": "rimraf ./dist",
+    "predev": "npm run clean",
+    "prebuild": "npm run clean",
+    "dev": "cross-env NODE_ENV=development webpack -w",
+    "build": "webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "awesome-typescript-loader": "^5.2.0",
+    "browser-sync": "^2.24.6",
+    "browser-sync-webpack-plugin": "^2.2.2",
+    "copy-webpack-plugin": "^4.5.2",
+    "cross-env": "^5.2.0",
+    "rimraf": "^2.6.2",
+    "typescript": "^3.0.1",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0"
+  }
+}
