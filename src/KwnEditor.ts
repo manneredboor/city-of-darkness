@@ -180,11 +180,29 @@ export class KwnEditor {
     const state = this.state
     this.hierarchyWin.innerHTML = ''
     state.textDrawings.forEach((itm, i) => {
+      const row = document.createElement('div')
+      row.classList.add('editor-hierarchy-row')
+
       const el = document.createElement('div')
       el.textContent = itm.text
       el.classList.add('editor-hierarchy-item')
       el.addEventListener('click', () => state.selectedItem.set(i))
-      this.hierarchyWin.appendChild(el)
+
+      const del = document.createElement('button')
+      del.textContent = 'x'
+      del.addEventListener('click', () => {
+        state.textDrawings = [
+          ...state.textDrawings.slice(0, i),
+          ...state.textDrawings.slice(i + 1),
+        ]
+        this.state.selectedItem.set(-1)
+        this.renderHierarchyWin()
+        this.intro.renderLetters()
+      })
+
+      row.appendChild(el)
+      row.appendChild(del)
+      this.hierarchyWin.appendChild(row)
     })
   }
 
@@ -209,6 +227,23 @@ export class KwnEditor {
     const i = this.state.selectedItem.value
     if (i === -1) return
     const itm = this.state.textDrawings[i]
+
+    // Text
+    const grp = document.createElement('div')
+    grp.classList.add('editor-props-grp')
+    const text = document.createElement('input')
+    text.value = itm.text
+    text.type = 'text'
+    text.addEventListener('change', e => {
+      itm.text = (e.currentTarget as any).value
+      this.intro.renderLetters()
+      this.renderHierarchyWin()
+    })
+    grp.appendChild(text)
+    this.propsWin.appendChild(grp)
+    this.propsWin.appendChild(document.createElement('hr'))
+
+    // Path
     itm.path.forEach((p, j) => {
       const grp = document.createElement('div')
       grp.classList.add('editor-props-grp')

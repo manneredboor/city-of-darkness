@@ -45,7 +45,7 @@
   cursor: pointer;
 }
 
-.editor-debug .kwn-intro-text-wrap {
+.editor-debug .kwn-intro-text-perspective {
   outline: 1px solid #f00;
 }
 
@@ -70,4 +70,15 @@
   display: block;
   padding: 10px 20px;
   margin: 10px auto;
+}
+
+.editor-hierarchy-row {
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+}
+
+.editor-hierarchy-row button {
+  width: 20px;
+  cursor: pointer;
 }

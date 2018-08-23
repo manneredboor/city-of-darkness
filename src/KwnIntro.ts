@@ -166,11 +166,10 @@ export class KwnIntro {
       textMeasure.textContent = itm.text
       textMeasure.style.fontSize = itmGlobH + 'px'
       textMeasure.style.position = 'absolute'
-      // textMeasure.style.visibility = 'hidden'
+      textMeasure.style.visibility = 'hidden'
       document.body.appendChild(textMeasure)
       const textW = textMeasure.clientWidth
-      console.log(textW)
-      // document.body.removeChild(textMeasure)
+      document.body.removeChild(textMeasure)
 
       totalW -= textW
 
