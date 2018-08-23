@@ -44,3 +44,30 @@
   text-align: center;
   cursor: pointer;
 }
+
+.editor-debug .kwn-intro-text-wrap {
+  border: 1px solid #f00;
+}
+
+.editor-popup {
+  width: 60%;
+  height: 60%;
+  position: fixed;
+  left: 20%;
+  top: 20%;
+  border: 2px solid #f3f3f3;
+  border-radius: 2px;
+  background-color: #fff;
+}
+
+.editor-popup textarea {
+  display: block;
+  width: 100%;
+  height: calc(100% - 55px);
+}
+
+.editor-popup button {
+  display: block;
+  padding: 10px 20px;
+  margin: 10px auto;
+}
