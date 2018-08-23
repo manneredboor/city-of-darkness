@@ -46,7 +46,7 @@
 }
 
 .editor-debug .kwn-intro-text-wrap {
-  border: 1px solid #f00;
+  outline: 1px solid #f00;
 }
 
 .editor-popup {

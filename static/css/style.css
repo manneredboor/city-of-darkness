@@ -28,23 +28,24 @@ body {
   overflow: hidden;
 }
 
-.kwn-intro-text-wrap {
+.kwn-intro-text-perspective {
   position: absolute;
   top: 0;
   left: 0;
   color: #fff;
-  font-size: 40px;
-  font-weight: bold;
-  text-transform: uppercase;
   overflow: hidden;
   transform-origin: 0 0;
 }
 
+.kwn-intro-text-mover {
+  position: relative;
+}
+
 .kwn-intro-text {
   position: relative;
-  animation-name: kek;
-  animation-duration: 12s;
-  animation-iteration-count: infinite;
+  line-height: 1;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .canvas {
@@ -52,16 +53,4 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-}
-
-@keyframes kek {
-  0% {
-    transform: translateX(-150px);
-  }
-  50% {
-    transform: translateX(650px);
-  }
-  100% {
-    transform: translateX(-150px);
-  }
 }

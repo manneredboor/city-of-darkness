@@ -1,6 +1,6 @@
-import { Vector, vec } from './Vector'
 import './numeric.min.js'
-import { initialState } from './initialState'
+import { Vector, vec } from './Vector'
+import initialState from './initialState'
 const numeric = (window as any).numeric
 
 export interface TextDrawing {
@@ -9,6 +9,7 @@ export interface TextDrawing {
 }
 
 export interface State {
+  animProg: number
   bgW: number
   bgH: number
   winH: number
@@ -16,14 +17,26 @@ export interface State {
   textDrawings: TextDrawing[]
 }
 
+interface TextPath {
+  el: HTMLElement
+  w: number
+}
+
+interface TextProgs {
+  prog: number
+  path: TextPath[]
+}
+
 export class KwnIntro {
-  scale: number
-  renderHooks: ((t: number) => void)[] = []
   canvas: HTMLCanvasElement
-  intoBody: HTMLElement
   ctx: CanvasRenderingContext2D
+  intoBody: HTMLElement
+  letters: TextProgs[]
+  renderHooks: ((t: number) => void)[] = []
+  scale: number
 
   state: State = {
+    animProg: 0,
     bgH: 1000,
     bgW: 1491,
     textDrawings: initialState,
@@ -35,6 +48,7 @@ export class KwnIntro {
     this.scale =
       typeof window.devicePixelRatio === 'number' ? window.devicePixelRatio : 1
 
+    this.letters = []
     this.intoBody = document.querySelector('.kwn-intro-body') as HTMLElement
     this.canvas = document.querySelector('#canvas') as HTMLCanvasElement
     this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D
@@ -47,10 +61,21 @@ export class KwnIntro {
       this.renderLetters()
     })
 
-    window.requestAnimationFrame(this.renderCanvas)
+    window.requestAnimationFrame(this.renderRaf)
   }
 
-  renderCanvas = (time: number) => {
+  renderRaf = (time: number) => {
+    const { animProg } = this.state
+    this.letters.forEach((l, i) => {
+      const prog = animProg
+      if (prog !== l.prog) {
+        l.prog = prog
+        l.path.forEach((p, j) => {
+          p.el.style.transform = `translateX(${prog * 100}%)`
+        })
+      }
+    })
+
     const ctx = this.ctx
 
     if (this.scale !== 1) ctx.scale(this.scale, this.scale)
@@ -60,7 +85,7 @@ export class KwnIntro {
 
     this.renderHooks.forEach(hook => hook(time))
 
-    window.requestAnimationFrame(this.renderCanvas)
+    window.requestAnimationFrame(this.renderRaf)
   }
 
   // https://franklinta.com/2014/09/08/computing-css-matrix3d-transforms/
@@ -107,71 +132,109 @@ export class KwnIntro {
 
   renderLetters = () => {
     const rv = this.restoreVec
+    this.letters = []
     this.intoBody.innerHTML = ''
 
     this.state.textDrawings.forEach((itm, i) => {
-      let itmGlobH = Infinity
+      this.letters[i] = {
+        prog: 0,
+        path: [],
+      }
 
-      const totalW = itm.path.reduce((tw, p, j) => {
-        const { y: y1 } = rv(p[0])
+      let itmGlobH = 0
+      let totalW = 0
+      let currOffset = 0
+
+      itm.path.forEach((p, j) => {
+        const { x: x1, y: y1 } = rv(p[0])
         const { y: y2 } = rv(p[1])
         const h = y2 - y1
-        itmGlobH = h < itmGlobH ? h : itmGlobH
+        itmGlobH += h
 
         if (j < itm.path.length - 1) {
-          const { x: x1 } = rv(p[0])
           const { x: nx1 } = rv(itm.path[j + 1][0])
           const w = nx1 - x1
-          return tw + w
-        } else {
-          return tw
+          totalW += w
         }
-      }, 0)
+      })
 
-      let currOffset = 0
+      itmGlobH /= itm.path.length
+      itmGlobH *= 0.75
+
+      const textMeasure = document.createElement('div')
+      textMeasure.classList.add('kwn-intro-text')
+      textMeasure.textContent = itm.text
+      textMeasure.style.fontSize = itmGlobH + 'px'
+      textMeasure.style.position = 'absolute'
+      // textMeasure.style.visibility = 'hidden'
+      document.body.appendChild(textMeasure)
+      const textW = textMeasure.clientWidth
+      console.log(textW)
+      // document.body.removeChild(textMeasure)
+
+      totalW -= textW
 
       itm.path.forEach((p, j) => {
         const p1 = rv(p[0])
         const p2 = rv(p[1])
-        const { x: x1, y: y1 } = p1
-        const { x: x2, y: y2 } = p2
+        const { x: x1 } = p1
+        // const { x: x1, y: y1 } = p1
+        // const { x: x2, y: y2 } = p2
 
         if (j < itm.path.length - 1) {
           const np1 = rv(itm.path[j + 1][0])
           const np2 = rv(itm.path[j + 1][1])
-          const { x: nx1, y: ny1 } = np1
-          const { x: nx2, y: ny2 } = np2
+          const { x: nx1 } = np1
+          // const { x: nx1, y: ny1 } = np1
+          // const { x: nx2, y: ny2 } = np2
 
           const w = nx1 - x1
-          const h1 = y2 - y1
-          const h2 = ny2 - ny1
-          const h = Math.min(h1, h2)
-          // const h = itmGlobH
+          // const h1 = y2 - y1
+          // const h2 = ny2 - ny1
+          // const h = Math.min(h1, h2)
+          // const h = Math.max(h1, h2)
+          // const h = (h1 + h2) / 2
+          const h = itmGlobH
 
-          const wrap = document.createElement('div')
-          wrap.classList.add('kwn-intro-text-wrap')
-
-          wrap.style.width = w + 'px'
-          wrap.style.height = h + 'px'
-
+          // Perspective
+          const perspective = document.createElement('div')
+          perspective.classList.add('kwn-intro-text-perspective')
+          perspective.style.width = w + 'px'
+          perspective.style.height = h + 'px'
           const matrix = this.getTransform(
             [vec(0, 0), vec(w, 0), vec(0, h), vec(w, h)],
             [p1, np1, p2, np2],
           )
-          wrap.style.transform = `matrix3d(${matrix})`
+          perspective.style.transform = `matrix3d(${matrix})`
 
+          // Text
           const text = document.createElement('div')
           text.classList.add('kwn-intro-text')
           text.textContent = itm.text
-
           text.style.fontSize = h + 'px'
 
-          text.style.width = totalW + 'px'
-          text.style.left = -currOffset + 'px'
+          // Scale
+          const textScale = document.createElement('div')
+          textScale.classList.add('kwn-intro-text-scale')
 
-          wrap.appendChild(text)
-          this.intoBody.appendChild(wrap)
+          // Mover
+          const textMover = document.createElement('div')
+          textMover.classList.add('kwn-intro-text-mover')
+          textMover.style.width = totalW + 'px'
+          textMover.style.left = -currOffset + 'px'
 
+          // Appends
+          textMover.appendChild(text)
+          perspective.appendChild(textMover)
+          this.intoBody.appendChild(perspective)
+
+          // Save
+          this.letters[i].path[j] = {
+            el: textMover,
+            w,
+          }
+
+          // Next offset
           currOffset += w
         }
       })
@@ -219,23 +282,23 @@ export class KwnIntro {
     return vec(x, y)
   }
 
-  saveW = (x: number) => {
-    const { scale } = this.getRatiosDiffs()
-    return x * scale
-  }
+  // saveW = (x: number) => {
+  //   const { scale } = this.getRatiosDiffs()
+  //   return x * scale
+  // }
 
-  saveH = (x: number) => {
-    const { scale } = this.getRatiosDiffs()
-    return x * scale
-  }
+  // saveH = (x: number) => {
+  //   const { scale } = this.getRatiosDiffs()
+  //   return x * scale
+  // }
 
-  restoreW = (x: number) => {
-    const { scale } = this.getRatiosDiffs()
-    return x * (1 / scale)
-  }
+  // restoreW = (x: number) => {
+  //   const { scale } = this.getRatiosDiffs()
+  //   return x * (1 / scale)
+  // }
 
-  restoreH = (x: number) => {
-    const { scale } = this.getRatiosDiffs()
-    return x * (1 / scale)
-  }
+  // restoreH = (x: number) => {
+  //   const { scale } = this.getRatiosDiffs()
+  //   return x * (1 / scale)
+  // }
 }

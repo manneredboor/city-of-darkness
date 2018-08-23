@@ -1,4 +1,5 @@
 import { Delegate } from './Delegate'
+import { WatchedValue } from './WatchedValue'
 import { Vector, vec } from './Vector'
 import { KwnIntro, State } from './KwnIntro'
 
@@ -7,17 +8,18 @@ export interface ExtendedState extends State {
   isDown: boolean
   mouse: Vector
   movingItem: number | string
-  selectedItem: number
+  selectedItem: WatchedValue<number>
 }
 
 export class KwnEditor {
-  hierarchy: HTMLElement
+  animWin: HTMLElement
+  hierarchyWin: HTMLElement
   intro: KwnIntro
   propsWin: HTMLElement
   state: ExtendedState
   propsUpdate = new Delegate()
   hierarchyUpdate = new Delegate()
-  wrap: HTMLElement
+  buttonsWin: HTMLElement
 
   sv = (x: number, y: number) => this.intro.saveVec(vec(x, y))
 
@@ -30,23 +32,32 @@ export class KwnEditor {
     state.debugMode = true
     state.isDown = false
     state.mouse = vec(0, 0)
-    state.selectedItem = -1
+    state.selectedItem = new WatchedValue(-1)
 
     this.loadStyles()
-    this.wrap = this.createWindow(20, 20)
-    this.hierarchy = this.createWindow(100, 20)
+    this.buttonsWin = this.createWindow(20, 20)
+    this.hierarchyWin = this.createWindow(100, 20)
     this.propsWin = this.createWindow(window.innerWidth - 400, 60)
+    this.animWin = this.createWindow(
+      window.innerWidth - 400,
+      window.innerHeight - 300,
+    )
 
-    this.renderHierarchy()
+    this.renderHierarchyWin()
 
     this.hierarchyUpdate.subscribe(() => {
       intro.renderLetters()
-      this.renderHierarchy()
+      this.renderHierarchyWin()
     })
 
     this.propsUpdate.subscribe(() => {
       intro.renderLetters()
-      this.renderProps()
+      this.renderPropsWin()
+    })
+
+    state.selectedItem.subscribe(() => {
+      this.renderPropsWin()
+      this.renderAnimWin()
     })
 
     intro.canvas.addEventListener('mousemove', e => {
@@ -81,6 +92,7 @@ export class KwnEditor {
       },
     })
 
+    // Debug Button
     this.createButton({
       text: 'D',
       onClick: () => {
@@ -89,13 +101,15 @@ export class KwnEditor {
       },
     })
 
+    // Save Button
     this.createButton({
       text: 'S',
       onClick: () => {
         const win = document.createElement('div')
         win.classList.add('editor-popup')
         const code = document.createElement('textarea')
-        code.value = JSON.stringify(intro.state.textDrawings)
+        code.value =
+          'export default ' + JSON.stringify(intro.state.textDrawings)
         const close = document.createElement('button')
         close.textContent = 'close'
         win.appendChild(close)
@@ -158,27 +172,41 @@ export class KwnEditor {
     const textButton = document.createElement('div')
     textButton.classList.add('editor-button')
     textButton.textContent = text
-    this.wrap.appendChild(textButton)
+    this.buttonsWin.appendChild(textButton)
     textButton.addEventListener('click', onClick)
   }
 
-  renderHierarchy = () => {
-    this.hierarchy.innerHTML = ''
-    this.state.textDrawings.forEach((itm, i) => {
+  renderHierarchyWin = () => {
+    const state = this.state
+    this.hierarchyWin.innerHTML = ''
+    state.textDrawings.forEach((itm, i) => {
       const el = document.createElement('div')
       el.textContent = itm.text
       el.classList.add('editor-hierarchy-item')
-      el.addEventListener('click', () => {
-        this.state.selectedItem = i
-        this.propsUpdate.fire()
-      })
-      this.hierarchy.appendChild(el)
+      el.addEventListener('click', () => state.selectedItem.set(i))
+      this.hierarchyWin.appendChild(el)
     })
   }
 
-  renderProps = () => {
+  renderAnimWin = () => {
+    this.animWin.innerHTML = ''
+    const i = this.state.selectedItem.value
+    if (i === -1) return
+    const prog = document.createElement('input')
+    prog.style.width = '300px'
+    prog.value = '0'
+    prog.type = 'range'
+    prog.min = '0'
+    prog.max = '10000'
+    prog.addEventListener('mousemove', () => {
+      this.state.animProg = Number(prog.value) / 10000
+    })
+    this.animWin.appendChild(prog)
+  }
+
+  renderPropsWin = () => {
     this.propsWin.innerHTML = ''
-    const { selectedItem: i } = this.state
+    const i = this.state.selectedItem.value
     if (i === -1) return
     const itm = this.state.textDrawings[i]
     itm.path.forEach((p, j) => {
@@ -295,7 +323,7 @@ export class KwnEditor {
         ctx.lineTo(x2, y2)
         ctx.stroke()
 
-        if (state.selectedItem === i) {
+        if (state.selectedItem.value === i) {
           ctx.beginPath()
           ctx.rect(x1, y1 - 20, 10, 10)
           ctx.fillStyle = '#fff'
