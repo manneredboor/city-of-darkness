@@ -14,7 +14,7 @@ interface EditorProps {}
 
 interface EditorState {
   debugMode: boolean
-  introState: number
+  introLastUpd: number
   isShownCode: boolean
   selectedItem: number
 }
@@ -36,7 +36,7 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
     this.intro.renderHooks.push(this.renderRaf)
     this.state = {
       debugMode: true,
-      introState: Date.now(),
+      introLastUpd: Date.now(),
       isShownCode: false,
       selectedItem: -1,
     }
@@ -73,9 +73,9 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
   }
 
   componentDidUpdate(prevProps: EditorProps, prevState: EditorState) {
-    const { debugMode, introState, isShownCode } = this.state
+    const { debugMode, introLastUpd, isShownCode } = this.state
 
-    if (introState !== prevState.introState) {
+    if (introLastUpd !== prevState.introLastUpd) {
       this.intro.renderLetters()
     }
 
@@ -89,12 +89,12 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
     }
   }
 
-  updIntro = () => this.setState({ introState: Date.now() })
+  updIntro = () => this.setState({ introLastUpd: Date.now() })
 
   render() {
     const intro = this.intro
     const introState = intro.state
-    const { debugMode, selectedItem, isShownCode } = this.state
+    const { debugMode, selectedItem, isShownCode, introLastUpd } = this.state
     const currentItem = introState.textDrawings[selectedItem]
     return (
       <>
@@ -111,6 +111,7 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
             />
           </div>
         )}
+
         <EditorWindow x={20} y={20}>
           {/* Buttons */}
           <EditorButton
@@ -151,11 +152,14 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
               </div>
               <button
                 onClick={() => {
-                  introState.textDrawings = [
-                    ...introState.textDrawings.slice(0, i),
-                    ...introState.textDrawings.slice(i + 1),
-                  ]
-                  this.setState({ selectedItem: -1 })
+                  if (selectedItem === i) {
+                    this.setState({ selectedItem: -1 })
+                  } else if (selectedItem > i) {
+                    this.setState({
+                      selectedItem: selectedItem - 1,
+                    })
+                  }
+                  introState.textDrawings.splice(i, 1)
                   this.updIntro()
                 }}
               >
@@ -187,11 +191,11 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
         {/* Props */}
         {selectedItem !== -1 && (
           <EditorWindow x={window.innerWidth - 400} y={60}>
-            <>
+            <React.Fragment key={selectedItem + introLastUpd}>
               <div className="editor-props-grp">
                 <input
                   type="text"
-                  value={currentItem.text}
+                  defaultValue={currentItem.text}
                   onChange={e => {
                     currentItem.text = e.currentTarget.value
                     intro.renderLetters()
@@ -260,7 +264,7 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
               >
                 +
               </div>
-            </>
+            </React.Fragment>
           </EditorWindow>
         )}
       </>
