@@ -13,7 +13,8 @@ module.exports = {
   devtool: process.env.NODE_ENV === 'development' ? 'eval-source-map' : false,
 
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.tsx', '.js'],
+    modules: ['src', 'node_modules'],
   },
 
   output: {

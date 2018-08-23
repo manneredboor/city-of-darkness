@@ -1,6 +1,6 @@
-import './numeric.min.js'
-import { Vector, vec } from './Vector'
-import initialState from './initialState'
+import 'vendor/numeric.min.js'
+import { Vector, vec } from 'utils/Vector'
+import initialState from 'utils/initialState'
 const numeric = (window as any).numeric
 
 export interface TextDrawing {
@@ -27,7 +27,7 @@ interface TextProgs {
   path: TextPath[]
 }
 
-export class KwnIntro {
+export class Intro {
   canvas: HTMLCanvasElement
   ctx: CanvasRenderingContext2D
   intoBody: HTMLElement

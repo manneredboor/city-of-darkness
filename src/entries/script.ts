@@ -1,2 +1,2 @@
-import { KwnIntro } from '../KwnIntro'
-;(window as any).kwnIntro = new KwnIntro()
+import { Intro } from '../Intro'
+;(window as any).kwnIntro = new Intro()
