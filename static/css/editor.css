@@ -63,7 +63,7 @@
 .editor-popup textarea {
   display: block;
   width: 100%;
-  height: calc(100% - 55px);
+  height: calc(100% - 60px);
 }
 
 .editor-popup button {

@@ -15,11 +15,13 @@ interface EditorProps {}
 interface EditorState {
   debugMode: boolean
   introState: number
+  isShownCode: boolean
   selectedItem: number
 }
 
 export class Editor extends React.PureComponent<EditorProps, EditorState> {
   intro: Intro
+  codeText: React.RefObject<HTMLTextAreaElement>
 
   rafState: RafState = {
     isDown: false,
@@ -29,11 +31,13 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
 
   constructor(props: EditorProps) {
     super(props)
+    this.codeText = React.createRef()
     this.intro = (window as any).kwnIntro as Intro
     this.intro.renderHooks.push(this.renderRaf)
     this.state = {
       debugMode: true,
       introState: Date.now(),
+      isShownCode: false,
       selectedItem: -1,
     }
   }
@@ -69,7 +73,7 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
   }
 
   componentDidUpdate(prevProps: EditorProps, prevState: EditorState) {
-    const { debugMode, introState } = this.state
+    const { debugMode, introState, isShownCode } = this.state
 
     if (introState !== prevState.introState) {
       this.intro.renderLetters()
@@ -78,6 +82,11 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
     if (debugMode !== prevState.debugMode) {
       document.body.classList.toggle('editor-debug', debugMode)
     }
+
+    if (!prevState.isShownCode && isShownCode && this.codeText.current) {
+      this.codeText.current.focus()
+      this.codeText.current.select()
+    }
   }
 
   updIntro = () => this.setState({ introState: Date.now() })
@@ -85,10 +94,23 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
   render() {
     const intro = this.intro
     const introState = intro.state
-    const { debugMode, selectedItem } = this.state
+    const { debugMode, selectedItem, isShownCode } = this.state
     const currentItem = introState.textDrawings[selectedItem]
     return (
       <>
+        {isShownCode && (
+          <div className="editor-popup">
+            <button onClick={() => this.setState({ isShownCode: false })}>
+              close
+            </button>
+            <textarea
+              ref={this.codeText}
+              value={`export default ${JSON.stringify(
+                intro.state.textDrawings,
+              )}`}
+            />
+          </div>
+        )}
         <EditorWindow x={20} y={20}>
           {/* Buttons */}
           <EditorButton
@@ -113,23 +135,7 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
           />
           <EditorButton
             text="S"
-            onClick={() => {
-              const win = document.createElement('div')
-              win.classList.add('editor-popup')
-              const code = document.createElement('textarea')
-              code.value =
-                'export default ' + JSON.stringify(intro.state.textDrawings)
-              const close = document.createElement('button')
-              close.textContent = 'close'
-              win.appendChild(close)
-              win.appendChild(code)
-              document.body.appendChild(win)
-              code.focus()
-              code.select()
-              close.addEventListener('click', () =>
-                document.body.removeChild(win),
-              )
-            }}
+            onClick={() => this.setState({ isShownCode: true })}
           />
         </EditorWindow>
 
