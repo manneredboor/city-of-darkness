@@ -1,4 +1,5 @@
 .editor-window {
+  font-size: 12px;
   position: fixed;
   border: 2px solid #f3f3f3;
   border-radius: 2px;
@@ -35,9 +36,10 @@
   padding: 5px 5px 0 5px;
 }
 
-.editor-props-grp input {
+.editor-props-grp input,
+.editor-props-grp select {
   width: 100px;
-  margin: 0 5px 5px;
+  margin: 0 5px 5px 0;
 }
 
 .editor-props-btn {
@@ -45,7 +47,7 @@
   cursor: pointer;
 }
 
-.editor-debug .kwn-intro-text-perspective {
+.editor-debug .kwc-intro-text-perspective {
   outline: 1px solid #f00;
 }
 

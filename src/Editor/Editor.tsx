@@ -1,12 +1,11 @@
 import * as React from 'react'
-import { Vector, vec } from 'utils/Vector'
+import { vec } from 'utils/Vector'
 import { Intro } from 'Intro'
 import { EditorWindow } from 'Editor/EditorWindow'
 import { EditorButton } from 'Editor/EditorButton'
 
 interface RafState {
   isDown: boolean
-  mouse: Vector
   movingItem: number | string
 }
 
@@ -25,14 +24,13 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
 
   rafState: RafState = {
     isDown: false,
-    mouse: vec(0, 0),
     movingItem: -1,
   }
 
   constructor(props: EditorProps) {
     super(props)
     this.codeText = React.createRef()
-    this.intro = (window as any).kwnIntro as Intro
+    this.intro = (window as any).kwcIntro as Intro
     this.intro.renderHooks.push(this.renderRaf)
     this.state = {
       debugMode: true,
@@ -58,11 +56,6 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
     const intro = this.intro
     const rafState = this.rafState
 
-    intro.canvas.addEventListener(
-      'mousemove',
-      e => (rafState.mouse = vec(e.pageX, e.pageY)),
-    )
-
     intro.canvas.addEventListener('mousedown', () => (rafState.isDown = true))
 
     intro.canvas.addEventListener('mouseup', () => {
@@ -70,6 +63,12 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
       rafState.movingItem = -1
       this.updIntro()
     })
+
+    // const dots: Vector[] = []
+    // intro.canvas.addEventListener('mousedown', () => {
+    //   dots.push(this.sv(intro.state.mouse.x, intro.state.mouse.y))
+    //   console.log(dots)
+    // })
   }
 
   componentDidUpdate(prevProps: EditorProps, prevState: EditorState) {
@@ -121,6 +120,8 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
               const y = window.innerHeight / 2
               introState.textDrawings.push({
                 text: 'LOLKEK',
+                dur: 4,
+                delay: 1,
                 path: [
                   [vec(x, y), vec(x, y + 30)],
                   [vec(x + 250, y), vec(x + 250, y + 30)],
@@ -131,12 +132,16 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
             }}
           />
           <EditorButton
-            text="D"
+            text="L"
             onClick={() => this.setState({ debugMode: !debugMode })}
           />
           <EditorButton
             text="S"
             onClick={() => this.setState({ isShownCode: true })}
+          />
+          <EditorButton
+            text="D"
+            onClick={() => (intro.state.isDarkShown = !intro.state.isDarkShown)}
           />
         </EditorWindow>
 
@@ -169,25 +174,6 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
           ))}
         </EditorWindow>
 
-        {/* Animation */}
-        {selectedItem !== -1 && (
-          <EditorWindow
-            x={window.innerWidth - 400}
-            y={window.innerHeight - 300}
-          >
-            <input
-              type="range"
-              min="0"
-              max="10000"
-              style={{ width: 300 }}
-              onMouseMove={e => {
-                const el = e.currentTarget
-                intro.state.animProg = Number(el.value) / Number(el.max)
-              }}
-            />
-          </EditorWindow>
-        )}
-
         {/* Props */}
         {selectedItem !== -1 && (
           <EditorWindow x={window.innerWidth - 400} y={60}>
@@ -203,6 +189,24 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
                 />
               </div>
               <hr />
+              <div className="editor-props-grp">
+                <input
+                  type="number"
+                  defaultValue={String(currentItem.dur)}
+                  onChange={e => {
+                    currentItem.dur = Number(e.currentTarget.value)
+                  }}
+                />
+                duration <br />
+                <input
+                  type="number"
+                  defaultValue={String(currentItem.delay)}
+                  onChange={e => {
+                    currentItem.delay = Number(e.currentTarget.value)
+                  }}
+                />
+                delay <br />
+              </div>
               {currentItem.path.map((p, j) => (
                 <React.Fragment key={j}>
                   <div className="editor-props-grp">
@@ -282,8 +286,8 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
     this.intro.state.textDrawings.forEach((itm, i) => {
       ctx.save()
 
-      const mx = rafState.mouse.x
-      const my = rafState.mouse.y
+      const mx = this.intro.state.mouse.x
+      const my = this.intro.state.mouse.y
 
       itm.path.forEach((p, j) => {
         const { x: x1, y: y1 } = rv(p[0])

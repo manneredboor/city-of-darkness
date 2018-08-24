@@ -1,20 +1,27 @@
 import 'vendor/numeric.min.js'
 import { Vector, vec } from 'utils/Vector'
 import initialState from 'utils/initialState'
-const numeric = (window as any).numeric
+import bgMask from 'utils/mask'
+
+export const minmax = (min: number, value: number, max: number) =>
+  Math.max(min, Math.min(max, value))
 
 export interface TextDrawing {
+  dur: number
+  delay: number
   path: Vector[][]
   text: string
 }
 
 export interface State {
-  animProg: number
-  bgW: number
   bgH: number
+  bgW: number
+  hlRadius: number
+  isDarkShown: boolean
+  mouse: Vector
+  textDrawings: TextDrawing[]
   winH: number
   winW: number
-  textDrawings: TextDrawing[]
 }
 
 interface TextPath {
@@ -23,7 +30,7 @@ interface TextPath {
 }
 
 interface TextProgs {
-  prog: number
+  prog: { [key: string]: number }
   path: TextPath[]
 }
 
@@ -36,9 +43,11 @@ export class Intro {
   scale: number
 
   state: State = {
-    animProg: 0,
     bgH: 1000,
     bgW: 1491,
+    hlRadius: 100,
+    isDarkShown: true,
+    mouse: vec(0, 0),
     textDrawings: initialState,
     winH: -1,
     winW: -1,
@@ -49,8 +58,10 @@ export class Intro {
       typeof window.devicePixelRatio === 'number' ? window.devicePixelRatio : 1
 
     this.letters = []
-    this.intoBody = document.querySelector('.kwn-intro-body') as HTMLElement
-    this.canvas = document.querySelector('#canvas') as HTMLCanvasElement
+    this.intoBody = document.querySelector('.kwc-intro-body') as HTMLElement
+    this.canvas = document.querySelector(
+      '.kwc-intro-canvas',
+    ) as HTMLCanvasElement
     this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D
 
     this.updateSizes()
@@ -61,37 +72,85 @@ export class Intro {
       this.renderLetters()
     })
 
+    this.canvas.addEventListener(
+      'mousemove',
+      e => (this.state.mouse = vec(e.pageX, e.pageY)),
+    )
+
     window.requestAnimationFrame(this.renderRaf)
   }
 
-  renderRaf = (time: number) => {
-    const { animProg } = this.state
-    this.letters.forEach((l, i) => {
-      const prog = animProg
-      if (prog !== l.prog) {
-        l.prog = prog
-        l.path.forEach((p, j) => {
-          p.el.style.transform = `translateX(${prog * 100}%)`
-        })
-      }
-    })
+  propsGetters: { [key: string]: (t: number) => string } = {
+    opacity: (prog: number) => String(prog),
+    transform: (prog: number) => `translateX(${prog * 100}%)`,
+  }
 
+  renderRaf = (time: number) => {
     const ctx = this.ctx
+    const { width: w, height: h } = ctx.canvas
+    const { mouse, hlRadius } = this.state
 
     if (this.scale !== 1) ctx.scale(this.scale, this.scale)
     ctx.imageSmoothingEnabled = true
-
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
 
-    this.renderHooks.forEach(hook => hook(time))
+    if (this.state.isDarkShown) {
+      ctx.save()
 
+      ctx.beginPath()
+      bgMask.forEach((dot, i) => {
+        const d = this.restoreVec(dot)
+        if (i === 0) {
+          ctx.moveTo(d.x, d.y)
+        } else {
+          ctx.lineTo(d.x, d.y)
+        }
+      })
+      ctx.closePath()
+      ctx.clip()
+      // ctx.fillStyle = '#000'
+      // ctx.globalCompositeOperation = 'xor'
+      // ctx.fill()
+
+      ctx.globalAlpha = 0.85
+      ctx.fillRect(0, 0, w, h)
+
+      var g = ctx.createRadialGradient(
+        mouse.x,
+        mouse.y,
+        0,
+        mouse.x,
+        mouse.y,
+        hlRadius,
+      )
+
+      g.addColorStop(1, 'rgba(0,0,0,0)')
+      g.addColorStop(0.95, 'rgba(0,0,0,1)')
+      g.addColorStop(0, 'rgba(0,0,0,1)')
+
+      ctx.globalAlpha = 1
+      ctx.fillStyle = g
+      ctx.globalCompositeOperation = 'xor'
+
+      ctx.fillRect(
+        mouse.x - hlRadius,
+        mouse.y - hlRadius,
+        hlRadius * 2,
+        hlRadius * 2,
+      )
+
+      ctx.restore()
+    }
+
+    this.renderHooks.forEach(hook => hook(time))
     window.requestAnimationFrame(this.renderRaf)
   }
 
   // https://franklinta.com/2014/09/08/computing-css-matrix3d-transforms/
   // prettier-ignore
   getTransform = (from: Vector[], to: Vector[]) => {
-    var A, H, b, h, i, k, k_i, l, lhs, m, ref, rhs;
+    var A, H, b, h, i, k, l, ref;
+    // var A, H, b, h, i, k, k_i, l, lhs, m, ref, rhs;
     console.assert((from.length === (ref = to.length) && ref === 4));
     A = []; // 8x8
     for (i = k = 0; k < 4; i = ++k) {
@@ -104,21 +163,21 @@ export class Intro {
       b.push(to[i].y);
     }
     // Solve A * h = b for h
-    h = numeric.solve(A, b);
+    h = (window as any).solve(A, b);
     H = [[h[0], h[1], 0, h[2]], [h[3], h[4], 0, h[5]], [0, 0, 1, 0], [h[6], h[7], 0, 1]];
     // Sanity check that H actually maps `from` to `to`
-    for (i = m = 0; m < 4; i = ++m) {
-      lhs = numeric.dot(H, [from[i].x, from[i].y, 0, 1]);
-      k_i = lhs[3];
-      rhs = numeric.dot(k_i, [to[i].x, to[i].y, 0, 1]);
-      console.assert(numeric.norm2(numeric.sub(lhs, rhs)) < 1e-9, "Not equal:", lhs, rhs);
-    }
+    // for (i = m = 0; m < 4; i = ++m) {
+    //   lhs = numeric.dot(H, [from[i].x, from[i].y, 0, 1]);
+    //   k_i = lhs[3];
+    //   rhs = numeric.dot(k_i, [to[i].x, to[i].y, 0, 1]);
+    //   console.assert(numeric.norm2(numeric.sub(lhs, rhs)) < 1e-9, "Not equal:", lhs, rhs);
+    // }
     // return H;
 
     var k, results;
     results = [];
     for (i = k = 0; k < 4; i = ++k) {
-      results.push((function() {
+      results.push((() => {
         var l, results1;
         results1 = [];
         for (let j = l = 0; l < 4; j = ++l) {
@@ -137,7 +196,7 @@ export class Intro {
 
     this.state.textDrawings.forEach((itm, i) => {
       this.letters[i] = {
-        prog: 0,
+        prog: {},
         path: [],
       }
 
@@ -162,7 +221,7 @@ export class Intro {
       itmGlobH *= 0.75
 
       const textMeasure = document.createElement('div')
-      textMeasure.classList.add('kwn-intro-text')
+      textMeasure.classList.add('kwc-intro-text')
       textMeasure.textContent = itm.text
       textMeasure.style.fontSize = itmGlobH + 'px'
       textMeasure.style.position = 'absolute'
@@ -171,7 +230,8 @@ export class Intro {
       const textW = textMeasure.clientWidth
       document.body.removeChild(textMeasure)
 
-      totalW -= textW
+      totalW += textW
+      currOffset = textW
 
       itm.path.forEach((p, j) => {
         const p1 = rv(p[0])
@@ -197,7 +257,7 @@ export class Intro {
 
           // Perspective
           const perspective = document.createElement('div')
-          perspective.classList.add('kwn-intro-text-perspective')
+          perspective.classList.add('kwc-intro-text-perspective')
           perspective.style.width = w + 'px'
           perspective.style.height = h + 'px'
           const matrix = this.getTransform(
@@ -208,19 +268,21 @@ export class Intro {
 
           // Text
           const text = document.createElement('div')
-          text.classList.add('kwn-intro-text')
+          text.classList.add('kwc-intro-text')
           text.textContent = itm.text
           text.style.fontSize = h + 'px'
 
           // Scale
           const textScale = document.createElement('div')
-          textScale.classList.add('kwn-intro-text-scale')
+          textScale.classList.add('kwc-intro-text-scale')
 
           // Mover
           const textMover = document.createElement('div')
-          textMover.classList.add('kwn-intro-text-mover')
+          textMover.classList.add('kwc-intro-text-mover')
           textMover.style.width = totalW + 'px'
           textMover.style.left = -currOffset + 'px'
+          textMover.style.animationDuration = itm.dur + 's'
+          textMover.style.animationDelay = itm.delay + 's'
 
           // Appends
           textMover.appendChild(text)
@@ -251,6 +313,7 @@ export class Intro {
     this.state.winH = h
     this.canvas.width = w
     this.canvas.height = h
+    this.state.hlRadius = Math.max(w / 7, h / 7)
   }
 
   getRatiosDiffs = () => {

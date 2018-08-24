@@ -30,7 +30,6 @@ export class EditorWindow extends React.PureComponent<
   handleMouseMove = (e: MouseEvent) => {
     const { isDown, offset } = this.state
     if (!isDown) return
-    console.log(offset)
     this.setState({
       x: e.pageX - offset.x,
       y: e.pageY - offset.y,

@@ -1,2 +1,2 @@
 import { Intro } from '../Intro'
-;(window as any).kwnIntro = new Intro()
+;(window as any).kwcIntro = new Intro()

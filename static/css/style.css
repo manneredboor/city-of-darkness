@@ -9,26 +9,24 @@ body {
   overflow-x: hidden;
 }
 
-.kwn-intro,
-.kwn-intro > * {
+.kwc-intro,
+.kwc-intro > * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.kwn-intro {
+.kwc-intro {
   display: block;
   width: 100%;
   max-width: 100%;
   height: 100vh;
-  /* background-position: center; */
   background-image: url('../img/bg.jpg');
-  /* background-size: cover; */
   background-position: center;
   background-size: cover;
   overflow: hidden;
 }
 
-.kwn-intro-text-perspective {
+.kwc-intro-text-perspective {
   position: absolute;
   top: 0;
   left: 0;
@@ -37,19 +35,35 @@ body {
   transform-origin: 0 0;
 }
 
-.kwn-intro-text-mover {
+.kwc-intro-text-mover {
   position: relative;
+  animation-name: kwc-text-move;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 
-.kwn-intro-text {
+@keyframes kwc-text-move {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.kwc-intro-text {
   position: relative;
   line-height: 1;
   font-weight: bold;
 }
 
-.canvas {
+.kwc-intro-canvas {
   display: block;
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.kwc-intro-body {
+  pointer-events: none;
 }
