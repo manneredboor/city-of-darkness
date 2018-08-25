@@ -1,3 +1,8 @@
+@font-face {
+  font-family: RFDewi;
+  src: url('../fonts/RFDewi-Black.otf');
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -16,6 +21,8 @@ body {
 }
 
 .kwc-intro {
+  position: relative;
+  font-family: RFDewi;
   display: block;
   width: 100%;
   max-width: 100%;
@@ -55,6 +62,7 @@ body {
   position: relative;
   line-height: 1;
   font-weight: bold;
+  font-family: RFDewi;
 }
 
 .kwc-intro-canvas {

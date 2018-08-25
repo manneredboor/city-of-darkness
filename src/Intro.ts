@@ -40,7 +40,8 @@ export class Intro {
   intoBody: HTMLElement
   letters: TextProgs[]
   renderHooks: ((t: number) => void)[] = []
-  scale: number
+  scale: number =
+    typeof window.devicePixelRatio === 'number' ? window.devicePixelRatio : 2
 
   state: State = {
     bgH: 1000,
@@ -54,9 +55,6 @@ export class Intro {
   }
 
   constructor() {
-    this.scale =
-      typeof window.devicePixelRatio === 'number' ? window.devicePixelRatio : 1
-
     this.letters = []
     this.intoBody = document.querySelector('.kwc-intro-body') as HTMLElement
     this.canvas = document.querySelector(
@@ -77,6 +75,14 @@ export class Intro {
       e => (this.state.mouse = vec(e.pageX, e.pageY)),
     )
 
+    this.canvas.addEventListener(
+      'touchmove',
+      e => (this.state.mouse = vec(e.touches[0].pageX, e.touches[0].pageY)),
+    )
+
+    if (this.scale !== 1) this.ctx.scale(this.scale, this.scale)
+    this.ctx.imageSmoothingEnabled = true
+
     window.requestAnimationFrame(this.renderRaf)
   }
 
@@ -87,34 +93,29 @@ export class Intro {
 
   renderRaf = (time: number) => {
     const ctx = this.ctx
-    const { width: w, height: h } = ctx.canvas
+    const { winW: w, winH: h } = this.state
     const { mouse, hlRadius } = this.state
 
-    if (this.scale !== 1) ctx.scale(this.scale, this.scale)
-    ctx.imageSmoothingEnabled = true
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+    ctx.save()
+
+    ctx.clearRect(0, 0, w, h)
 
     if (this.state.isDarkShown) {
       ctx.save()
 
       ctx.beginPath()
-      bgMask.forEach((dot, i) => {
-        const d = this.restoreVec(dot)
-        if (i === 0) {
-          ctx.moveTo(d.x, d.y)
-        } else {
-          ctx.lineTo(d.x, d.y)
-        }
+      bgMask.forEach((d, i) => {
+        const { x, y } = this.restoreVec(d)
+        if (i === 0) ctx.moveTo(x, y)
+        else ctx.lineTo(x, y)
       })
       ctx.closePath()
       ctx.clip()
-      // ctx.fillStyle = '#000'
-      // ctx.globalCompositeOperation = 'xor'
-      // ctx.fill()
 
-      ctx.globalAlpha = 0.85
+      // ctx.globalAlpha = 0.85
       ctx.fillRect(0, 0, w, h)
 
+      ctx.beginPath()
       var g = ctx.createRadialGradient(
         mouse.x,
         mouse.y,
@@ -143,6 +144,8 @@ export class Intro {
     }
 
     this.renderHooks.forEach(hook => hook(time))
+    ctx.restore()
+
     window.requestAnimationFrame(this.renderRaf)
   }
 
@@ -189,6 +192,19 @@ export class Intro {
     return results.join(',');
   }
 
+  measureText(text: string, size: number) {
+    const textMeasure = document.createElement('div')
+    textMeasure.classList.add('kwc-intro-text')
+    textMeasure.textContent = text
+    textMeasure.style.fontSize = size + 'px'
+    textMeasure.style.position = 'absolute'
+    textMeasure.style.visibility = 'hidden'
+    document.body.appendChild(textMeasure)
+    const textW = textMeasure.clientWidth
+    document.body.removeChild(textMeasure)
+    return textW
+  }
+
   renderLetters = () => {
     const rv = this.restoreVec
     this.letters = []
@@ -220,15 +236,7 @@ export class Intro {
       itmGlobH /= itm.path.length
       itmGlobH *= 0.75
 
-      const textMeasure = document.createElement('div')
-      textMeasure.classList.add('kwc-intro-text')
-      textMeasure.textContent = itm.text
-      textMeasure.style.fontSize = itmGlobH + 'px'
-      textMeasure.style.position = 'absolute'
-      textMeasure.style.visibility = 'hidden'
-      document.body.appendChild(textMeasure)
-      const textW = textMeasure.clientWidth
-      document.body.removeChild(textMeasure)
+      const textW = this.measureText(itm.text, itmGlobH)
 
       totalW += textW
       currOffset = textW
@@ -309,10 +317,19 @@ export class Intro {
         : document.documentElement
     const h = Math.min(rootEl.clientHeight, window.innerHeight)
     const w = rootEl.clientWidth
+
     this.state.winW = w
     this.state.winH = h
-    this.canvas.width = w
-    this.canvas.height = h
+
+    this.canvas.style.width = w + 'px'
+    this.canvas.style.height = h + 'px'
+
+    this.canvas.width = w * this.scale
+    this.canvas.height = h * this.scale
+
+    this.canvas.style.width = w + 'px'
+    this.canvas.style.height = h + 'px'
+
     this.state.hlRadius = Math.max(w / 7, h / 7)
   }
 
