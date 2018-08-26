@@ -49,7 +49,7 @@ export class Intro {
   letters: TextProgs[]
   renderHooks: ((t: number) => void)[] = []
   scale: number =
-    typeof window.devicePixelRatio === 'number' ? window.devicePixelRatio : 2
+    typeof window.devicePixelRatio === 'number' ? window.devicePixelRatio : 1
 
   state: State = {
     bgH: 1000,
@@ -75,9 +75,6 @@ export class Intro {
       '2d',
     ) as CanvasRenderingContext2D
 
-    this.updateSizes()
-    this.renderLetters()
-
     window.addEventListener('resize', () => {
       this.updateSizes()
       this.renderLetters()
@@ -101,10 +98,9 @@ export class Intro {
       e => (this.state.mouse = vec(e.touches[0].pageX, e.touches[0].pageY)),
     )
 
-    if (this.scale !== 1) {
-      this.ctx.scale(this.scale, this.scale)
-      this.darknessCtx.scale(this.scale, this.scale)
-    }
+    this.updateSizes()
+    this.renderLetters()
+
     this.ctx.imageSmoothingEnabled = true
     this.darknessCtx.imageSmoothingEnabled = true
 
@@ -123,6 +119,7 @@ export class Intro {
     const { winW: w, winH: h } = this.state
 
     ctx.save()
+    if (this.scale !== 1) ctx.scale(this.scale, this.scale)
     ctx.clearRect(0, 0, w, h)
 
     if (img.complete) {
@@ -147,14 +144,15 @@ export class Intro {
 
   renderDarkness(time: number) {
     const ctx = this.darknessCtx
+
     const { winW: w, winH: h, mouse, hlRadius, mouseLeaved } = this.state
 
     const now = Date.now()
     const n = noise.simplex3(0, 0, (time % 5000) / 300)
 
-    ctx.clearRect(0, 0, w, h)
-
     ctx.save()
+    if (this.scale !== 1) ctx.scale(this.scale, this.scale)
+    ctx.clearRect(0, 0, w, h)
 
     ctx.beginPath()
     bgMask.forEach((d, i) => {
@@ -164,6 +162,7 @@ export class Intro {
     })
     ctx.closePath()
     ctx.clip()
+    ctx.fillStyle = '#000'
     ctx.fillRect(0, 0, w, h)
 
     const r = hlRadius - hlRadius * n * 0.01
@@ -188,7 +187,7 @@ export class Intro {
     ctx.restore()
 
     ctx.globalAlpha = 0.8
-    this.ctx.globalCompositeOperation = 'overlay'
+    this.ctx.globalCompositeOperation = 'multiply'
     this.ctx.drawImage(this.darknessCanvas, 0, 0, w, h)
   }
 
@@ -361,8 +360,14 @@ export class Intro {
     this.state.winW = w
     this.state.winH = h
 
-    const canvases = [this.canvas, this.darknessCanvas]
-    canvases.forEach(c => {
+    this.scale =
+      typeof window.devicePixelRatio === 'number' ? window.devicePixelRatio : 1
+
+    const canvases = [
+      { c: this.canvas, ctx: this.ctx },
+      { c: this.darknessCanvas, ctx: this.darknessCtx },
+    ]
+    canvases.forEach(({ c, ctx }) => {
       c.style.width = w + 'px'
       c.style.height = h + 'px'
 
@@ -403,24 +408,4 @@ export class Intro {
     const y = (1 / scale) * (v.y - diffY)
     return vec(x, y)
   }
-
-  // saveW = (x: number) => {
-  //   const { scale } = this.getRatiosDiffs()
-  //   return x * scale
-  // }
-
-  // saveH = (x: number) => {
-  //   const { scale } = this.getRatiosDiffs()
-  //   return x * scale
-  // }
-
-  // restoreW = (x: number) => {
-  //   const { scale } = this.getRatiosDiffs()
-  //   return x * (1 / scale)
-  // }
-
-  // restoreH = (x: number) => {
-  //   const { scale } = this.getRatiosDiffs()
-  //   return x * (1 / scale)
-  // }
 }
