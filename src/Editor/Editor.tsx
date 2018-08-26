@@ -12,7 +12,6 @@ interface RafState {
 interface EditorProps {}
 
 interface EditorState {
-  debugMode: boolean
   introLastUpd: number
   isShownCode: boolean
   selectedItem: number
@@ -33,7 +32,6 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
     this.intro = (window as any).kwcIntro as Intro
     this.intro.renderHooks.push(this.renderRaf)
     this.state = {
-      debugMode: true,
       introLastUpd: Date.now(),
       isShownCode: false,
       selectedItem: -1,
@@ -72,14 +70,10 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
   }
 
   componentDidUpdate(prevProps: EditorProps, prevState: EditorState) {
-    const { debugMode, introLastUpd, isShownCode } = this.state
+    const { introLastUpd, isShownCode } = this.state
 
     if (introLastUpd !== prevState.introLastUpd) {
       this.intro.renderLetters()
-    }
-
-    if (debugMode !== prevState.debugMode) {
-      document.body.classList.toggle('editor-debug', debugMode)
     }
 
     if (!prevState.isShownCode && isShownCode && this.codeText.current) {
@@ -93,7 +87,7 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
   render() {
     const intro = this.intro
     const introState = intro.state
-    const { debugMode, selectedItem, isShownCode, introLastUpd } = this.state
+    const { selectedItem, isShownCode, introLastUpd } = this.state
     const currentItem = introState.textDrawings[selectedItem]
     return (
       <>
@@ -132,16 +126,18 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
             }}
           />
           <EditorButton
-            text="L"
-            onClick={() => this.setState({ debugMode: !debugMode })}
+            text="D"
+            onClick={() => {
+              intro.state.debugMode = !intro.state.debugMode
+              document.body.classList.toggle(
+                'editor-debug',
+                intro.state.debugMode,
+              )
+            }}
           />
           <EditorButton
             text="S"
             onClick={() => this.setState({ isShownCode: true })}
-          />
-          <EditorButton
-            text="D"
-            onClick={() => (intro.state.isDarkShown = !intro.state.isDarkShown)}
           />
         </EditorWindow>
 
@@ -277,17 +273,13 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
 
   renderRaf = (time: number) => {
     const ctx = this.intro.ctx
-    const state = this.state
     const rafState = this.rafState
-    if (!state.debugMode) return
+    if (!this.intro.state.debugMode) return
 
     const rv = this.intro.restoreVec
 
     this.intro.state.textDrawings.forEach((itm, i) => {
       ctx.save()
-
-      const mx = this.intro.state.mouse.x
-      const my = this.intro.state.mouse.y
 
       itm.path.forEach((p, j) => {
         const { x: x1, y: y1 } = rv(p[0])
@@ -320,6 +312,8 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
           ctx.rect(x1, y1 - 20, 10, 10)
           ctx.fillStyle = '#fff'
           ctx.fill()
+
+          const { x: mx, y: my } = this.intro.state.mouse
 
           if (
             rafState.isDown &&

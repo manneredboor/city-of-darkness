@@ -47,9 +47,11 @@
   cursor: pointer;
 }
 
+/*
 .editor-debug .kwc-intro-text-perspective {
   outline: 1px solid #f00;
 }
+*/
 
 .editor-popup {
   width: 60%;
@@ -83,4 +85,8 @@
 .editor-hierarchy-row button {
   width: 20px;
   cursor: pointer;
+}
+
+.editor-debug .kwc-intro {
+  cursor: default;
 }

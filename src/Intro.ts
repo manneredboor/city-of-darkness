@@ -2,6 +2,11 @@ import 'vendor/numeric.min.js'
 import { Vector, vec } from 'utils/Vector'
 import initialState from 'utils/initialState'
 import bgMask from 'utils/mask'
+require('vendor/parlin-noise')
+const noise = (window as any).noise
+
+const img = new Image()
+img.src = 'img/bg.jpg'
 
 export const minmax = (min: number, value: number, max: number) =>
   Math.max(min, Math.min(max, value))
@@ -16,9 +21,10 @@ export interface TextDrawing {
 export interface State {
   bgH: number
   bgW: number
+  debugMode: boolean
   hlRadius: number
-  isDarkShown: boolean
   mouse: Vector
+  mouseLeaved: number | null
   textDrawings: TextDrawing[]
   winH: number
   winW: number
@@ -36,7 +42,9 @@ interface TextProgs {
 
 export class Intro {
   canvas: HTMLCanvasElement
+  darknessCanvas: HTMLCanvasElement
   ctx: CanvasRenderingContext2D
+  darknessCtx: CanvasRenderingContext2D
   intoBody: HTMLElement
   letters: TextProgs[]
   renderHooks: ((t: number) => void)[] = []
@@ -46,9 +54,10 @@ export class Intro {
   state: State = {
     bgH: 1000,
     bgW: 1491,
+    debugMode: false,
     hlRadius: 100,
-    isDarkShown: true,
     mouse: vec(0, 0),
+    mouseLeaved: null,
     textDrawings: initialState,
     winH: -1,
     winW: -1,
@@ -60,7 +69,11 @@ export class Intro {
     this.canvas = document.querySelector(
       '.kwc-intro-canvas',
     ) as HTMLCanvasElement
+    this.darknessCanvas = document.createElement('canvas')
     this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D
+    this.darknessCtx = this.darknessCanvas.getContext(
+      '2d',
+    ) as CanvasRenderingContext2D
 
     this.updateSizes()
     this.renderLetters()
@@ -70,9 +83,17 @@ export class Intro {
       this.renderLetters()
     })
 
+    window.addEventListener('mousemove', e => {
+      this.state.mouse = vec(e.pageX, e.pageY)
+    })
+
+    this.canvas.addEventListener('mousemove', e => {
+      if (this.state.mouseLeaved) this.state.mouseLeaved = null
+    })
+
     this.canvas.addEventListener(
-      'mousemove',
-      e => (this.state.mouse = vec(e.pageX, e.pageY)),
+      'mouseleave',
+      e => (this.state.mouseLeaved = Date.now()),
     )
 
     this.canvas.addEventListener(
@@ -80,8 +101,14 @@ export class Intro {
       e => (this.state.mouse = vec(e.touches[0].pageX, e.touches[0].pageY)),
     )
 
-    if (this.scale !== 1) this.ctx.scale(this.scale, this.scale)
+    if (this.scale !== 1) {
+      this.ctx.scale(this.scale, this.scale)
+      this.darknessCtx.scale(this.scale, this.scale)
+    }
     this.ctx.imageSmoothingEnabled = true
+    this.darknessCtx.imageSmoothingEnabled = true
+
+    noise.seed(Math.random())
 
     window.requestAnimationFrame(this.renderRaf)
   }
@@ -94,59 +121,75 @@ export class Intro {
   renderRaf = (time: number) => {
     const ctx = this.ctx
     const { winW: w, winH: h } = this.state
-    const { mouse, hlRadius } = this.state
 
     ctx.save()
-
     ctx.clearRect(0, 0, w, h)
 
-    if (this.state.isDarkShown) {
-      ctx.save()
-
-      ctx.beginPath()
-      bgMask.forEach((d, i) => {
-        const { x, y } = this.restoreVec(d)
-        if (i === 0) ctx.moveTo(x, y)
-        else ctx.lineTo(x, y)
-      })
-      ctx.closePath()
-      ctx.clip()
-
-      // ctx.globalAlpha = 0.85
-      ctx.fillRect(0, 0, w, h)
-
-      ctx.beginPath()
-      var g = ctx.createRadialGradient(
-        mouse.x,
-        mouse.y,
-        0,
-        mouse.x,
-        mouse.y,
-        hlRadius,
+    if (img.complete) {
+      const { diffX, diffY, scale } = this.getRatiosDiffs()
+      const sc = 1 / scale
+      ctx.drawImage(
+        img,
+        -diffX * sc,
+        -diffY * sc,
+        img.width * sc,
+        img.height * sc,
       )
-
-      g.addColorStop(1, 'rgba(0,0,0,0)')
-      g.addColorStop(0.95, 'rgba(0,0,0,1)')
-      g.addColorStop(0, 'rgba(0,0,0,1)')
-
-      ctx.globalAlpha = 1
-      ctx.fillStyle = g
-      ctx.globalCompositeOperation = 'xor'
-
-      ctx.fillRect(
-        mouse.x - hlRadius,
-        mouse.y - hlRadius,
-        hlRadius * 2,
-        hlRadius * 2,
-      )
-
-      ctx.restore()
     }
+
+    if (!this.state.debugMode) this.renderDarkness(time)
 
     this.renderHooks.forEach(hook => hook(time))
     ctx.restore()
 
     window.requestAnimationFrame(this.renderRaf)
+  }
+
+  renderDarkness(time: number) {
+    const ctx = this.darknessCtx
+    const { winW: w, winH: h, mouse, hlRadius, mouseLeaved } = this.state
+
+    const now = Date.now()
+    const n = noise.simplex3(0, 0, (time % 5000) / 200)
+
+    ctx.clearRect(0, 0, w, h)
+
+    ctx.save()
+
+    ctx.beginPath()
+    bgMask.forEach((d, i) => {
+      const { x, y } = this.restoreVec(d)
+      if (i === 0) ctx.moveTo(x, y)
+      else ctx.lineTo(x, y)
+    })
+    ctx.closePath()
+    ctx.clip()
+    ctx.fillRect(0, 0, w, h)
+
+    const r = hlRadius - hlRadius * n * 0.01
+
+    ctx.beginPath()
+    var g = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, r)
+
+    g.addColorStop(1, 'rgba(255,255,255,0)')
+    g.addColorStop(0.95, 'rgba(255,255,255,1)')
+    g.addColorStop(0, 'rgba(255,255,255,1)')
+
+    ctx.globalAlpha = minmax(
+      0,
+      1 - (mouseLeaved ? minmax(0, now - mouseLeaved, 200) / 200 : n * 0.2),
+      1,
+    )
+    ctx.fillStyle = g
+    ctx.globalCompositeOperation = 'xor'
+
+    ctx.fillRect(mouse.x - r, mouse.y - r, r * 2, r * 2)
+
+    ctx.restore()
+
+    ctx.globalAlpha = 0.8
+    this.ctx.globalCompositeOperation = 'overlay'
+    this.ctx.drawImage(this.darknessCanvas, 0, 0, w, h)
   }
 
   // https://franklinta.com/2014/09/08/computing-css-matrix3d-transforms/
@@ -321,14 +364,17 @@ export class Intro {
     this.state.winW = w
     this.state.winH = h
 
-    this.canvas.style.width = w + 'px'
-    this.canvas.style.height = h + 'px'
+    const canvases = [this.canvas, this.darknessCanvas]
+    canvases.forEach(c => {
+      c.style.width = w + 'px'
+      c.style.height = h + 'px'
 
-    this.canvas.width = w * this.scale
-    this.canvas.height = h * this.scale
+      c.width = w * this.scale
+      c.height = h * this.scale
 
-    this.canvas.style.width = w + 'px'
-    this.canvas.style.height = h + 'px'
+      c.style.width = w + 'px'
+      c.style.height = h + 'px'
+    })
 
     this.state.hlRadius = Math.max(w / 7, h / 7)
   }
