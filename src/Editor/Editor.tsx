@@ -61,12 +61,6 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
       rafState.movingItem = -1
       this.updIntro()
     })
-
-    // const dots: Vector[] = []
-    // intro.canvas.addEventListener('mousedown', () => {
-    //   dots.push(this.sv(intro.state.mouse.x, intro.state.mouse.y))
-    //   console.log(dots)
-    // })
   }
 
   componentDidUpdate(prevProps: EditorProps, prevState: EditorState) {

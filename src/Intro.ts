@@ -150,7 +150,7 @@ export class Intro {
     const { winW: w, winH: h, mouse, hlRadius, mouseLeaved } = this.state
 
     const now = Date.now()
-    const n = noise.simplex3(0, 0, (time % 5000) / 200)
+    const n = noise.simplex3(0, 0, (time % 5000) / 300)
 
     ctx.clearRect(0, 0, w, h)
 
@@ -210,15 +210,12 @@ export class Intro {
     }
     // Solve A * h = b for h
     h = (window as any).solve(A, b);
-    H = [[h[0], h[1], 0, h[2]], [h[3], h[4], 0, h[5]], [0, 0, 1, 0], [h[6], h[7], 0, 1]];
-    // Sanity check that H actually maps `from` to `to`
-    // for (i = m = 0; m < 4; i = ++m) {
-    //   lhs = numeric.dot(H, [from[i].x, from[i].y, 0, 1]);
-    //   k_i = lhs[3];
-    //   rhs = numeric.dot(k_i, [to[i].x, to[i].y, 0, 1]);
-    //   console.assert(numeric.norm2(numeric.sub(lhs, rhs)) < 1e-9, "Not equal:", lhs, rhs);
-    // }
-    // return H;
+    H = [
+      [h[0], h[1], 0, h[2]],
+      [h[3], h[4], 0, h[5]],
+      [  0,    0,  1,   0 ],
+      [h[6], h[7], 0,   1 ]
+    ];
 
     var k, results;
     results = [];
