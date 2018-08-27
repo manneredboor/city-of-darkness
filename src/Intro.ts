@@ -100,11 +100,6 @@ export class Intro {
     window.requestAnimationFrame(this.renderRaf)
   }
 
-  propsGetters: { [key: string]: (t: number) => string } = {
-    opacity: (prog: number) => String(prog),
-    transform: (prog: number) => `translateX(${prog * 100}%)`,
-  }
-
   renderRaf = (time: number) => {
     const ctx = this.ctx
     const { winW: w, winH: h } = this.state
@@ -266,10 +261,6 @@ export class Intro {
           text.classList.add('kwc-intro-text')
           text.textContent = itm.text
           text.style.fontSize = h + 'px'
-
-          // Scale
-          const textScale = document.createElement('div')
-          textScale.classList.add('kwc-intro-text-scale')
 
           // Mover
           const textMover = document.createElement('div')
