@@ -1,12 +1,13 @@
 import 'vendor/numeric.min.js'
 import { Vector, vec } from 'utils/Vector'
 import initialState from 'utils/initialState'
+import { getTransform } from 'utils/matrixTransform'
 import bgMask from 'utils/mask'
 require('vendor/parlin-noise')
 const noise = (window as any).noise
 
 const img = new Image()
-img.src = 'img/bg.jpg'
+img.src = 'http://ucraft.neekeesh.com/img/bg.jpg'
 
 export const minmax = (min: number, value: number, max: number) =>
   Math.max(min, Math.min(max, value))
@@ -30,23 +31,13 @@ export interface State {
   winW: number
 }
 
-interface TextPath {
-  el: HTMLElement
-  w: number
-}
-
-interface TextProgs {
-  prog: { [key: string]: number }
-  path: TextPath[]
-}
-
 export class Intro {
   canvas: HTMLCanvasElement
   darknessCanvas: HTMLCanvasElement
   ctx: CanvasRenderingContext2D
   darknessCtx: CanvasRenderingContext2D
   intoBody: HTMLElement
-  letters: TextProgs[]
+  // letters: TextProgs[]
   renderHooks: ((t: number) => void)[] = []
   scale: number =
     typeof window.devicePixelRatio === 'number' ? window.devicePixelRatio : 1
@@ -64,7 +55,7 @@ export class Intro {
   }
 
   constructor() {
-    this.letters = []
+    // this.letters = []
     this.intoBody = document.querySelector('.kwc-intro-body') as HTMLElement
     this.canvas = document.querySelector(
       '.kwc-intro-canvas',
@@ -191,46 +182,6 @@ export class Intro {
     this.ctx.drawImage(this.darknessCanvas, 0, 0, w, h)
   }
 
-  // https://franklinta.com/2014/09/08/computing-css-matrix3d-transforms/
-  // prettier-ignore
-  getTransform = (from: Vector[], to: Vector[]) => {
-    var A, H, b, h, i, k, l, ref;
-    // var A, H, b, h, i, k, k_i, l, lhs, m, ref, rhs;
-    console.assert((from.length === (ref = to.length) && ref === 4));
-    A = []; // 8x8
-    for (i = k = 0; k < 4; i = ++k) {
-      A.push([from[i].x, from[i].y, 1, 0, 0, 0, -from[i].x * to[i].x, -from[i].y * to[i].x]);
-      A.push([0, 0, 0, from[i].x, from[i].y, 1, -from[i].x * to[i].y, -from[i].y * to[i].y]);
-    }
-    b = []; // 8x1
-    for (i = l = 0; l < 4; i = ++l) {
-      b.push(to[i].x);
-      b.push(to[i].y);
-    }
-    // Solve A * h = b for h
-    h = (window as any).solve(A, b);
-    H = [
-      [h[0], h[1], 0, h[2]],
-      [h[3], h[4], 0, h[5]],
-      [  0,    0,  1,   0 ],
-      [h[6], h[7], 0,   1 ]
-    ];
-
-    var k, results;
-    results = [];
-    for (i = k = 0; k < 4; i = ++k) {
-      results.push((() => {
-        var l, results1;
-        results1 = [];
-        for (let j = l = 0; l < 4; j = ++l) {
-          results1.push(H[j][i].toFixed(20));
-        }
-        return results1;
-      })());
-    }
-    return results.join(',');
-  }
-
   measureText(text: string, size: number) {
     const textMeasure = document.createElement('div')
     textMeasure.classList.add('kwc-intro-text')
@@ -246,68 +197,65 @@ export class Intro {
 
   renderLetters = () => {
     const rv = this.restoreVec
-    this.letters = []
     this.intoBody.innerHTML = ''
 
     this.state.textDrawings.forEach((itm, i) => {
-      this.letters[i] = {
-        prog: {},
-        path: [],
-      }
-
-      let itmGlobH = 0
-      let totalW = 0
-      let currOffset = 0
-
+      let globH = 0
       itm.path.forEach((p, j) => {
-        const { x: x1, y: y1 } = rv(p[0])
-        const { y: y2 } = rv(p[1])
-        const h = y2 - y1
-        itmGlobH += h
-
-        if (j < itm.path.length - 1) {
-          const { x: nx1 } = rv(itm.path[j + 1][0])
-          const w = nx1 - x1
-          totalW += w
-        }
+        const h = rv(p[1]).y - rv(p[0]).y
+        globH += h
       })
 
-      itmGlobH /= itm.path.length
-      itmGlobH *= 0.75
-
-      const textW = this.measureText(itm.text, itmGlobH)
-
-      totalW += textW
-      currOffset = textW
-
-      itm.path.forEach((p, j) => {
+      // Boxes where texts goes
+      const stopBoxes = itm.path.slice(0, -1).map((p, j) => {
         const p1 = rv(p[0])
         const p2 = rv(p[1])
-        const { x: x1 } = p1
-        // const { x: x1, y: y1 } = p1
-        // const { x: x2, y: y2 } = p2
+        const np1 = rv(itm.path[j + 1][0])
+        const np2 = rv(itm.path[j + 1][1])
+        const { x: x1, y: y1 } = p1
+        const { x: x2, y: y2 } = p2
+        const { x: nx1, y: ny1 } = np1
+        const { x: nx2, y: ny2 } = np2
+        return { x1, y1, x2, y2, nx1, ny1, nx2, ny2, p1, p2, np1, np2 }
+      })
 
-        if (j < itm.path.length - 1) {
-          const np1 = rv(itm.path[j + 1][0])
-          const np2 = rv(itm.path[j + 1][1])
-          const { x: nx1 } = np1
-          // const { x: nx1, y: ny1 } = np1
-          // const { x: nx2, y: ny2 } = np2
+      let pathLength = 0
+      let currOffset = 0
 
+      const widths: number[] = []
+      // const speedsCoeffs: number[] = []
+      // const speeds: number[] = []
+
+      stopBoxes.forEach(({ x1, y1, x2, y2, nx1, ny1, nx2, ny2 }, j) => {
+        const w = nx1 - x1
+        widths.push(w)
+        pathLength += w
+      })
+
+      // stopBoxes.forEach(({ x1, y1, x2, y2, nx1, ny1, nx2, ny2 }, j) => {})
+
+      globH /= itm.path.length
+      globH *= 0.75
+      const textW = this.measureText(itm.text, globH)
+      pathLength += textW
+      currOffset = textW
+
+      stopBoxes.forEach(
+        ({ x1, y1, x2, y2, nx1, ny1, nx2, ny2, p1, np1, p2, np2 }, j) => {
           const w = nx1 - x1
+
           // const h1 = y2 - y1
           // const h2 = ny2 - ny1
-          // const h = Math.min(h1, h2)
-          // const h = Math.max(h1, h2)
           // const h = (h1 + h2) / 2
-          const h = itmGlobH
+
+          const h = globH
 
           // Perspective
           const perspective = document.createElement('div')
           perspective.classList.add('kwc-intro-text-perspective')
           perspective.style.width = w + 'px'
           perspective.style.height = h + 'px'
-          const matrix = this.getTransform(
+          const matrix = getTransform(
             [vec(0, 0), vec(w, 0), vec(0, h), vec(w, h)],
             [p1, np1, p2, np2],
           )
@@ -326,7 +274,7 @@ export class Intro {
           // Mover
           const textMover = document.createElement('div')
           textMover.classList.add('kwc-intro-text-mover')
-          textMover.style.width = totalW + 'px'
+          textMover.style.width = pathLength + 'px'
           textMover.style.left = -currOffset + 'px'
           textMover.style.animationDuration = itm.dur + 's'
           textMover.style.animationDelay = itm.delay + 's'
@@ -336,16 +284,10 @@ export class Intro {
           perspective.appendChild(textMover)
           this.intoBody.appendChild(perspective)
 
-          // Save
-          this.letters[i].path[j] = {
-            el: textMover,
-            w,
-          }
-
           // Next offset
           currOffset += w
-        }
-      })
+        },
+      )
     })
   }
 
