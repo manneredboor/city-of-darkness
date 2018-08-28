@@ -3,11 +3,9 @@ import { Vector, vec } from 'utils/Vector'
 import initialState from 'utils/initialState'
 import { getTransform } from 'utils/matrixTransform'
 import bgMask from 'utils/mask'
+import { dewi, china } from 'utils/fontObserver'
 require('vendor/parlin-noise')
 const noise = (window as any).noise
-const FontFaceObserver = require('fontfaceobserver')
-
-const font = new FontFaceObserver('RF Dewi Black Custom')
 
 const img = new Image()
 img.src = 'http://ucraft.neekeesh.com/img/bg.jpg'
@@ -16,8 +14,9 @@ export const minmax = (min: number, value: number, max: number) =>
   Math.max(min, Math.min(max, value))
 
 export interface TextDrawing {
-  dur: number
   delay: number
+  dur: number
+  isChinese: boolean
   path: Vector[][]
   text: string
 }
@@ -81,8 +80,7 @@ export class Intro {
 
     this.updateSizes()
 
-    font.load().then(() => {
-      console.log(1)
+    Promise.all([dewi.load(), china.load()]).then(() => {
       this.renderLetters()
     })
 
@@ -175,20 +173,6 @@ export class Intro {
     this.ctx.drawImage(this.darknessCanvas, 0, 0, w, h)
   }
 
-  measureText(text: string, size: number) {
-    const textMeasure = document.createElement('div')
-    textMeasure.classList.add('kwc-intro-text')
-    textMeasure.textContent = text
-    textMeasure.style.fontSize = size + 'px'
-    textMeasure.style.position = 'absolute'
-    textMeasure.style.left = '-10000px'
-    textMeasure.style.top = '-10000px'
-    document.body.appendChild(textMeasure)
-    const textW = textMeasure.clientWidth + 1
-    document.body.removeChild(textMeasure)
-    return textW
-  }
-
   renderLetters = () => {
     const rv = this.restoreVec
     this.intoBody.innerHTML = ''
@@ -225,7 +209,11 @@ export class Intro {
       })
 
       fz /= stopBoxes.length + 1
-      const textW = this.measureText(itm.text, fz)
+      const textW = measureText(
+        itm.text,
+        'kwc-intro-text' + (itm.isChinese ? ' kwc-intro-text-chinese' : ''),
+        fz,
+      )
 
       const maxH = medHs.reduce((max, h) => Math.max(max, h), 0)
       const hCoeffs = medHs.map(h => h / maxH)
@@ -262,6 +250,7 @@ export class Intro {
           // Text
           const text = document.createElement('div')
           text.classList.add('kwc-intro-text')
+          if (itm.isChinese) text.classList.add('kwc-intro-text-chinese')
           text.textContent = itm.text
           text.style.fontSize = fz + 'px'
           text.style.height = h + 'px'

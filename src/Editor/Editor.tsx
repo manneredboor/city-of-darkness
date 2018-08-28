@@ -108,6 +108,7 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
               const y = window.innerHeight / 2
               introState.textDrawings.push({
                 text: 'LOLKEK',
+                isChinese: false,
                 dur: 4,
                 delay: 1,
                 path: [
