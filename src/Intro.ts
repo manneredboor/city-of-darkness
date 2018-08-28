@@ -5,6 +5,9 @@ import { getTransform } from 'utils/matrixTransform'
 import bgMask from 'utils/mask'
 require('vendor/parlin-noise')
 const noise = (window as any).noise
+const FontFaceObserver = require('fontfaceobserver')
+
+const font = new FontFaceObserver('RF Dewi Black Custom')
 
 const img = new Image()
 img.src = 'http://ucraft.neekeesh.com/img/bg.jpg'
@@ -77,7 +80,11 @@ export class Intro {
     )
 
     this.updateSizes()
-    this.renderLetters()
+
+    font.load().then(() => {
+      console.log(1)
+      this.renderLetters()
+    })
 
     this.ctx.imageSmoothingEnabled = true
     this.darknessCtx.imageSmoothingEnabled = true
