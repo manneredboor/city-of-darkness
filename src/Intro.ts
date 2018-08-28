@@ -174,9 +174,10 @@ export class Intro {
     textMeasure.textContent = text
     textMeasure.style.fontSize = size + 'px'
     textMeasure.style.position = 'absolute'
-    textMeasure.style.visibility = 'hidden'
+    textMeasure.style.left = '-10000px'
+    textMeasure.style.top = '-10000px'
     document.body.appendChild(textMeasure)
-    const textW = textMeasure.clientWidth
+    const textW = textMeasure.clientWidth + 1
     document.body.removeChild(textMeasure)
     return textW
   }
@@ -186,12 +187,6 @@ export class Intro {
     this.intoBody.innerHTML = ''
 
     this.state.textDrawings.forEach((itm, i) => {
-      let globH = 0
-      itm.path.forEach((p, j) => {
-        const h = rv(p[1]).y - rv(p[0]).y
-        globH += h
-      })
-
       // Boxes where texts goes
       const stopBoxes = itm.path.slice(0, -1).map((p, j) => {
         const p1 = rv(p[0])
@@ -205,58 +200,70 @@ export class Intro {
         return { x1, y1, x2, y2, nx1, ny1, nx2, ny2, p1, p2, np1, np2 }
       })
 
-      let pathLength = 0
-      let currOffset = 0
-
+      let fz = 0
+      let fullW = 0
+      const medHs: number[] = []
       const widths: number[] = []
-      // const speedsCoeffs: number[] = []
-      // const speeds: number[] = []
 
       stopBoxes.forEach(({ x1, y1, x2, y2, nx1, ny1, nx2, ny2 }, j) => {
         const w = nx1 - x1
         widths.push(w)
-        pathLength += w
+
+        fz += y2 - y1
+        if (j === stopBoxes.length - 1) fz += ny2 - ny1
+
+        const h1 = y2 - y1
+        const h2 = ny2 - ny1
+        medHs.push(Math.min(h1, h2))
       })
 
-      // stopBoxes.forEach(({ x1, y1, x2, y2, nx1, ny1, nx2, ny2 }, j) => {})
+      fz /= stopBoxes.length + 1
+      const textW = this.measureText(itm.text, fz)
 
-      globH /= itm.path.length
-      globH *= 0.75
-      const textW = this.measureText(itm.text, globH)
-      pathLength += textW
-      currOffset = textW
+      const maxH = medHs.reduce((max, h) => Math.max(max, h), 0)
+      const hCoeffs = medHs.map(h => h / maxH)
+      stopBoxes.forEach(({ x1, y1, x2, y2, nx1, ny1, nx2, ny2 }, j) => {
+        const h1 = y2 - y1
+        const h2 = ny2 - ny1
+        const c1 = Math.max(h1, h2) / Math.min(h1, h2)
+        const c2 = 1 / hCoeffs[j]
+        const pCoeff = c1 * c2
+        widths[j] = widths[j] * pCoeff
+        fullW += widths[j]
+      })
 
+      fullW += textW
+      let currOffset = textW
       stopBoxes.forEach(
         ({ x1, y1, x2, y2, nx1, ny1, nx2, ny2, p1, np1, p2, np2 }, j) => {
-          const w = nx1 - x1
-
-          // const h1 = y2 - y1
-          // const h2 = ny2 - ny1
-          // const h = (h1 + h2) / 2
-
-          const h = globH
+          const w = widths[j]
+          const h = fz
 
           // Perspective
           const perspective = document.createElement('div')
           perspective.classList.add('kwc-intro-text-perspective')
           perspective.style.width = w + 'px'
           perspective.style.height = h + 'px'
+
           const matrix = getTransform(
             [vec(0, 0), vec(w, 0), vec(0, h), vec(w, h)],
             [p1, np1, p2, np2],
           )
+
           perspective.style.transform = `matrix3d(${matrix})`
 
           // Text
           const text = document.createElement('div')
           text.classList.add('kwc-intro-text')
           text.textContent = itm.text
-          text.style.fontSize = h + 'px'
+          text.style.fontSize = fz + 'px'
+          text.style.height = h + 'px'
 
           // Mover
           const textMover = document.createElement('div')
           textMover.classList.add('kwc-intro-text-mover')
-          textMover.style.width = pathLength + 'px'
+          textMover.style.width = fullW + 'px'
+          textMover.style.height = h + 'px'
           textMover.style.left = -currOffset + 'px'
           textMover.style.animationDuration = itm.dur + 's'
           textMover.style.animationDelay = itm.delay + 's'

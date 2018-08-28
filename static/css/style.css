@@ -59,11 +59,9 @@ body {
 
 .kwc-intro-text-mover {
   position: relative;
-  /*
   animation-name: kwc-text-move;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-  */
 }
 
 @keyframes kwc-text-move {
@@ -79,9 +77,7 @@ body {
   position: relative;
   line-height: 1;
   font-weight: bold;
-  /*
   font-family: 'RF Dewi Black Custom';
-  */
   text-align: left;
 }
 
