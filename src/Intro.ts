@@ -25,7 +25,6 @@ export interface State {
   debugMode: boolean
   hlRadius: number
   mouse: Vector
-  mouseLeaved: number | null
   textDrawings: TextDrawing[]
   winH: number
   winW: number
@@ -37,7 +36,6 @@ export class Intro {
   ctx: CanvasRenderingContext2D
   darknessCtx: CanvasRenderingContext2D
   intoBody: HTMLElement
-  // letters: TextProgs[]
   renderHooks: ((t: number) => void)[] = []
   scale: number =
     typeof window.devicePixelRatio === 'number' ? window.devicePixelRatio : 1
@@ -45,17 +43,15 @@ export class Intro {
   state: State = {
     bgH: 1000,
     bgW: 1491,
-    debugMode: false,
+    debugMode: true,
     hlRadius: 100,
     mouse: vec(0, 0),
-    mouseLeaved: null,
     textDrawings: initialState,
     winH: -1,
     winW: -1,
   }
 
   constructor() {
-    // this.letters = []
     this.intoBody = document.querySelector('.kwc-intro-body') as HTMLElement
     this.canvas = document.querySelector(
       '.kwc-intro-canvas',
@@ -74,15 +70,6 @@ export class Intro {
     window.addEventListener('mousemove', e => {
       this.state.mouse = vec(e.pageX, e.pageY)
     })
-
-    this.canvas.addEventListener('mousemove', e => {
-      if (this.state.mouseLeaved) this.state.mouseLeaved = null
-    })
-
-    this.canvas.addEventListener(
-      'mouseleave',
-      e => (this.state.mouseLeaved = Date.now()),
-    )
 
     this.canvas.addEventListener(
       'touchmove',
@@ -103,11 +90,23 @@ export class Intro {
   renderRaf = (time: number) => {
     const ctx = this.ctx
     const { winW: w, winH: h } = this.state
+    const now = Date.now()
 
     ctx.save()
     if (this.scale !== 1) ctx.scale(this.scale, this.scale)
-    ctx.clearRect(0, 0, w, h)
 
+    ctx.clearRect(0, 0, w, h)
+    this.renderBg()
+    if (!this.state.debugMode) this.renderDarkness(time, now)
+    this.renderHooks.forEach(hook => hook(time))
+
+    ctx.restore()
+
+    window.requestAnimationFrame(this.renderRaf)
+  }
+
+  renderBg() {
+    const ctx = this.ctx
     if (img.complete) {
       const { diffX, diffY, scale } = this.getRatiosDiffs()
       const sc = 1 / scale
@@ -119,21 +118,13 @@ export class Intro {
         img.height * sc,
       )
     }
-
-    if (!this.state.debugMode) this.renderDarkness(time)
-
-    this.renderHooks.forEach(hook => hook(time))
-    ctx.restore()
-
-    window.requestAnimationFrame(this.renderRaf)
   }
 
-  renderDarkness(time: number) {
+  renderDarkness(time: number, now: number) {
     const ctx = this.darknessCtx
 
-    const { winW: w, winH: h, mouse, hlRadius, mouseLeaved } = this.state
+    const { winW: w, winH: h, mouse, hlRadius } = this.state
 
-    const now = Date.now()
     const n = noise.simplex3(0, 0, (time % 5000) / 300)
 
     ctx.save()
@@ -154,25 +145,25 @@ export class Intro {
     const r = hlRadius - hlRadius * n * 0.01
 
     ctx.beginPath()
-    var g = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, r)
+
+    const lightX = minmax(hlRadius, mouse.x, w - hlRadius)
+    const lightY = minmax(hlRadius, mouse.y, h - hlRadius)
+
+    var g = ctx.createRadialGradient(lightX, lightY, 0, lightX, lightY, r)
 
     g.addColorStop(1, 'rgba(255,255,255,0)')
     g.addColorStop(0.95, 'rgba(255,255,255,1)')
     g.addColorStop(0, 'rgba(255,255,255,1)')
 
-    ctx.globalAlpha = minmax(
-      0,
-      1 - (mouseLeaved ? minmax(0, now - mouseLeaved, 200) / 200 : n * 0.2),
-      1,
-    )
+    ctx.globalAlpha = minmax(0, 1 - n * 0.2, 1)
     ctx.fillStyle = g
     ctx.globalCompositeOperation = 'xor'
 
-    ctx.fillRect(mouse.x - r, mouse.y - r, r * 2, r * 2)
+    ctx.fillRect(lightX - r, lightY - r, r * 2, r * 2)
 
     ctx.restore()
 
-    ctx.globalAlpha = 0.8
+    ctx.globalAlpha = 0.85
     this.ctx.globalCompositeOperation = 'multiply'
     this.ctx.drawImage(this.darknessCanvas, 0, 0, w, h)
   }
@@ -311,7 +302,7 @@ export class Intro {
       c.style.height = h + 'px'
     })
 
-    this.state.hlRadius = Math.max(w / 7, h / 7)
+    this.state.hlRadius = Math.max(w / 8, h / 8)
   }
 
   getRatiosDiffs = () => {
