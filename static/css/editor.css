@@ -87,6 +87,7 @@
   cursor: pointer;
 }
 
-.editor-debug .kwc-intro {
+.editor-debug .kwc-intro,
+.editor-debug .kwc-intro-canvas {
   cursor: default;
 }

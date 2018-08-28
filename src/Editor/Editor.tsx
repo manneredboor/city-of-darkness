@@ -45,7 +45,7 @@ export class Editor extends React.PureComponent<EditorProps, EditorState> {
     style.rel = 'stylesheet'
     style.href = 'css/editor.css'
     document.head.appendChild(style)
-    document.body.classList.add('editor-debug')
+    document.body.classList.toggle('editor-debug', this.intro.state.debugMode)
   }
 
   componentDidMount() {

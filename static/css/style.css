@@ -23,7 +23,6 @@ body {
 
 .kwc-intro {
   position: relative;
-  font-family: 'RF Dewi Black Custom';
   display: block;
   width: 100%;
   max-width: 100%;
@@ -34,7 +33,6 @@ body {
   background-size: cover;
   */
   overflow: hidden;
-  cursor: none;
 }
 
 .kwc-intro:after {
@@ -61,9 +59,11 @@ body {
 
 .kwc-intro-text-mover {
   position: relative;
+  /*
   animation-name: kwc-text-move;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+  */
 }
 
 @keyframes kwc-text-move {
@@ -79,7 +79,9 @@ body {
   position: relative;
   line-height: 1;
   font-weight: bold;
+  /*
   font-family: 'RF Dewi Black Custom';
+  */
   text-align: left;
 }
 
@@ -89,6 +91,13 @@ body {
   top: 0;
   left: 0;
 }
+
+/*
+.kwc-intro,
+.kwc-intro-canvas {
+  cursor: none;
+}
+*/
 
 .kwc-intro-body {
   pointer-events: none;
