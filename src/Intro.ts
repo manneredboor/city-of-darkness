@@ -3,7 +3,9 @@ import { Vector, vec } from 'utils/Vector'
 import initialState from 'utils/initialState'
 import { getTransform } from 'utils/matrixTransform'
 import bgMask from 'utils/mask'
+import measureText from 'utils/measureText'
 import { dewi, china } from 'utils/fontObserver'
+import scroll from 'utils/scroll'
 require('vendor/parlin-noise')
 const noise = (window as any).noise
 
@@ -45,7 +47,7 @@ export class Intro {
   state: State = {
     bgH: 1000,
     bgW: 1491,
-    debugMode: true,
+    debugMode: false,
     hlRadius: 100,
     mouse: vec(0, 0),
     textDrawings: initialState,
@@ -54,10 +56,16 @@ export class Intro {
   }
 
   constructor() {
-    this.intoBody = document.querySelector('.kwc-intro-body') as HTMLElement
-    this.canvas = document.querySelector(
-      '.kwc-intro-canvas',
-    ) as HTMLCanvasElement
+    const intro = document.querySelector('.kwc-intro') as HTMLElement
+
+    this.canvas = document.createElement('canvas')
+    this.canvas.classList.add('kwc-intro-canvas')
+    intro.appendChild(this.canvas)
+
+    this.intoBody = document.createElement('div')
+    this.intoBody.classList.add('kwc-intro-body')
+    intro.appendChild(this.intoBody)
+
     this.darknessCanvas = document.createElement('canvas')
     this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D
     this.darknessCtx = this.darknessCanvas.getContext(
@@ -93,19 +101,21 @@ export class Intro {
   }
 
   renderRaf = (time: number) => {
-    const ctx = this.ctx
-    const { winW: w, winH: h } = this.state
-    const now = Date.now()
+    if (scroll.pos < this.state.winH) {
+      const ctx = this.ctx
+      const { winW: w, winH: h } = this.state
+      const now = Date.now()
 
-    ctx.save()
-    if (this.scale !== 1) ctx.scale(this.scale, this.scale)
+      ctx.save()
+      if (this.scale !== 1) ctx.scale(this.scale, this.scale)
 
-    ctx.clearRect(0, 0, w, h)
-    this.renderBg()
-    if (!this.state.debugMode) this.renderDarkness(time, now)
-    this.renderHooks.forEach(hook => hook(time))
+      ctx.clearRect(0, 0, w, h)
+      this.renderBg()
+      if (!this.state.debugMode) this.renderDarkness(time, now)
+      this.renderHooks.forEach(hook => hook(time))
 
-    ctx.restore()
+      ctx.restore()
+    }
 
     window.requestAnimationFrame(this.renderRaf)
   }
@@ -324,15 +334,15 @@ export class Intro {
 
   saveVec = (v: Vector) => {
     const { diffX, diffY, scale } = this.getRatiosDiffs()
-    const x = scale * v.x + diffX
-    const y = scale * v.y + diffY
+    const x = Math.round(scale * v.x + diffX)
+    const y = Math.round(scale * v.y + diffY)
     return vec(x, y)
   }
 
   restoreVec = (v: Vector) => {
     const { diffX, diffY, scale } = this.getRatiosDiffs()
-    const x = (1 / scale) * (v.x - diffX)
-    const y = (1 / scale) * (v.y - diffY)
+    const x = Math.round((1 / scale) * (v.x - diffX))
+    const y = Math.round((1 / scale) * (v.y - diffY))
     return vec(x, y)
   }
 }

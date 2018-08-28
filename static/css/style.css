@@ -1,18 +1,5 @@
-@font-face {
-  font-family: 'RF Dewi Black Custom';
-  src: url('../fonts/RFDewi-Black.otf');
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  font-family: sans-serif;
   overflow-x: hidden;
-  background-color: #000;
 }
 
 .kwc-intro,
@@ -27,11 +14,9 @@ body {
   width: 100%;
   max-width: 100%;
   height: 100vh;
-  /*
   background-image: url('../img/bg.jpg');
   background-position: center;
   background-size: cover;
-  */
   overflow: hidden;
 }
 
@@ -77,8 +62,14 @@ body {
   position: relative;
   line-height: 1;
   font-weight: bold;
-  font-family: 'RF Dewi Black Custom';
+  font-family: 'RF Dewi Expanded Black Custom';
   text-align: left;
+}
+
+.kwc-intro-text.kwc-intro-text-chinese {
+  font-family: 'Typeface Custom';
+  font-weight: 400;
+  letter-spacing: 0.1em;
 }
 
 .kwc-intro-canvas {
