@@ -6,6 +6,7 @@ import bgMask from 'utils/mask'
 import measureText from 'utils/measureText'
 import { dewi, china } from 'utils/fontObserver'
 import scroll from 'utils/scroll'
+const smokemachine = require('vendor/smoke')
 require('vendor/parlin-noise')
 const noise = (window as any).noise
 
@@ -14,6 +15,8 @@ img.src = 'http://ucraft.neekeesh.com/img/bg.jpg'
 
 export const minmax = (min: number, value: number, max: number) =>
   Math.max(min, Math.min(max, value))
+
+const rnd = (min: number, max: number) => Math.random() * (max - min) + min
 
 export interface TextDrawing {
   delay: number
@@ -36,9 +39,16 @@ export interface State {
 
 export class Intro {
   canvas: HTMLCanvasElement
-  darknessCanvas: HTMLCanvasElement
   ctx: CanvasRenderingContext2D
-  darknessCtx: CanvasRenderingContext2D
+
+  bufferCanvas: HTMLCanvasElement
+  bufferCtx: CanvasRenderingContext2D
+
+  smoke: any
+  smokeCanvas: HTMLCanvasElement
+  smokeCtx: CanvasRenderingContext2D
+  lastSmokeSpawn: number = 0
+
   intoBody: HTMLElement
   renderHooks: ((t: number) => void)[] = []
   scale: number =
@@ -66,9 +76,15 @@ export class Intro {
     this.intoBody.classList.add('kwc-intro-body')
     intro.appendChild(this.intoBody)
 
-    this.darknessCanvas = document.createElement('canvas')
+    this.bufferCanvas = document.createElement('canvas')
     this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D
-    this.darknessCtx = this.darknessCanvas.getContext(
+    this.bufferCtx = this.bufferCanvas.getContext(
+      '2d',
+    ) as CanvasRenderingContext2D
+
+    this.smokeCanvas = document.createElement('canvas')
+    this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D
+    this.smokeCtx = this.smokeCanvas.getContext(
       '2d',
     ) as CanvasRenderingContext2D
 
@@ -93,9 +109,22 @@ export class Intro {
     })
 
     this.ctx.imageSmoothingEnabled = true
-    this.darknessCtx.imageSmoothingEnabled = true
+    this.bufferCtx.imageSmoothingEnabled = true
 
     noise.seed(Math.random())
+
+    // Smoke
+    this.smoke = smokemachine(this.smokeCtx, [10, 10, 10])
+    this.smoke.start()
+    for (let k = 0; k < 100; k++) {
+      this.smoke.addsmoke(
+        rnd(-this.state.winW / 2, this.state.winW),
+        rnd(0, this.state.winH),
+        1,
+        5000,
+      )
+      this.smoke.step(10)
+    }
 
     window.requestAnimationFrame(this.renderRaf)
   }
@@ -107,17 +136,51 @@ export class Intro {
       const now = Date.now()
 
       ctx.save()
-      if (this.scale !== 1) ctx.scale(this.scale, this.scale)
+      this.bufferCtx.save()
+      this.smokeCtx.save()
+      if (this.scale !== 1) {
+        ctx.scale(this.scale, this.scale)
+        this.bufferCtx.scale(this.scale, this.scale)
+        this.smokeCtx.scale(this.scale, this.scale)
+      }
 
       ctx.clearRect(0, 0, w, h)
       this.renderBg()
+      this.renderSmoke(time, now)
       if (!this.state.debugMode) this.renderDarkness(time, now)
       this.renderHooks.forEach(hook => hook(time))
 
       ctx.restore()
+      this.bufferCtx.restore()
+      this.smokeCtx.restore()
     }
 
     window.requestAnimationFrame(this.renderRaf)
+  }
+
+  renderSmoke = (time: number, now: number) => {
+    const { winW: w, winH: h } = this.state
+
+    if (now - this.lastSmokeSpawn > 100) {
+      for (let k = 0; k < 6; k++) {
+        this.smoke.addsmoke(rnd(-w / 2, w), rnd(0, h), 1, 5000)
+      }
+      this.lastSmokeSpawn = now
+    }
+
+    const ctx = this.bufferCtx
+
+    ctx.save()
+
+    ctx.clearRect(0, 0, w, h)
+    ctx.drawImage(this.smokeCanvas, 0, 0)
+    this.drawMask(ctx)
+    ctx.clip()
+    ctx.clearRect(0, 0, w, h)
+
+    this.ctx.drawImage(this.bufferCanvas, 0, 0, w, h)
+
+    ctx.restore()
   }
 
   renderBg() {
@@ -135,17 +198,7 @@ export class Intro {
     }
   }
 
-  renderDarkness(time: number, now: number) {
-    const ctx = this.darknessCtx
-
-    const { winW: w, winH: h, mouse, hlRadius } = this.state
-
-    const n = noise.simplex3(0, 0, (time % 5000) / 300)
-
-    ctx.save()
-    if (this.scale !== 1) ctx.scale(this.scale, this.scale)
-    ctx.clearRect(0, 0, w, h)
-
+  drawMask(ctx: CanvasRenderingContext2D) {
     ctx.beginPath()
     bgMask.forEach((d, i) => {
       const { x, y } = this.restoreVec(d)
@@ -153,6 +206,16 @@ export class Intro {
       else ctx.lineTo(x, y)
     })
     ctx.closePath()
+  }
+
+  renderDarkness(time: number, now: number) {
+    const ctx = this.bufferCtx
+    const { winW: w, winH: h, mouse, hlRadius } = this.state
+    const n = noise.simplex3(0, 0, (time % 5000) / 300)
+
+    ctx.save()
+    ctx.clearRect(0, 0, w, h)
+    this.drawMask(ctx)
     ctx.clip()
     ctx.fillStyle = '#000'
     ctx.fillRect(0, 0, w, h)
@@ -176,11 +239,12 @@ export class Intro {
 
     ctx.fillRect(lightX - r, lightY - r, r * 2, r * 2)
 
-    ctx.restore()
-
-    ctx.globalAlpha = 0.85
+    this.ctx.save()
     this.ctx.globalCompositeOperation = 'multiply'
-    this.ctx.drawImage(this.darknessCanvas, 0, 0, w, h)
+    this.ctx.drawImage(this.bufferCanvas, 0, 0, w, h)
+    this.ctx.restore()
+
+    ctx.restore()
   }
 
   renderLetters = () => {
@@ -302,7 +366,8 @@ export class Intro {
 
     const canvases = [
       { c: this.canvas, ctx: this.ctx },
-      { c: this.darknessCanvas, ctx: this.darknessCtx },
+      { c: this.bufferCanvas, ctx: this.bufferCtx },
+      { c: this.smokeCanvas, ctx: this.smokeCtx },
     ]
     canvases.forEach(({ c, ctx }) => {
       c.style.width = w + 'px'
