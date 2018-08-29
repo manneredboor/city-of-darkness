@@ -116,13 +116,8 @@ export class Intro {
     // Smoke
     this.smoke = smokemachine(this.smokeCtx, [10, 10, 10])
     this.smoke.start()
-    for (let k = 0; k < 100; k++) {
-      this.smoke.addsmoke(
-        rnd(-this.state.winW / 2, this.state.winW),
-        rnd(0, this.state.winH),
-        1,
-        5000,
-      )
+    for (let k = 0; k < 20; k++) {
+      this.spawnSmoke()
       this.smoke.step(10)
     }
 
@@ -158,17 +153,21 @@ export class Intro {
     window.requestAnimationFrame(this.renderRaf)
   }
 
-  renderSmoke = (time: number, now: number) => {
+  spawnSmoke() {
     const { winW: w, winH: h } = this.state
+    for (let k = 0; k < w / 250; k++) {
+      this.smoke.addsmoke(rnd(-w / 2, w), rnd(0, h), 1, w * 3)
+    }
+  }
 
+  renderSmoke(time: number, now: number) {
     if (now - this.lastSmokeSpawn > 100) {
-      for (let k = 0; k < 6; k++) {
-        this.smoke.addsmoke(rnd(-w / 2, w), rnd(0, h), 1, 5000)
-      }
+      this.spawnSmoke()
       this.lastSmokeSpawn = now
     }
 
     const ctx = this.bufferCtx
+    const { winW: w, winH: h } = this.state
 
     ctx.save()
 
