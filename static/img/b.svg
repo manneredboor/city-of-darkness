@@ -1,44 +1,51 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<!-- Creator: CorelDRAW 2018 (64-Bit Оценочная версия) -->
-<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="254mm" height="1763.89mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-viewBox="0 0 25400 176388.88"
- xmlns:xlink="http://www.w3.org/1999/xlink">
- <defs>
-  <style type="text/css">
-   <![CDATA[
-    .fil0 {fill:white}
-    .fil4 {fill:url(#id0)}
-    .fil3 {fill:url(#id1)}
-    .fil2 {fill:url(#id2)}
-    .fil5 {fill:url(#id3)}
-    .fil1 {fill:url(#id4)}
-   ]]>
-  </style>
-  <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="4742.18" y1="24713.21" x2="7957.7" y2="15892.51">
-   <stop offset="0" style="stop-opacity:1; stop-color:#FEFEFE"/>
-   <stop offset="0.4" style="stop-opacity:1; stop-color:white"/>
-   <stop offset="1" style="stop-opacity:1; stop-color:#F0F0F0"/>
-  </linearGradient>
-  <linearGradient id="id1" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="18025.97" y1="22323.35" x2="19582.99" y2="18655.58">
-  </linearGradient>
-  <linearGradient id="id2" gradientUnits="userSpaceOnUse" x1="14041.99" y1="20689.99" x2="14041.99" y2="18571.39">
-   <stop offset="0" style="stop-opacity:1; stop-color:white"/>
-   <stop offset="1" style="stop-opacity:1; stop-color:#EDEDED"/>
-  </linearGradient>
-  <linearGradient id="id3" gradientUnits="userSpaceOnUse" xlink:href="#id2" x1="19049.92" y1="24730.73" x2="19049.92" y2="20497.39">
-  </linearGradient>
-  <linearGradient id="id4" gradientUnits="userSpaceOnUse" xlink:href="#id2" x1="11112.46" y1="18956.59" x2="11112.46" y2="16837.99">
-  </linearGradient>
- </defs>
- <g id="Слой_x0020_1">
-  <metadata id="CorelCorpID_0Corel-Layer"/>
-  <polygon class="fil0" points="-0.04,15874.99 12699.98,15874.99 15345.79,16837.99 15345.79,17608.39 17462.47,17608.39 25399.92,20497.39 25399.92,24730.73 12699.92,24730.73 -0.04,20108.33 "/>
-  <rect id="Прямоугольник_x0020_" class="fil1" x="6879.14" y="16837.99" width="8466.65" height="2118.6"/>
-  <rect id="Прямоугольник_x0020__0" class="fil2" x="11641.62" y="18571.39" width="4800.74" height="2118.6"/>
-  <polygon class="fil3" points="21166.6,20290.87 16442.36,18571.39 16442.36,20688.05 21166.6,22407.54 "/>
-  <path class="fil0" d="M-0.04 15874.99l12700.02 0 2645.81 963 -8466.65 0 2116.64 770.4 8466.69 0 7937.45 2889 -12700 0 -12699.96 -4622.4zm16442.4 2696.4l-4800.74 0 2116.68 770.41 4800.75 0 -2116.69 -770.41z"/>
-  <polygon class="fil4" points="12699.92,20497.39 -0.04,15874.99 -0.04,20108.33 12699.92,24730.73 "/>
-  <rect id="Прямоугольник_x0020__1" class="fil5" x="12699.92" y="20497.39" width="12700" height="4233.34"/>
- </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 720 250.5" style="enable-background:new 0 0 720 250.5;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:url(#Прямоугольник_x0020__1_);}
+	.st2{fill:url(#Прямоугольник_x0020__0_1_);}
+	.st3{fill:url(#SVGID_1_);}
+	.st4{fill:url(#SVGID_2_);}
+	.st5{fill:url(#Прямоугольник_x0020__1_1_);}
+	.st6{fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;}
+</style>
+<g id="Слой_x0020_1">
+	<polygon class="st0" points="0,0 360,0 435,27.3 435,49.1 495,49.1 720,131 720,251 360,251 0,120 	"/>
+	
+		<linearGradient id="Прямоугольник_x0020__1_" gradientUnits="userSpaceOnUse" x1="16048.5264" y1="-133487.3438" x2="16048.5264" y2="-131368.75" gradientTransform="matrix(2.834646e-02 0 0 -2.834646e-02 -139.9181 -3696.541)">
+		<stop  offset="0" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#EDEDED"/>
+	</linearGradient>
+	<rect id="Прямоугольник_x0020_" x="195" y="27.3" class="st1" width="240" height="60.1"/>
+	
+		<linearGradient id="Прямоугольник_x0020__0_1_" gradientUnits="userSpaceOnUse" x1="18978.0508" y1="-135220.75" x2="18978.0508" y2="-133102.1563" gradientTransform="matrix(2.834646e-02 0 0 -2.834646e-02 -139.9181 -3696.541)">
+		<stop  offset="0" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#EDEDED"/>
+	</linearGradient>
+	<rect id="Прямоугольник_x0020__0" x="330" y="76.4" class="st2" width="136.1" height="60.1"/>
+	
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="22962.0313" y1="-136854.1094" x2="24519.0508" y2="-133186.3438" gradientTransform="matrix(2.834646e-02 0 0 -2.834646e-02 -139.9181 -3696.541)">
+		<stop  offset="0" style="stop-color:#FEFEFE"/>
+		<stop  offset="0.4" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#F0F0F0"/>
+	</linearGradient>
+	<polygon class="st3" points="600,125.2 466.1,76.4 466.1,136.4 600,185.2 	"/>
+	<path class="st0" d="M0,0h360l75,27.3H195l60,21.8h240L720,131H360L0,0L0,0z M466.1,76.4H330l60,21.8h136.1L466.1,76.4z"/>
+	
+		<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="9678.2412" y1="-139243.9688" x2="12893.7607" y2="-130423.2656" gradientTransform="matrix(2.834646e-02 0 0 -2.834646e-02 -139.9181 -3696.541)">
+		<stop  offset="0" style="stop-color:#FEFEFE"/>
+		<stop  offset="0.4" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#F0F0F0"/>
+	</linearGradient>
+	<polygon class="st4" points="360,131 0,0 0,120 360,251 	"/>
+	
+		<linearGradient id="Прямоугольник_x0020__1_1_" gradientUnits="userSpaceOnUse" x1="23985.9805" y1="-139261.4844" x2="23985.9805" y2="-135028.1563" gradientTransform="matrix(2.834646e-02 0 0 -2.834646e-02 -139.9181 -3696.541)">
+		<stop  offset="0" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#EDEDED"/>
+	</linearGradient>
+	<rect id="Прямоугольник_x0020__1" x="360" y="131" class="st5" width="360" height="120"/>
+</g>
+<polygon class="st6" points="691,-2852.2 691,-2852.2 691,-2852.2 691,-2852.2 "/>
 </svg>

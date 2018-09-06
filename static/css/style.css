@@ -337,7 +337,6 @@ body {
   white-space: nowrap;
   overflow: hidden;
   position: absolute;
-  color: #fff;
   text-transform: uppercase;
   font-weight: bold;
   font-size: calc(100vw / 13);
@@ -347,9 +346,26 @@ body {
   /* background-color: rgba(255, 255, 255, 0.2); */
 }
 
+.kwc-letter-text-itm {
+  position: relative;
+  width: fit-content;
+}
+
 /**
  * A
  */
+
+.kwc-letter-a {
+  color: #fff;
+}
+
+.kwc-letter-a:after {
+  content: '';
+  display: block;
+  width: 100%;
+  position: relative;
+  padding-bottom: 35%;
+}
 
 .kwc-letter-a-bg {
   position: absolute;
@@ -381,7 +397,56 @@ body {
   width: 50%;
 }
 
-.kwc-letter-a:after {
+.kwc-letter-a-text-1 {
+  left: 0;
+  width: 50%;
+  top: 5.4%;
+  transform: skewY(20deg);
+}
+
+.kwc-letter-a-text-2 {
+  left: 50%;
+  width: 16.666%;
+  top: 57.4%;
+}
+
+.kwc-letter-a-text-3 {
+  left: 50%;
+  width: 16.666%;
+  top: 40%;
+}
+
+.kwc-letter-a-text-4 {
+  left: 66.666%;
+  width: 16.666%;
+  top: 40%;
+  transform: skewY(20deg);
+}
+
+.kwc-letter-a-text-5 {
+  right: 0;
+  width: 16.666%;
+  top: 57.4%;
+}
+
+/**
+ * B
+ */
+
+.kwc-letter-b {
+  color: #000;
+}
+
+.kwc-letter-b-bg {
+  position: absolute;
+  width: 50%;
+  top: 0;
+  left: 50%;
+  height: 60%;
+  background-color: #000;
+}
+
+.kwc-letter-b:after {
   content: '';
   display: block;
   width: 100%;
@@ -389,39 +454,15 @@ body {
   padding-bottom: 35%;
 }
 
-.kwc-letter-a1-1 {
+.kwc-letter-b-text-1 {
   left: 0;
   width: 50%;
   top: 5.4%;
   transform: skewY(20deg);
 }
 
-.kwc-letter-a1-2 {
+.kwc-letter-b-text-2 {
   left: 50%;
-  width: 16.666%;
+  width: 50%;
   top: 57.4%;
-}
-
-.kwc-letter-a1-3 {
-  left: 50%;
-  width: 16.666%;
-  top: 40%;
-}
-
-.kwc-letter-a1-4 {
-  left: 66.666%;
-  width: 16.666%;
-  top: 40%;
-  transform: skewY(20deg);
-}
-
-.kwc-letter-a1-5 {
-  right: 0;
-  width: 16.666%;
-  top: 57.4%;
-}
-
-.kwc-letter-text-itm {
-  position: relative;
-  width: fit-content;
 }
