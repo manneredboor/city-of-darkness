@@ -28,7 +28,7 @@ const render = () => {
 
   if (letters) {
     letters.forEach((letter: HTMLDivElement, i) => {
-      const text = String(letter.dataset.text) + '&nbsp;'
+      const text = String(letter.dataset.text) + '&nbsp;&nbsp;'
       const textsWraps = letter.querySelectorAll('.kwc-letter-text')
 
       const textW = measureText(text, 'kwc-letter-text')
