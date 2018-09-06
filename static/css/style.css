@@ -314,3 +314,114 @@ body {
 .kwc-title.kwc-title-dark.kwc-title-fill-bg .kwc-title-inner:before {
   background-color: #fff;
 }
+
+/**
+ * Letters
+ */
+.kwc-letter {
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+}
+
+.kwc-letter img {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+.kwc-letter-text {
+  white-space: nowrap;
+  overflow: hidden;
+  position: absolute;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: calc(100vw / 13);
+  font-family: 'RF Dewi Expanded Black Custom';
+  transform-origin: 0 0;
+  line-height: 1;
+  /* background-color: rgba(255, 255, 255, 0.2); */
+}
+
+/**
+ * A
+ */
+
+.kwc-letter-a-bg {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.kwc-letter-a-bg:after,
+.kwc-letter-a-bg:before {
+  content: '';
+  display: block;
+  position: absolute;
+  background-color: #000;
+}
+
+.kwc-letter-a-bg:before {
+  top: 40%;
+  left: 0;
+  height: 60%;
+  width: 50%;
+}
+
+.kwc-letter-a-bg:after {
+  top: 55%;
+  left: 50%;
+  height: 45%;
+  width: 50%;
+}
+
+.kwc-letter-a:after {
+  content: '';
+  display: block;
+  width: 100%;
+  position: relative;
+  padding-bottom: 35%;
+}
+
+.kwc-letter-a1-1 {
+  left: 0;
+  width: 50%;
+  top: 5.4%;
+  transform: skewY(20deg);
+}
+
+.kwc-letter-a1-2 {
+  left: 50%;
+  width: 16.666%;
+  top: 57.4%;
+}
+
+.kwc-letter-a1-3 {
+  left: 50%;
+  width: 16.666%;
+  top: 40%;
+}
+
+.kwc-letter-a1-4 {
+  left: 66.666%;
+  width: 16.666%;
+  top: 40%;
+  transform: skewY(20deg);
+}
+
+.kwc-letter-a1-5 {
+  right: 0;
+  width: 16.666%;
+  top: 57.4%;
+}
+
+.kwc-letter-text-itm {
+  position: relative;
+  width: fit-content;
+}
