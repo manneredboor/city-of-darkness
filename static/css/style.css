@@ -466,3 +466,75 @@ body {
   width: 50%;
   top: 57.4%;
 }
+
+/**
+ * K
+ */
+
+.kwc-letter-k {
+  color: #000;
+}
+
+.kwc-letter-k-bg {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.kwc-letter-k-bg:before,
+.kwc-letter-k-bg:after {
+  content: '';
+  display: block;
+  position: absolute;
+  background-color: #000;
+}
+
+.kwc-letter-k-bg:before {
+  width: 60%;
+  top: 0;
+  left: 40%;
+  height: 60%;
+}
+
+.kwc-letter-k-bg:after {
+  width: 50%;
+  top: 0;
+  left: 0;
+  height: 20%;
+}
+
+.kwc-letter-k:after {
+  content: '';
+  display: block;
+  width: 100%;
+  position: relative;
+  padding-bottom: 35%;
+}
+
+.kwc-letter-k-text-1 {
+  left: 0;
+  width: 50%;
+  top: 5.4%;
+  transform: skewY(20deg);
+}
+
+.kwc-letter-k-text-2 {
+  left: 50%;
+  width: 16.666%;
+  top: 57.4%;
+}
+
+.kwc-letter-k-text-3 {
+  left: 50%;
+  width: 33.333%;
+  top: 40.7%;
+  transform: skewY(10deg);
+}
+
+.kwc-letter-k-text-4 {
+  right: 0;
+  width: 16.666%;
+  top: 57.4%;
+}

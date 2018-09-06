@@ -1,34 +1,50 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="1440px" height="502px" viewBox="0 0 1440 502" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
-    <title>K1</title>
-    <desc>Created with Sketch.</desc>
-    <defs>
-        <linearGradient x1="37.3404326%" y1="99.8021622%" x2="62.6595674%" y2="0.197837787%" id="linearGradient-1">
-            <stop stop-color="#FFFFFF" offset="0%"></stop>
-            <stop stop-color="#FFFFFF" offset="40%"></stop>
-            <stop stop-color="#F0F0F0" offset="100%"></stop>
-        </linearGradient>
-        <linearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="linearGradient-2">
-            <stop stop-color="#FFFFFF" offset="0%"></stop>
-            <stop stop-color="#EDEDED" offset="100%"></stop>
-        </linearGradient>
-        <linearGradient x1="43.3170305%" y1="100.098726%" x2="56.6829695%" y2="-0.0987264291%" id="linearGradient-3">
-            <stop stop-color="#FFFFFF" offset="0%"></stop>
-            <stop stop-color="#FFFFFF" offset="40%"></stop>
-            <stop stop-color="#F0F0F0" offset="100%"></stop>
-        </linearGradient>
-    </defs>
-    <g id="Letters" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Artboard">
-            <g id="K1">
-                <polygon id="Shape" fill="#FFFFFF" points="960.013606 458.327644 960.013606 501.984697 720.02381 501.984697 0.0544230542 239.994768 0.0544230542 0.0561115502 240.045353 0.0561115502 480.034014 87.3860878 480.036282 0.0561115502 720.027212 0.0561115502 720.024944 131.051076 1439.99546 262.04604 1439.99546 501.984697 1200.00454 501.984697"></polygon>
-                <polygon id="Shape" fill="url(#linearGradient-1)" points="720.02381 262.04604 0.0544230542 0.0561115502 0.0544230542 239.994768 720.02381 501.984697"></polygon>
-                <rect id="Rectangle-path" fill="url(#linearGradient-2)" x="1200.00454" y="262.04604" width="239.990929" height="239.938656"></rect>
-                <polygon id="Shape" fill="url(#linearGradient-3)" points="1200.00454 262.04604 720.129255 174.750638 720.129255 414.689294 1200.00454 501.984697"></polygon>
-                <rect id="Rectangle-path" fill="url(#linearGradient-2)" x="720.02381" y="262.04604" width="239.989796" height="239.938656"></rect>
-                <polygon id="Shape" fill="#FFFFFF" points="960.013606 262.04604 720.02381 262.04604 0.0544230542 0.0561115502 240.045353 0.0561115502 480.034014 87.3860878 480.036282 0.0561115502 720.027212 0.0561115502 720.024944 131.051076 1439.99546 262.04604 1200.00454 262.04604 720.02381 174.716064"></polygon>
-            </g>
-        </g>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1440 502" style="enable-background:new 0 0 1440 502;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:url(#Shape_4_);}
+	.st2{fill:url(#Rectangle-path_2_);}
+	.st3{fill:url(#Shape_5_);}
+	.st4{fill:url(#Rectangle-path_3_);}
+</style>
+<title>K1</title>
+<desc>Created with Sketch.</desc>
+<g id="Letters">
+	<g id="Artboard">
+		<g id="K1">
+			<polygon id="Shape" class="st0" points="960,458.3 960,502 720,502 0.1,240 0.1,0.1 240,0.1 480,87.4 480,0.1 720,0.1 720,131.1 
+				1440,262 1440,502 1200,502 			"/>
+			
+				<linearGradient id="Shape_4_" gradientUnits="userSpaceOnUse" x1="575.5734" y1="1285.9619" x2="575.8265" y2="1286.9579" gradientTransform="matrix(719.9694 0 0 -501.9286 -414126.3125 645962)">
+				<stop  offset="0" style="stop-color:#FFFFFF"/>
+				<stop  offset="0.4" style="stop-color:#FFFFFF"/>
+				<stop  offset="1" style="stop-color:#F0F0F0"/>
+			</linearGradient>
+			<polygon id="Shape_1_" class="st1" points="720,262 0.1,0.1 0.1,240 720,502 			"/>
+			
+				<linearGradient id="Rectangle-path_2_" gradientUnits="userSpaceOnUse" x1="574.0999" y1="1283.1537" x2="574.0999" y2="1284.1537" gradientTransform="matrix(239.9909 0 0 -239.9387 -136458.7813 308380.1563)">
+				<stop  offset="0" style="stop-color:#FFFFFF"/>
+				<stop  offset="1" style="stop-color:#EDEDED"/>
+			</linearGradient>
+			<rect id="Rectangle-path" x="1200" y="262" class="st2" width="240" height="239.9"/>
+			
+				<linearGradient id="Shape_5_" gradientUnits="userSpaceOnUse" x1="575.2328" y1="1284.5869" x2="575.3665" y2="1285.5889" gradientTransform="matrix(479.8752 0 0 -327.2341 -275112 420862.9063)">
+				<stop  offset="0" style="stop-color:#FFFFFF"/>
+				<stop  offset="0.4" style="stop-color:#FFFFFF"/>
+				<stop  offset="1" style="stop-color:#F0F0F0"/>
+			</linearGradient>
+			<polygon id="Shape_2_" class="st3" points="1200,262 720.1,174.8 720.1,414.7 1200,502 			"/>
+			
+				<linearGradient id="Rectangle-path_3_" gradientUnits="userSpaceOnUse" x1="574.0999" y1="1283.1537" x2="574.0999" y2="1284.1537" gradientTransform="matrix(239.9898 0 0 -239.9387 -136938.0938 308380.1563)">
+				<stop  offset="0" style="stop-color:#FFFFFF"/>
+				<stop  offset="1" style="stop-color:#EDEDED"/>
+			</linearGradient>
+			<rect id="Rectangle-path_1_" x="720" y="262" class="st4" width="240" height="239.9"/>
+			<polygon id="Shape_3_" class="st0" points="960,262 720,262 0.1,0.1 240,0.1 480,87.4 480,0.1 720,0.1 720,131.1 1440,262 
+				1200,262 720,174.7 			"/>
+		</g>
+	</g>
+</g>
 </svg>
