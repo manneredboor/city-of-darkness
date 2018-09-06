@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1440px" height="502px" viewBox="0 0 1440 502" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>K1</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="37.3404326%" y1="99.8021622%" x2="62.6595674%" y2="0.197837787%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="40%"></stop>
+            <stop stop-color="#F0F0F0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#EDEDED" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="43.3170305%" y1="100.098726%" x2="56.6829695%" y2="-0.0987264291%" id="linearGradient-3">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="40%"></stop>
+            <stop stop-color="#F0F0F0" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Letters" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard">
+            <g id="K1">
+                <polygon id="Shape" fill="#FFFFFF" points="960.013606 458.327644 960.013606 501.984697 720.02381 501.984697 0.0544230542 239.994768 0.0544230542 0.0561115502 240.045353 0.0561115502 480.034014 87.3860878 480.036282 0.0561115502 720.027212 0.0561115502 720.024944 131.051076 1439.99546 262.04604 1439.99546 501.984697 1200.00454 501.984697"></polygon>
+                <polygon id="Shape" fill="url(#linearGradient-1)" points="720.02381 262.04604 0.0544230542 0.0561115502 0.0544230542 239.994768 720.02381 501.984697"></polygon>
+                <rect id="Rectangle-path" fill="url(#linearGradient-2)" x="1200.00454" y="262.04604" width="239.990929" height="239.938656"></rect>
+                <polygon id="Shape" fill="url(#linearGradient-3)" points="1200.00454 262.04604 720.129255 174.750638 720.129255 414.689294 1200.00454 501.984697"></polygon>
+                <rect id="Rectangle-path" fill="url(#linearGradient-2)" x="720.02381" y="262.04604" width="239.989796" height="239.938656"></rect>
+                <polygon id="Shape" fill="#FFFFFF" points="960.013606 262.04604 720.02381 262.04604 0.0544230542 0.0561115502 240.045353 0.0561115502 480.034014 87.3860878 480.036282 0.0561115502 720.027212 0.0561115502 720.024944 131.051076 1439.99546 262.04604 1200.00454 262.04604 720.02381 174.716064"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

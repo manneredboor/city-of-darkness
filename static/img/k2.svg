@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="961px" height="503px" viewBox="0 0 961 503" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>K2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="37.3404326%" y1="99.8021622%" x2="62.6595674%" y2="0.197837787%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="40%"></stop>
+            <stop stop-color="#F0F0F0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#EDEDED" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Letters" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(0.000000, -603.000000)">
+            <g id="K2" transform="translate(0.000000, 603.000000)">
+                <polygon id="Shape" fill="#FFFFFF" points="960.013606 502.094059 720.02381 502.094059 0.0544230542 240.047053 0.0544230542 0.0561237747 240.045353 0.0561237747 960.013606 262.10313"></polygon>
+                <polygon id="Shape" fill="url(#linearGradient-1)" points="720.02381 262.10313 0.0544230542 0.0561237747 0.0544230542 240.047053 720.02381 502.094059"></polygon>
+                <rect id="Rectangle-path" fill="url(#linearGradient-2)" x="720.02381" y="262.10313" width="239.989796" height="239.990929"></rect>
+                <polygon id="Shape" fill="#FFFFFF" points="960.013606 262.10313 720.02381 262.10313 0.0544230542 0.0561237747 240.045353 0.0561237747"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>
