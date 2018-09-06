@@ -5,7 +5,7 @@ export default function measureText(
 ) {
   const textMeasure = document.createElement('div')
   textMeasure.className = className
-  textMeasure.textContent = text
+  textMeasure.innerHTML = text
   if (size) textMeasure.style.fontSize = size + 'px'
   textMeasure.style.position = 'absolute'
   textMeasure.style.left = '-10000px'
