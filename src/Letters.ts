@@ -78,3 +78,34 @@ const raf = () => {
 }
 
 window.requestAnimationFrame(raf)
+
+// Navigation related js
+const anime = require('vendor/anime');
+
+console.log(anime);
+
+
+const navBtn = document.querySelector('.nav-btn');
+const menu = document.querySelector('.kwc-menu');
+
+const menuCols = document.querySelectorAll('.menu-col');
+
+function animateLines() {
+  anime({
+    target: menuCols,
+    opacity: 1,
+    duration: 600,
+    easing: 'easeInOutQuart'
+  })
+}
+
+if (navBtn !== null && menu !== null) {
+  navBtn.addEventListener('click', function name() {
+    if (menu.classList.contains('open')) {
+      menu.classList.remove('open');
+      return;
+    }
+    menu.classList.add('open');
+    animateLines();
+  })
+}
