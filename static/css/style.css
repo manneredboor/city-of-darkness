@@ -543,3 +543,83 @@ body {
   width: 16.666%;
   top: 57.4%;
 }
+
+/**
+ * N
+ */
+
+.kwc-letter-n {
+  color: #000;
+}
+
+.kwc-letter-n:after {
+  content: '';
+  display: block;
+  width: 100%;
+  position: relative;
+  padding-bottom: 35%;
+}
+
+.kwc-letter-n-bg {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.kwc-letter-n-bg:after,
+.kwc-letter-n-bg:before {
+  content: '';
+  display: block;
+  position: absolute;
+  background-color: #000;
+}
+
+.kwc-letter-n-bg:before {
+  top: 0;
+  left: 0;
+  height: 35%;
+  width: 50%;
+}
+
+.kwc-letter-n-bg:after {
+  top: 0;
+  left: 50%;
+  height: 52.2%;
+  width: 50%;
+}
+
+.kwc-letter-n-text-1 {
+  left: 0;
+  width: 50%;
+  top: 57.4%;
+  transform: skewY(20deg);
+  transform-origin: top right;
+}
+
+.kwc-letter-n-text-2 {
+  left: 50%;
+  width: 16.666%;
+  top: 57.4%;
+}
+
+.kwc-letter-n-text-3 {
+  left: 50%;
+  width: 16.666%;
+  top: 40%;
+}
+
+.kwc-letter-n-text-4 {
+  left: 66.666%;
+  width: 16.666%;
+  top: 57.4%;
+  transform: skewY(20deg);
+  transform-origin: top right;
+}
+
+.kwc-letter-n-text-5 {
+  right: 0;
+  width: 16.666%;
+  top: 57.4%;
+}
