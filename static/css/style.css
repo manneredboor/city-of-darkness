@@ -400,8 +400,9 @@ body {
 .kwc-letter-a-text-1 {
   left: 0;
   width: 50%;
-  top: 5.4%;
+  top: 57.4%;
   transform: skewY(20deg);
+  transform-origin: top right;
 }
 
 .kwc-letter-a-text-2 {
@@ -419,8 +420,9 @@ body {
 .kwc-letter-a-text-4 {
   left: 66.666%;
   width: 16.666%;
-  top: 40%;
+  top: 57.4%;
   transform: skewY(20deg);
+  transform-origin: top right;
 }
 
 .kwc-letter-a-text-5 {
@@ -457,8 +459,9 @@ body {
 .kwc-letter-b-text-1 {
   left: 0;
   width: 50%;
-  top: 5.4%;
+  top: 57.4%;
   transform: skewY(20deg);
+  transform-origin: top right;
 }
 
 .kwc-letter-b-text-2 {
@@ -516,8 +519,9 @@ body {
 .kwc-letter-k-text-1 {
   left: 0;
   width: 50%;
-  top: 5.4%;
+  top: 57.4%;
   transform: skewY(20deg);
+  transform-origin: top right;
 }
 
 .kwc-letter-k-text-2 {
@@ -529,8 +533,9 @@ body {
 .kwc-letter-k-text-3 {
   left: 50%;
   width: 33.333%;
-  top: 40.7%;
+  top: 57.4%;
   transform: skewY(10deg);
+  transform-origin: top right;
 }
 
 .kwc-letter-k-text-4 {
