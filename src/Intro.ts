@@ -65,9 +65,7 @@ export class Intro {
     winW: -1,
   }
 
-  constructor() {
-    const intro = document.querySelector('.kwc-intro') as HTMLElement
-
+  constructor(intro: HTMLElement) {
     this.canvas = document.createElement('canvas')
     this.canvas.classList.add('kwc-intro-canvas')
     intro.appendChild(this.canvas)
