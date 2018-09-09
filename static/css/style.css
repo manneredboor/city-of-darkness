@@ -623,3 +623,63 @@ body {
   width: 16.666%;
   top: 57.4%;
 }
+
+/**
+ * C
+ */
+
+.kwc-letter-c {
+  color: #fff;
+}
+
+.kwc-letter-c-bg {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.kwc-letter-c-bg:after,
+.kwc-letter-c-bg:before {
+  content: '';
+  display: block;
+  position: absolute;
+  background-color: #000;
+}
+
+.kwc-letter-c-bg:before {
+  width: 50%;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.kwc-letter-c-bg:after {
+  top: 52%;
+  left: 50%;
+  height: 48%;
+  width: 50%;
+}
+
+.kwc-letter-c:after {
+  content: '';
+  display: block;
+  width: 100%;
+  position: relative;
+  padding-bottom: 35%;
+}
+
+.kwc-letter-c-text-1 {
+  left: 0;
+  width: 50%;
+  top: 57.4%;
+  transform: skewY(20deg);
+  transform-origin: top right;
+}
+
+.kwc-letter-c-text-2 {
+  left: 50%;
+  width: 50%;
+  top: 57.4%;
+}
