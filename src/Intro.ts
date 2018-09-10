@@ -51,14 +51,14 @@ export class Intro {
     textDrawings: initialState,
   }
 
-  constructor(intro: HTMLElement) {
+  constructor() {
+    const intro = document.querySelector('.kwc-intro')
+
     this.canvas = document.createElement('canvas')
     this.canvas.classList.add('kwc-intro-canvas')
-    intro.appendChild(this.canvas)
 
     this.intoBody = document.createElement('div')
     this.intoBody.classList.add('kwc-intro-body')
-    intro.appendChild(this.intoBody)
 
     this.bufferCanvas = document.createElement('canvas')
     this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D
@@ -71,6 +71,10 @@ export class Intro {
     this.smokeCtx = this.smokeCanvas.getContext(
       '2d',
     ) as CanvasRenderingContext2D
+
+    if (!intro) return
+    intro.appendChild(this.canvas)
+    intro.appendChild(this.intoBody)
 
     this.updateSizes()
     onResize.subscribe(this.updateSizes)
