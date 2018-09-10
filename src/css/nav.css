@@ -75,6 +75,7 @@
   color: #000;
   font-family: 'RF Dewi Regular';
   z-index: 2;
+  transition: all ease-in-out .25s;
 }
 
 .nav-status {
@@ -87,9 +88,32 @@
   padding: 0 0 30px;
 }
 
+.nav-item-box {
+  display: flex;
+  align-items: center;
+  padding: 0 0 15px;
+  cursor: pointer;
+}
+
+.nav-item-box:hover .nav-item-line {
+  width: 30px;
+}
+
+.nav-item-box:hover .nav-item {
+  transform: translateX(8px);
+}
+
+.nav-item-line {
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: all ease-in-out .25s;
+  cursor: pointer;
+}
+
 .nav-item {
   font-size: 18px;
-  padding: 0 0 15px;
+  cursor: pointer;
 }
 
 .menu-col-1 {
