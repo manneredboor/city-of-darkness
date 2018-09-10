@@ -1,0 +1,117 @@
+/* Menu */
+.kwc-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  /* background: #000; */
+  transform: translateX(-100vw);
+  transition: all ease-in-out 0.4s;
+  z-index: 1001;
+}
+
+.kwc-menu.open {
+  transform: translateX(0);
+}
+
+.menu-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../img/bg.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.menu-col {
+  height: 100vh;
+  width: 25%;
+  padding: 0 30px;
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.menu-border {
+  position: absolute;
+  top: 0;
+  right: 0;
+  content: '';
+  height: 0;
+  width: 1px;
+  background: #fff;
+  z-index: 2;
+}
+
+.menu-num {
+  font-family: 'RF Dewi Expanded Black';
+  font-size: 72px;
+  letter-spacing: 3px;
+  position: absolute;
+  top: 100px;
+  left: -200px;
+  opacity: 0;
+  color: #000;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
+    1px 1px 0 #fff;
+  z-index: 2;
+}
+
+.nav-box {
+  position: absolute;
+  opacity: 0;
+  left: -200px;
+  z-index: 2;
+  /* transform: translateX(-250px); */
+}
+
+.nav-box p {
+  display: block;
+  color: #000;
+  font-family: 'RF Dewi Regular';
+  z-index: 2;
+}
+
+.nav-status {
+  font-size: 14px;
+  padding: 0 0 80px;
+}
+
+.nav-title {
+  font-size: 36px;
+  padding: 0 0 30px;
+}
+
+.nav-item {
+  font-size: 18px;
+  padding: 0 0 15px;
+}
+
+.menu-col-1 {
+  background: url('https://img-aws.ehowcdn.com/877x500p/s3-us-west-1.amazonaws.com/contentlab.studiod/getty/f24b4a7bf9f24d1ba5f899339e6949f3');
+  background-size: cover;
+}
+
+.menu-col-2 {
+  background: url('http://www.visitgreece.gr/deployedFiles/StaticFiles/Photos/Generic%20Contents/Forests/mountains_2_560.jpg');
+  background-size: cover;
+}
+
+.menu-col-3 {
+  background: url('https://www.tripsavvy.com/thmb/VcjtcUR_WdXiA0eA1phgE4VBzPY=/960x0/filters:no_upscale():max_bytes(150000):strip_icc()/scenic-view-of-snowcapped-mountains-against-blue-sky-740670351-598783ea03f402001065a152.jpg');
+  background-size: cover;
+}
+
+.menu-col-4 {
+  background: url('https://images.unsplash.com/photo-1528150113746-eedf29a184c1?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=418cfe031d636ba13d884ecb0f791291&w=1000&q=80');
+  background-size: cover;
+}
+
+.menu-bg canvas {
+  z-index: 1;
+}
