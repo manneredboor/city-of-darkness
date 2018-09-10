@@ -1,7 +1,7 @@
 import measureText from 'utils/measureText'
 import { dewi } from 'utils/fontObserver'
 import { scrollState } from 'utils/scroll'
-import { onResize, sizeState } from 'utils/resize'
+import { onResize } from 'utils/resize'
 
 const titles = document.querySelectorAll('.kwc-title')
 
