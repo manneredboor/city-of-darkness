@@ -1,7 +1,6 @@
 require('vendor/parlin-noise')
 import { Intro } from '../Intro'
 import { NavBg } from '../Nav'
-// import '../Titles' // Deprecated
 import '../Letters'
 
 new NavBg()

@@ -11,9 +11,6 @@ import { onResize, sizeState, resizeCanvases } from 'utils/resize'
 const smokemachine = require('vendor/smoke')
 const noise = (window as any).noise
 
-const img = new Image()
-img.src = 'http://ucraft.neekeesh.com/img/bg.jpg'
-
 export interface TextDrawing {
   delay: number
   dur: number
@@ -133,7 +130,6 @@ export class Intro {
       }
 
       ctx.clearRect(0, 0, w, h)
-      this.renderBg()
       this.renderSmoke(time, now)
       if (!this.state.debugMode) this.renderDarkness(time, now)
       this.renderHooks.forEach(hook => hook(time))
@@ -173,21 +169,6 @@ export class Intro {
     this.ctx.drawImage(this.bufferCanvas, 0, 0, w, h)
 
     ctx.restore()
-  }
-
-  renderBg() {
-    const ctx = this.ctx
-    if (img.complete) {
-      const { diffX, diffY, scale } = this.getRatiosDiffs()
-      const sc = 1 / scale
-      ctx.drawImage(
-        img,
-        -diffX * sc,
-        -diffY * sc,
-        img.width * sc,
-        img.height * sc,
-      )
-    }
   }
 
   drawMask(ctx: CanvasRenderingContext2D) {
