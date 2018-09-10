@@ -10,6 +10,7 @@ import { minmax, rnd } from 'utils/math'
 import { onResize, sizeState, resizeCanvases } from 'utils/resize'
 const smokemachine = require('vendor/smoke')
 const noise = (window as any).noise
+require('./css/intro.css')
 
 export interface TextDrawing {
   delay: number

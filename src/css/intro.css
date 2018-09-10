@@ -1,0 +1,113 @@
+body {
+  overflow-x: hidden;
+}
+
+.kwc-intro,
+.kwc-intro > * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.kwc-intro {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 100vh;
+  background-image: url('../img/bg.jpg');
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.kwc-intro:after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20vh;
+  pointer-events: none;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(rgba(0, 0, 0, 0)),
+    to(rgba(0, 0, 0, 255))
+  );
+  background: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 255));
+  background: -o-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 255));
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 255));
+}
+
+.kwc-intro-text-perspective {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+  overflow: hidden;
+  -webkit-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  transform-origin: 0 0;
+}
+
+.kwc-intro-text-mover {
+  position: relative;
+  -webkit-animation-name: kwc-text-move;
+  animation-name: kwc-text-move;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes kwc-text-move {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+}
+
+@keyframes kwc-text-move {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+}
+
+.kwc-intro-text {
+  position: relative;
+  line-height: 1;
+  font-weight: bold;
+  font-family: 'RF Dewi Expanded Black Custom';
+  text-align: left;
+}
+
+.kwc-intro-text.kwc-intro-text-chinese {
+  font-family: 'Typeface Custom';
+  font-weight: 400;
+  letter-spacing: 0.1em;
+}
+
+.kwc-intro-canvas {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.kwc-intro-body {
+  pointer-events: none;
+  width: 100%;
+  max-width: 100%;
+  height: 100vh;
+}

@@ -2,6 +2,7 @@ import measureText from 'utils/measureText'
 import { dewi } from 'utils/fontObserver'
 import { scrollState } from 'utils/scroll'
 import { onResize, sizeState } from 'utils/resize'
+require('./css/letters.css')
 
 const letters = document.querySelectorAll('.kwc-letter')
 
