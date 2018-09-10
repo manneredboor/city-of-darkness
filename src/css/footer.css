@@ -23,6 +23,7 @@
 
 .kwc-footer p {
   color: #fff;
+  word-break: unset !important;
 }
 
 .footer-nav {
@@ -71,6 +72,7 @@
   display: flex;
   flex-flow: column;
   justify-content: space-between;
+  text-align: left;
 }
 
 .ft-cont-35 {
@@ -78,6 +80,7 @@
   display: flex;
   flex-flow: column;
   justify-content: space-between;
+  text-align: left;
 }
 
 .footer-ch {
