@@ -1,3 +1,7 @@
+[data-id='463'] {
+  margin-top: 25vh;
+}
+
 /* Grid */
 .kwc-n-grid {
   position: absolute;
@@ -119,6 +123,10 @@
 }
 
 /* Third row */
+[data-id='475'] .row-container.container {
+  margin-bottom: 15vw;
+}
+
 [data-id='475'] .column:nth-child(2) {
   opacity: 0;
 }

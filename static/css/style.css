@@ -329,7 +329,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100% !important;
   pointer-events: none;
 }
 
@@ -414,7 +414,7 @@ body {
 .kwc-letter-a-text-3 {
   left: 50%;
   width: 16.666%;
-  top: 40%;
+  top: 40.3%;
 }
 
 .kwc-letter-a-text-4 {
@@ -607,7 +607,7 @@ body {
 .kwc-letter-n-text-3 {
   left: 50%;
   width: 16.666%;
-  top: 40%;
+  top: 40.3%;
 }
 
 .kwc-letter-n-text-4 {
