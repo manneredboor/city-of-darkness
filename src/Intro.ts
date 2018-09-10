@@ -5,10 +5,11 @@ import { getTransform } from 'utils/matrixTransform'
 import bgMask from 'utils/mask'
 import measureText from 'utils/measureText'
 import { dewi, china } from 'utils/fontObserver'
-import scroll from 'utils/scroll'
+import { scrollState } from 'utils/scroll'
+import { minmax, rnd } from 'utils/math'
+import { onResize, sizeState, resizeCanvases } from 'utils/resize'
 const smokemachine = require('vendor/smoke')
 const noise = (window as any).noise
-import { minmax, rnd } from 'utils/math'
 
 const img = new Image()
 img.src = 'http://ucraft.neekeesh.com/img/bg.jpg'
@@ -25,11 +26,8 @@ export interface State {
   bgH: number
   bgW: number
   debugMode: boolean
-  hlRadius: number
   mouse: Vector
   textDrawings: TextDrawing[]
-  winH: number
-  winW: number
 }
 
 export class Intro {
@@ -46,18 +44,13 @@ export class Intro {
 
   intoBody: HTMLElement
   renderHooks: ((t: number) => void)[] = []
-  scale: number =
-    typeof window.devicePixelRatio === 'number' ? window.devicePixelRatio : 1
 
   state: State = {
     bgH: 1000,
     bgW: 1491,
     debugMode: false,
-    hlRadius: 100,
     mouse: vec(0, 0),
     textDrawings: initialState,
-    winH: -1,
-    winW: -1,
   }
 
   constructor(intro: HTMLElement) {
@@ -81,10 +74,8 @@ export class Intro {
       '2d',
     ) as CanvasRenderingContext2D
 
-    window.addEventListener('resize', () => {
-      this.updateSizes()
-      this.renderLetters()
-    })
+    this.updateSizes()
+    onResize.subscribe(this.updateSizes)
 
     window.addEventListener('mousemove', e => {
       this.state.mouse = vec(e.pageX, e.pageY)
@@ -117,19 +108,28 @@ export class Intro {
     window.requestAnimationFrame(this.renderRaf)
   }
 
+  updateSizes = () => {
+    this.renderLetters()
+    resizeCanvases([
+      { c: this.canvas, ctx: this.ctx },
+      { c: this.bufferCanvas, ctx: this.bufferCtx },
+      { c: this.smokeCanvas, ctx: this.smokeCtx },
+    ])
+  }
+
   renderRaf = (time: number) => {
-    if (scroll.pos < this.state.winH) {
+    if (scrollState.pos < sizeState.h) {
       const ctx = this.ctx
-      const { winW: w, winH: h } = this.state
+      const { w, h, scale } = sizeState
       const now = Date.now()
 
       ctx.save()
       this.bufferCtx.save()
       this.smokeCtx.save()
-      if (this.scale !== 1) {
-        ctx.scale(this.scale, this.scale)
-        this.bufferCtx.scale(this.scale, this.scale)
-        this.smokeCtx.scale(this.scale, this.scale)
+      if (scale !== 1) {
+        ctx.scale(scale, scale)
+        this.bufferCtx.scale(scale, scale)
+        this.smokeCtx.scale(scale, scale)
       }
 
       ctx.clearRect(0, 0, w, h)
@@ -147,7 +147,7 @@ export class Intro {
   }
 
   spawnSmoke() {
-    const { winW: w, winH: h } = this.state
+    const { w, h } = sizeState
     for (let k = 0; k < w / 250; k++) {
       this.smoke.addsmoke(rnd(-w / 2, w), rnd(0, h), 1, w * 3)
     }
@@ -160,7 +160,7 @@ export class Intro {
     }
 
     const ctx = this.bufferCtx
-    const { winW: w, winH: h } = this.state
+    const { w, h } = sizeState
 
     ctx.save()
 
@@ -202,8 +202,14 @@ export class Intro {
 
   renderDarkness(time: number, now: number) {
     const ctx = this.bufferCtx
-    const { winW: w, winH: h, mouse, hlRadius } = this.state
+    const { w, h } = sizeState
+    const { mouse } = this.state
+
     const n = noise.simplex3(0, 0, (time % 5000) / 300)
+    const hlRadius = Math.max(w / 8, h / 8)
+    const r = hlRadius - hlRadius * n * 0.01
+    const lightX = minmax(hlRadius, mouse.x, w - hlRadius)
+    const lightY = minmax(hlRadius, mouse.y, h - hlRadius)
 
     ctx.save()
     ctx.clearRect(0, 0, w, h)
@@ -212,12 +218,7 @@ export class Intro {
     ctx.fillStyle = '#000'
     ctx.fillRect(0, 0, w, h)
 
-    const r = hlRadius - hlRadius * n * 0.01
-
     ctx.beginPath()
-
-    const lightX = minmax(hlRadius, mouse.x, w - hlRadius)
-    const lightY = minmax(hlRadius, mouse.y, h - hlRadius)
 
     var g = ctx.createRadialGradient(lightX, lightY, 0, lightX, lightY, r)
 
@@ -342,41 +343,9 @@ export class Intro {
     })
   }
 
-  updateSizes = () => {
-    const rootEl =
-      document.compatMode === 'BackCompat'
-        ? document.body
-        : document.documentElement
-    const h = Math.min(rootEl.clientHeight, window.innerHeight)
-    const w = rootEl.clientWidth
-
-    this.state.winW = w
-    this.state.winH = h
-
-    this.scale =
-      typeof window.devicePixelRatio === 'number' ? window.devicePixelRatio : 1
-
-    const canvases = [
-      { c: this.canvas, ctx: this.ctx },
-      { c: this.bufferCanvas, ctx: this.bufferCtx },
-      { c: this.smokeCanvas, ctx: this.smokeCtx },
-    ]
-    canvases.forEach(({ c, ctx }) => {
-      c.style.width = w + 'px'
-      c.style.height = h + 'px'
-
-      c.width = w * this.scale
-      c.height = h * this.scale
-
-      c.style.width = w + 'px'
-      c.style.height = h + 'px'
-    })
-
-    this.state.hlRadius = Math.max(w / 8, h / 8)
-  }
-
   getRatiosDiffs = () => {
-    const { winW, winH, bgW, bgH } = this.state
+    const { bgW, bgH } = this.state
+    const { w: winW, h: winH } = sizeState
 
     const winR = winW / winH
     const bgR = bgW / bgH

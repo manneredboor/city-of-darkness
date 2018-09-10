@@ -1,7 +1,8 @@
 import { Vector, vec } from 'utils/Vector'
 import { minmax } from 'utils/math'
-const noise = (window as any).noise
 import { onResize, sizeState, resizeCanvases } from 'utils/resize'
+const anime = require('vendor/anime')
+const noise = (window as any).noise
 
 interface State {
   mouse: Vector
@@ -10,6 +11,10 @@ interface State {
 export class NavBg {
   canvas: HTMLCanvasElement
   ctx: CanvasRenderingContext2D
+  navBtn: HTMLElement | null
+  menu: HTMLElement | null
+  menuCols: NodeListOf<HTMLElement>
+  navRows: NodeListOf<HTMLElement>
 
   renderHooks: ((t: number) => void)[] = []
 
@@ -18,16 +23,24 @@ export class NavBg {
   }
 
   constructor() {
-    const intro = document.querySelector('.menu-bg') as HTMLElement
-    const menu = document.querySelector('.kwc-menu') as HTMLElement
+    this.navBtn = document.querySelector('.nav-btn')
+    this.menu = document.querySelector('.kwc-menu')
+    this.menuCols = document.querySelectorAll('.menu-border')
+    this.navRows = document.querySelectorAll('.nav-box')
+
+    const bgWrap = document.querySelector('.menu-bg')
 
     this.canvas = document.createElement('canvas')
     this.canvas.classList.add('kwc-intro-canvas')
-    intro.appendChild(this.canvas)
-
     this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D
 
-    menu.addEventListener('mousemove', e => {
+    if (!this.navBtn || !this.menu || !bgWrap) return
+
+    bgWrap.appendChild(this.canvas)
+
+    this.navBtn.addEventListener('click', this.handleClickNav)
+
+    this.menu.addEventListener('mousemove', e => {
       this.state.mouse = vec(e.clientX, e.clientY)
     })
 
@@ -48,6 +61,53 @@ export class NavBg {
 
   updateSizes = () => {
     resizeCanvases([{ c: this.canvas, ctx: this.ctx }])
+  }
+
+  handleClickNav = () => {
+    const menu = this.menu
+    const navBtn = this.navBtn
+
+    if (!navBtn || !menu) return
+
+    if (menu.classList.contains('open')) {
+      menu.classList.remove('open')
+      navBtn.classList.remove('open')
+      return
+    }
+    menu.classList.add('open')
+    navBtn.classList.add('open')
+
+    anime
+      .timeline()
+      .add({
+        targets: this.menuCols,
+        height: '100vh',
+        duration: 1700,
+        easing: 'easeInOutQuart',
+      })
+      .add({
+        targets: '.menu-num',
+        opacity: 1,
+        left: 30,
+        duration: 1000,
+        easing: 'easeInOutQuart',
+        offset: '0',
+      })
+      .add({
+        targets: this.navRows,
+        opacity: 1,
+        left: 30,
+        duration: 1000,
+        easing: 'easeInOutQuart',
+        offset: '0',
+      })
+      .add({
+        targets: '.nav-box p',
+        color: '#fff',
+        duration: 1000,
+        easing: 'easeInOutQuart',
+        offset: '0',
+      })
   }
 
   renderRaf = (time: number) => {

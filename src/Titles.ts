@@ -1,6 +1,7 @@
 import measureText from 'utils/measureText'
 import { dewi } from 'utils/fontObserver'
-import scroll from 'utils/scroll'
+import { scrollState } from 'utils/scroll'
+import { onResize, sizeState } from 'utils/resize'
 
 const titles = document.querySelectorAll('.kwc-title')
 
@@ -51,7 +52,7 @@ const render = () => {
       skewText.style.transform = `translateX(${-columnW}px)`
 
       const handleScroll = () => {
-        const pos = (scroll.pos * 0.85) % textW
+        const pos = (scrollState.pos * 0.85) % textW
         if (isReversed) {
           columnText.style.transform = `translateX(${pos - skewW}px)`
           skewText.style.transform = `translateX(${pos}px)`
@@ -67,16 +68,13 @@ const render = () => {
   }
 }
 
-dewi.load().then(() => {
-  render()
-})
-
-window.addEventListener('resize', render)
+dewi.load().then(render)
+onResize.subscribe(render)
 
 const raf = () => {
-  if (lastRenderedScroll !== scroll.pos) {
+  if (lastRenderedScroll !== scrollState.pos) {
     scrollers.forEach(s => s())
-    lastRenderedScroll = scroll.pos
+    lastRenderedScroll = scrollState.pos
   }
   window.requestAnimationFrame(raf)
 }
