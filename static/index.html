@@ -27,21 +27,38 @@
       font-family: 'Typeface Custom';
       src: url('fonts/Karakuli Sans.ttf');
     }
+
+    @font-face {
+      font-family: ('RF Dewi Regular');
+      src: url('fonts/RFDewi-Regular.otf')
+    }
+
+    @font-face {
+      font-family: ('RF Dewi Expanded Black');
+      src: url('fonts/RFDewiExpanded-Black.otf');
+    }
+
+    @font-face {
+      font-family: 'RF Dewi Extended Bold';
+      src: url('fonts/RF Dewi Extended Bold.otf')
+    }
   </style>
 </head>
 
 <body>
-
-  <div class="kwc-nav">
-    <div class="nav-btn">
+  <div class="nav-btn">
+    <div class="nav-bar-box">
       <span class="nav-bar"></span>
       <span class="nav-bar"></span>
       <span class="nav-bar"></span>
     </div>
   </div>
+  <div class="nav-text"></div>
 
   <div class="kwc-menu">
-    <div class="menu-col">
+    <div class="menu-bg"></div>
+    <div class="menu-col menu-col-1">
+      <span class="menu-border"></span>
       <span class="menu-num">01</span>
       <div class="nav-box">
         <p class="nav-status">Прочитано</p>
@@ -51,7 +68,8 @@
         <p class="nav-item">Быт</p>
       </div>
     </div>
-    <div class="menu-col">
+    <div class="menu-col menu-col-2">
+      <span class="menu-border"></span>
       <span class="menu-num">02</span>
       <div class="nav-box">
         <p class="nav-status">Прочитано</p>
@@ -61,7 +79,8 @@
         <p class="nav-item">История</p>
       </div>
     </div>
-    <div class="menu-col">
+    <div class="menu-col menu-col-3">
+      <span class="menu-border"></span>
       <span class="menu-num">03</span>
       <div class="nav-box">
         <p class="nav-status">Следующая глава</p>
@@ -71,7 +90,7 @@
         <p class="nav-item">Снос</p>
       </div>
     </div>
-    <div class="menu-col">
+    <div class="menu-col menu-col-4">
       <span class="menu-num">04</span>
       <div class="nav-box">
         <p class="nav-status">Не прочитано</p>
