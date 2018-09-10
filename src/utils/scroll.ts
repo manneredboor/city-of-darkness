@@ -4,12 +4,10 @@ const getScroll = () =>
   document.body.scrollTop ||
   0
 
-const scrollState = {
+export const scrollState = {
   pos: getScroll(),
 }
 
 window.addEventListener('scroll', () => {
   scrollState.pos = getScroll()
 })
-
-export default scrollState

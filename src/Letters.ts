@@ -1,17 +1,9 @@
 import measureText from 'utils/measureText'
 import { dewi } from 'utils/fontObserver'
-import scroll from 'utils/scroll'
+import { scrollState } from 'utils/scroll'
+import { onResize, sizeState } from 'utils/resize'
 
 const letters = document.querySelectorAll('.kwc-letter')
-
-// const genTexts = (text: string, n: number) => {
-//   const mover = document.createElement('div')
-//   mover.classList.add('kwc-title-mover')
-//   mover.innerHTML = Array.from(Array(n))
-//     .map(() => `<div class="kwc-title-text">${text}</div>`)
-//     .join('')
-//   return mover
-// }
 
 let scrollers: (() => void)[] = []
 let lastRenderedScroll = 0
@@ -19,12 +11,7 @@ let lastRenderedScroll = 0
 const render = () => {
   scrollers = []
 
-  const rootEl =
-    document.compatMode === 'BackCompat'
-      ? document.body
-      : document.documentElement
-  // const winH = Math.min(rootEl.clientHeight, window.innerHeight)
-  const winW = rootEl.clientWidth
+  const { w: winW } = sizeState
 
   if (letters) {
     letters.forEach((letter: HTMLDivElement, i) => {
@@ -48,7 +35,7 @@ const render = () => {
       })
 
       const handleScroll = () => {
-        const pos = (scroll.pos * 0.85) % textW
+        const pos = (scrollState.pos * 0.85) % textW
 
         textsWraps.forEach((el: HTMLDivElement, i) => {
           const textEl = textEls[i]
@@ -63,81 +50,15 @@ const render = () => {
   }
 }
 
-dewi.load().then(() => {
-  render()
-})
-
-window.addEventListener('resize', render)
+dewi.load().then(render)
+onResize.subscribe(render)
 
 const raf = () => {
-  if (lastRenderedScroll !== scroll.pos) {
+  if (lastRenderedScroll !== scrollState.pos) {
     scrollers.forEach(s => s())
-    lastRenderedScroll = scroll.pos
+    lastRenderedScroll = scrollState.pos
   }
   window.requestAnimationFrame(raf)
 }
 
 window.requestAnimationFrame(raf)
-
-// Navigation related js
-const anime = require('vendor/anime');
-const navBtn = document.querySelector('.nav-btn');
-const menu = document.querySelector('.kwc-menu');
-const menuCols = document.querySelectorAll('.menu-border');
-const navRows = document.querySelectorAll('.nav-box');
-
-console.log(menuCols);
-
-
-function animateNav() {
-  // anime({
-  //   targets: menuCols,
-  //   height: '100vh',
-  //   duration: 1600,
-  //   easing: 'easeInOutQuart'
-  // })
-  
-  anime.timeline()
-    .add({
-      targets: menuCols,
-      height: '100vh',
-      duration: 1700,
-      easing: 'easeInOutQuart'
-    })
-    .add({
-      targets: '.menu-num',
-      opacity: 1,
-      left: 30,
-      duration: 1000,
-      easing: 'easeInOutQuart',
-      offset: '0' 
-    })
-    .add({
-      targets: navRows,
-      opacity: 1,
-      left: 30,
-      duration: 1000,
-      easing: 'easeInOutQuart',
-      offset: '0'
-    })
-    .add({
-      targets: '.nav-box p',
-      color: '#fff',
-      duration: 1000,
-      easing: 'easeInOutQuart',
-      offset: '0'
-    })
-}
-
-if (navBtn !== null && menu !== null) {
-  navBtn.addEventListener('click', function name() {
-    if (menu.classList.contains('open')) {
-      menu.classList.remove('open');
-      navBtn.classList.remove('open');
-      return;
-    }
-    menu.classList.add('open');
-    navBtn.classList.add('open');
-    animateNav();
-  })
-}
