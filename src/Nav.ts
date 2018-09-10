@@ -2,6 +2,7 @@ import { Vector, vec } from 'utils/Vector'
 import { minmax } from 'utils/math'
 import { onResize, sizeState, resizeCanvases } from 'utils/resize'
 require('./css/nav.css')
+require('./css/footer.css')
 const anime = require('vendor/anime')
 const noise = (window as any).noise
 
