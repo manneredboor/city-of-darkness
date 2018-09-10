@@ -3,6 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const mode = process.env.NODE_ENV || 'production'
 
@@ -25,7 +26,7 @@ module.exports = {
   },
 
   optimization: {
-    minimizer: [new OptimizeCSSAssetsPlugin({})],
+    minimizer: [new UglifyJsPlugin(), new OptimizeCSSAssetsPlugin({})],
   },
 
   plugins: [
