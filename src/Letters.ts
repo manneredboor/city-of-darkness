@@ -78,3 +78,66 @@ const raf = () => {
 }
 
 window.requestAnimationFrame(raf)
+
+// Navigation related js
+const anime = require('vendor/anime');
+const navBtn = document.querySelector('.nav-btn');
+const menu = document.querySelector('.kwc-menu');
+const menuCols = document.querySelectorAll('.menu-border');
+const navRows = document.querySelectorAll('.nav-box');
+
+console.log(menuCols);
+
+
+function animateNav() {
+  // anime({
+  //   targets: menuCols,
+  //   height: '100vh',
+  //   duration: 1600,
+  //   easing: 'easeInOutQuart'
+  // })
+  
+  anime.timeline()
+    .add({
+      targets: menuCols,
+      height: '100vh',
+      duration: 1700,
+      easing: 'easeInOutQuart'
+    })
+    .add({
+      targets: '.menu-num',
+      opacity: 1,
+      left: 30,
+      duration: 1000,
+      easing: 'easeInOutQuart',
+      offset: '0' 
+    })
+    .add({
+      targets: navRows,
+      opacity: 1,
+      left: 30,
+      duration: 1000,
+      easing: 'easeInOutQuart',
+      offset: '0'
+    })
+    .add({
+      targets: '.nav-box p',
+      color: '#fff',
+      duration: 1000,
+      easing: 'easeInOutQuart',
+      offset: '0'
+    })
+}
+
+if (navBtn !== null && menu !== null) {
+  navBtn.addEventListener('click', function name() {
+    if (menu.classList.contains('open')) {
+      menu.classList.remove('open');
+      navBtn.classList.remove('open');
+      return;
+    }
+    menu.classList.add('open');
+    navBtn.classList.add('open');
+    animateNav();
+  })
+}

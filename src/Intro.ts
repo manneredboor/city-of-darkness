@@ -7,16 +7,11 @@ import measureText from 'utils/measureText'
 import { dewi, china } from 'utils/fontObserver'
 import scroll from 'utils/scroll'
 const smokemachine = require('vendor/smoke')
-require('vendor/parlin-noise')
 const noise = (window as any).noise
+import { minmax, rnd } from 'utils/math'
 
 const img = new Image()
 img.src = 'http://ucraft.neekeesh.com/img/bg.jpg'
-
-export const minmax = (min: number, value: number, max: number) =>
-  Math.max(min, Math.min(max, value))
-
-const rnd = (min: number, max: number) => Math.random() * (max - min) + min
 
 export interface TextDrawing {
   delay: number
