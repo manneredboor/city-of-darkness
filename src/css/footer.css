@@ -88,6 +88,7 @@
 }
 
 .ft-text-lg {
+  font-family: RF Dewi Expanded Black Custom;
   text-transform: uppercase;
   font-size: 64px;
 }
@@ -122,4 +123,8 @@
 
 .ft-cont-35 .footer-text:nth-last-child(1) {
   margin-bottom: 0
+}
+
+[datacolumn-id="814"] .module-container  {
+  margin-bottom: 0 !important;
 }

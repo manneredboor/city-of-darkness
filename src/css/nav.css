@@ -49,7 +49,7 @@
 }
 
 .menu-num {
-  font-family: 'RF Dewi Expanded Black';
+  font-family: RF Dewi Expanded Black Custom;
   font-size: 72px;
   letter-spacing: 3px;
   position: absolute;
@@ -73,7 +73,7 @@
 .nav-box p {
   display: block;
   color: #000;
-  font-family: 'RF Dewi Regular';
+  font-family: 'RF Dewi Custom';
   z-index: 2;
   transition: all ease-in-out .25s;
 }
@@ -84,6 +84,7 @@
 }
 
 .nav-title {
+  font-family: rf dewi extended custom;
   font-size: 36px;
   padding: 0 0 30px;
 }

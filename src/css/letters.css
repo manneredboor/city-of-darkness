@@ -383,7 +383,7 @@
   width: 100%;
   height: 100%;
   transition: all ease-in-out 0.3s;
-  padding: 18px 16px 0;
+  padding: 16px 16px 0;
 }
 
 .nav-btn:hover .nav-bar-box {
@@ -403,13 +403,13 @@
 }
 
 .nav-btn.open .nav-bar:nth-child(3) {
-  transform: rotate(-45deg) translateY(-12px) translateX(6px);
+  transform: rotate(-45deg) translateY(-12px) translateX(8px);
 }
 
 .nav-bar {
   display: block;
   width: 18px;
-  height: 1.25px;
+  height: 2px;
   background: #fff;
   margin: 0 0 7px;
   transition: all ease-in-out 0.3s;
