@@ -24,5 +24,6 @@ const removeSpinner = () => {
   }
 }
 
-Promise.all([fonts, pageLoad, introLoading]).then(removeSpinner)
-// .catch(removeSpinner)
+Promise.all([fonts, pageLoad, introLoading])
+  .then(removeSpinner)
+  .catch(removeSpinner)
