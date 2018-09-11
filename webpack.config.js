@@ -10,8 +10,9 @@ const mode = process.env.NODE_ENV || 'production'
 module.exports = {
   mode,
   entry: {
-    main: './src/entries/main',
     editor: './src/entries/editor',
+    main: './src/entries/main',
+    spinner: './src/entries/spinner',
   },
   devtool: process.env.NODE_ENV === 'development' ? 'eval-source-map' : false,
 

@@ -12,6 +12,11 @@ const smokemachine = require('vendor/smoke')
 const noise = (window as any).noise
 require('./css/intro.css')
 
+let onLoad: () => void
+export const introLoading = new Promise(resolve => {
+  onLoad = resolve
+})
+
 export interface TextDrawing {
   delay: number
   dur: number
@@ -92,6 +97,7 @@ export class Intro {
 
     Promise.all([dewi.load(), china.load()]).then(() => {
       this.renderLetters()
+      onLoad()
     })
 
     this.ctx.imageSmoothingEnabled = true

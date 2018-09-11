@@ -1,0 +1,14 @@
+body {
+  overflow-y: scroll;
+}
+
+html.html-scroll-lock {
+  width: 100%;
+  overflow-y: scroll;
+}
+
+body.body-scroll-lock {
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+}
