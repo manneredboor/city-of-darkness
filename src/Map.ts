@@ -13,10 +13,10 @@ const MIN_ZOOM = 1
 const MAX_ZOOM = 3
 
 const texts: { [key: string]: string } = {
-  church: 'Храм',
+  church: 'Храм Тин Хау',
   school: 'Начальная школа',
   olds: 'Центр для пожилых людей',
-  yamen: 'Ямен',
+  yamen: 'Храм Ямен',
   hospital: 'Клиника',
   well: 'Колодец',
 }
