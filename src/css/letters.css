@@ -27,6 +27,7 @@
   transform-origin: 0 0;
   line-height: 1;
   /* background-color: rgba(255, 255, 255, 0.2); */
+  height: 100%;
 }
 
 .kwc-letter-text-itm {
@@ -395,7 +396,7 @@
 }
 
 .nav-btn.open .nav-bar:nth-child(1) {
-  transform: rotate(45deg) translateY(5px) translateX(0.5px);
+  transform: rotate(45deg) translateY(4px) translateX(1.5px);
 }
 
 .nav-btn.open .nav-bar:nth-child(2) {
@@ -403,7 +404,7 @@
 }
 
 .nav-btn.open .nav-bar:nth-child(3) {
-  transform: rotate(-45deg) translateY(-12px) translateX(8px);
+  transform: rotate(-45deg) translateY(-12px) translateX(8.5px);
 }
 
 .nav-bar {
@@ -417,6 +418,7 @@
 
 .nav-bar:nth-last-of-type(1) {
   margin: 0;
+  height: 2.25px;
 }
 
 .nav-text {

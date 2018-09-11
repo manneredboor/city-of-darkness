@@ -56,9 +56,10 @@
   top: 100px;
   left: -200px;
   opacity: 0;
-  color: #000;
-  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
-    1px 1px 0 #fff;
+  color: #fff;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: currentColor;
   z-index: 2;
 }
 
@@ -67,6 +68,7 @@
   opacity: 0;
   left: -200px;
   z-index: 2;
+  text-align: left;
   /* transform: translateX(-250px); */
 }
 
@@ -118,22 +120,22 @@
 }
 
 .menu-col-1 {
-  background: url('https://img-aws.ehowcdn.com/877x500p/s3-us-west-1.amazonaws.com/contentlab.studiod/getty/f24b4a7bf9f24d1ba5f899339e6949f3');
+  background: url('http://ucraft.neekeesh.com/img/mn-1.jpg');
   background-size: cover;
 }
 
 .menu-col-2 {
-  background: url('http://www.visitgreece.gr/deployedFiles/StaticFiles/Photos/Generic%20Contents/Forests/mountains_2_560.jpg');
+  background: url('http://ucraft.neekeesh.com/img/mn-2.jpg');
   background-size: cover;
 }
 
 .menu-col-3 {
-  background: url('https://www.tripsavvy.com/thmb/VcjtcUR_WdXiA0eA1phgE4VBzPY=/960x0/filters:no_upscale():max_bytes(150000):strip_icc()/scenic-view-of-snowcapped-mountains-against-blue-sky-740670351-598783ea03f402001065a152.jpg');
+  background: url('http://ucraft.neekeesh.com/img/mn-3.jpg');
   background-size: cover;
 }
 
 .menu-col-4 {
-  background: url('https://images.unsplash.com/photo-1528150113746-eedf29a184c1?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=418cfe031d636ba13d884ecb0f791291&w=1000&q=80');
+  background: url('http://ucraft.neekeesh.com/img/mn-4.jpg');
   background-size: cover;
 }
 
