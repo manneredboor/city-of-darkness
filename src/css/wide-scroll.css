@@ -1,0 +1,28 @@
+.kwc-scroll-wrapper {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.kwc-scroll-img {
+  position: absolute;
+  display: block;
+  height: 100vh;
+  max-width: initial !important;
+}
+
+[datamodule-id='1717'] p {
+  line-height: 0.5;
+}
+
+[data-id='458'] .mainRow {
+  overflow-y: scroll;
+}
+
+[datacolumn-id='833'] {
+  min-width: 1200px !important;
+  width: 1200px !important;
+  max-width: 1200px !important;
+  overflow-y: auto !important;
+}

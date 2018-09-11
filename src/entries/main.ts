@@ -5,6 +5,7 @@ import { NavBg } from '../Nav'
 import '../Letters'
 import '../Spinner'
 import '../Plans'
+import '../WideScroll'
 
 new Map()
 new NavBg()
