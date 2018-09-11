@@ -60,6 +60,13 @@ module.exports = {
             loader: 'css-loader',
             options: {
               url: false,
+              importLoaders: 1,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [require('autoprefixer')],
             },
           },
         ],
