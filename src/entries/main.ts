@@ -4,6 +4,7 @@ import { Map } from '../Map'
 import { NavBg } from '../Nav'
 import '../Letters'
 import '../Spinner'
+import '../Plans'
 
 new Map()
 new NavBg()

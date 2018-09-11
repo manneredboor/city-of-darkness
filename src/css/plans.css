@@ -1,0 +1,21 @@
+.kwc-plans-wrap {
+  background-color: #000;
+}
+
+.kwc-plans {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.kwc-plans img {
+  position: relative;
+  display: block;
+}
+
+@media (max-width: 1030px) {
+  .kwc-plans {
+    max-width: 1000px;
+  }
+}
