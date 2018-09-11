@@ -4,13 +4,18 @@ import initialState from 'utils/initialState'
 import { getTransform } from 'utils/matrixTransform'
 import bgMask from 'utils/mask'
 import measureText from 'utils/measureText'
-import { dewi, china } from 'utils/fontObserver'
+import { fonts } from 'utils/fontObserver'
 import { scrollState } from 'utils/scroll'
 import { minmax, rnd } from 'utils/math'
 import { onResize, sizeState, resizeCanvases } from 'utils/resize'
 const smokemachine = require('vendor/smoke')
 const noise = (window as any).noise
 require('./css/intro.css')
+
+let onLoad: () => void
+export const introLoading = new Promise(resolve => {
+  onLoad = resolve
+})
 
 export interface TextDrawing {
   delay: number
@@ -72,7 +77,10 @@ export class Intro {
       '2d',
     ) as CanvasRenderingContext2D
 
-    if (!intro) return
+    if (!intro) {
+      onLoad()
+      return
+    }
     intro.appendChild(this.canvas)
     intro.appendChild(this.intoBody)
 
@@ -90,8 +98,19 @@ export class Intro {
 
     this.updateSizes()
 
-    Promise.all([dewi.load(), china.load()]).then(() => {
+    const introImgLoad = new Promise(resolve => {
+      const img = new Image()
+      img.src = 'http://ucraft.neekeesh.com/img/bg.jpg'
+      if (img.complete) {
+        resolve()
+      } else {
+        img.onload = resolve
+      }
+    })
+
+    Promise.all([fonts, introImgLoad]).then(() => {
       this.renderLetters()
+      onLoad()
     })
 
     this.ctx.imageSmoothingEnabled = true
