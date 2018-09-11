@@ -1,7 +1,7 @@
 import { Vector, vec } from 'utils/Vector'
 import { minmax } from 'utils/math'
 import { onResize, sizeState, resizeCanvases } from 'utils/resize'
-import { lockScroll, unlockScroll } from 'utils/scroll';
+import { lockScroll, unlockScroll } from 'utils/scroll'
 require('./css/nav.css')
 require('./css/footer.css')
 const anime = require('vendor/anime')
@@ -26,7 +26,10 @@ export class NavBg {
   }
 
   constructor() {
-    document.querySelector('body').insertAdjacentHTML('beforeend', '<div class="nav-btn"><div class="nav-bar-box"><span class="nav-bar"></span><span class="nav-bar"></span><span class="nav-bar"></span></div></div>')
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      '<div class="nav-btn"><div class="nav-bar-box"><span class="nav-bar"></span><span class="nav-bar"></span><span class="nav-bar"></span></div></div>',
+    )
 
     this.navBtn = document.querySelector('.nav-btn')
     this.menu = document.querySelector('.kwc-menu')
