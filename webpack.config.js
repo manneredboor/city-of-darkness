@@ -26,7 +26,16 @@ module.exports = {
   },
 
   optimization: {
-    minimizer: [new UglifyJsPlugin(), new OptimizeCSSAssetsPlugin({})],
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          mangle: {
+            safari10: true,
+          },
+        },
+      }),
+      new OptimizeCSSAssetsPlugin({}),
+    ],
   },
 
   plugins: [
