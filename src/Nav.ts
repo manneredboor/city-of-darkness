@@ -7,6 +7,85 @@ require('./css/footer.css')
 const anime = require('vendor/anime')
 const noise = (window as any).noise
 
+const menuHtml = `
+  <div class="menu-bg"></div>
+  <div class="menu-col menu-col-1">
+    <span class="menu-border"></span>
+    <span class="menu-num">01</span>
+    <div class="nav-box">
+      <p class="nav-title">Архитектура</p>
+      <div class="nav-item-box">
+        <span class="nav-item-line"></span>
+        <p class="nav-item">Коулун</p>
+      </div>
+      <div class="nav-item-box">
+        <span class="nav-item-line"></span>
+        <p class="nav-item">Архитектура</p>
+      </div>
+      <div class="nav-item-box">
+        <span class="nav-item-line"></span>
+        <p class="nav-item">Быт</p>
+      </div>
+    </div>
+  </div>
+  <div class="menu-col menu-col-2">
+    <span class="menu-border"></span>
+    <span class="menu-num">02</span>
+    <div class="nav-box">
+      <p class="nav-title">Люди</p>
+      <div class="nav-item-box">
+        <span class="nav-item-line"></span>
+        <p class="nav-item">Население</p>
+      </div>
+      <div class="nav-item-box">
+        <span class="nav-item-line"></span>
+        <p class="nav-item">Сферы жизни</p>
+      </div>
+      <div class="nav-item-box">
+        <span class="nav-item-line"></span>
+        <p class="nav-item">История</p>
+      </div>
+    </div>
+  </div>
+  <div class="menu-col menu-col-3">
+    <span class="menu-border"></span>
+    <span class="menu-num">03</span>
+    <div class="nav-box">
+      <p class="nav-title">История</p>
+      <div class="nav-item-box">
+        <span class="nav-item-line"></span>
+        <p class="nav-item">Зарождение</p>
+      </div>
+      <div class="nav-item-box">
+        <span class="nav-item-line"></span>
+        <p class="nav-item">Развитие</p>
+      </div>
+      <div class="nav-item-box">
+        <span class="nav-item-line"></span>
+        <p class="nav-item">Снос</p>
+      </div>
+    </div>
+  </div>
+  <div class="menu-col menu-col-4">
+    <span class="menu-num">04</span>
+    <div class="nav-box">
+      <p class="nav-title">Факты</p>
+      <div class="nav-item-box">
+        <span class="nav-item-line"></span>
+        <p class="nav-item">Самолеты</p>
+      </div>
+      <div class="nav-item-box">
+        <span class="nav-item-line"></span>
+        <p class="nav-item">Парк</p>
+      </div>
+      <div class="nav-item-box">
+        <span class="nav-item-line"></span>
+        <p class="nav-item">Упоминания</p>
+      </div>
+    </div>
+  </div>
+`
+
 interface State {
   mouse: Vector
 }
@@ -32,11 +111,14 @@ export class NavBg {
     )
 
     this.navBtn = document.querySelector('.nav-btn')
-    this.menu = document.querySelector('.kwc-menu')
-    this.menuCols = document.querySelectorAll('.menu-border')
-    this.navRows = document.querySelectorAll('.nav-box')
+    this.menu = document.createElement('div')
+    this.menu.innerHTML = menuHtml
+    this.menu.classList.add('kwc-menu')
+    document.body.appendChild(this.menu)
 
-    const bgWrap = document.querySelector('.menu-bg')
+    this.menuCols = this.menu.querySelectorAll('.menu-border')
+    this.navRows = this.menu.querySelectorAll('.nav-box')
+    const bgWrap = this.menu.querySelector('.menu-bg')
 
     this.canvas = document.createElement('canvas')
     this.canvas.classList.add('kwc-intro-canvas')

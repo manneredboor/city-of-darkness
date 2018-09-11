@@ -77,7 +77,7 @@
   color: #000;
   font-family: 'RF Dewi Custom';
   z-index: 2;
-  transition: all ease-in-out .25s;
+  transition: all ease-in-out 0.25s;
 }
 
 .nav-status {
@@ -110,7 +110,7 @@
   width: 0;
   height: 2px;
   background: #fff;
-  transition: all ease-in-out .25s;
+  transition: all ease-in-out 0.25s;
   cursor: pointer;
 }
 
@@ -121,21 +121,25 @@
 
 .menu-col-1 {
   background: url('http://ucraft.neekeesh.com/img/mn-1.jpg');
+  background-position: center;
   background-size: cover;
 }
 
 .menu-col-2 {
   background: url('http://ucraft.neekeesh.com/img/mn-2.jpg');
+  background-position: center;
   background-size: cover;
 }
 
 .menu-col-3 {
   background: url('http://ucraft.neekeesh.com/img/mn-3.jpg');
+  background-position: center;
   background-size: cover;
 }
 
 .menu-col-4 {
   background: url('http://ucraft.neekeesh.com/img/mn-4.jpg');
+  background-position: center;
   background-size: cover;
 }
 

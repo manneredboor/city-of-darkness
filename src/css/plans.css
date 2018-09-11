@@ -1,4 +1,7 @@
 .kwc-plans-wrap {
+  max-width: 100%;
+  overflow: hidden;
+  padding: 80px 0;
   background-color: #000;
 }
 
@@ -10,6 +13,7 @@
 }
 
 .kwc-plans img {
+  max-width: none;
   position: relative;
   display: block;
 }

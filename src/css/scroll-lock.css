@@ -9,6 +9,7 @@ html.html-scroll-lock {
 
 body.body-scroll-lock {
   width: 100%;
+  height: auto;
   overflow: hidden;
   position: fixed;
 }

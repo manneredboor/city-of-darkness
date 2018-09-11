@@ -16,10 +16,6 @@ export const scrollState = {
   pos: getScroll(),
 }
 
-window.addEventListener('scroll', () => {
-  scrollState.pos = getScroll()
-})
-
 declare global {
   interface Window {
     kwcLockerStack: number
@@ -27,11 +23,13 @@ declare global {
 }
 
 if (window.kwcLockerStack === undefined) window.kwcLockerStack = 0
+let savedScroll = 0
 
 // Scroll Locker
 export const lockScroll = () => {
   if (++window.kwcLockerStack > 1) return
   const scroll = scrollState.pos
+  savedScroll = scroll
   if (body) body.classList.add(bodyLockClass)
   if (html) html.classList.add(htmlLockClass)
   if (body) body.style.top = `-${scroll}px`
@@ -43,6 +41,9 @@ export const unlockScroll = () => {
   if (body) body.classList.remove(bodyLockClass)
   if (html) html.classList.remove(htmlLockClass)
   if (body) body.style.top = ''
-  const scroll = scrollState.pos
-  window.scrollTo(0, scroll)
+  window.scrollTo(0, savedScroll)
 }
+
+window.addEventListener('scroll', () => {
+  scrollState.pos = window.kwcLockerStack > 0 ? savedScroll : getScroll()
+})
