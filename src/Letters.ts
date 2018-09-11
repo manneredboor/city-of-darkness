@@ -27,6 +27,7 @@ const render = () => {
         const el = document.createElement('div')
         el.classList.add('kwc-letter-text-itm')
         el.innerHTML = fullText
+        el.style.width = textW * repeats.length + 'px'
         return el
       })
 
