@@ -1,5 +1,5 @@
 import measureText from 'utils/measureText'
-import { dewi } from 'utils/fontObserver'
+import { fonts } from 'utils/fontObserver'
 import { scrollState } from 'utils/scroll'
 import { onResize } from 'utils/resize'
 require('./css/titles.css')
@@ -69,7 +69,7 @@ const render = () => {
   }
 }
 
-dewi.load().then(render)
+fonts.then(render)
 onResize.subscribe(render)
 
 const raf = () => {
