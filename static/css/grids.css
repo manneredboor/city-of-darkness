@@ -1,5 +1,42 @@
 [data-id='463'] {
-  margin-top: 25vh;
+  padding-top: 25vh;
+}
+
+[data-id='463'] .row-container.container:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: -30px;
+  left: 0;
+  background-image: url('http://ucraft.neekeesh.com/img/quote.svg');
+  width: 359px;
+  height: 324px;
+}
+
+[data-id='463'] .row-container.container {
+  max-width: 1000px;
+  padding-left: 300px;
+}
+
+[data-id='463'] .row-container.container > * {
+  position: relative;
+  padding: 10px;
+  background-color: #000;
+}
+
+[data-id='483'] {
+  padding-top: 60px;
+  padding-bottom: 25vh;
+}
+
+[data-id='483'] .row-container.container {
+  padding-left: 260px;
+  max-width: 1000px;
+}
+
+[datacolumn-id='895'] {
+  width: fit-content;
+  flex-basis: auto !important;
 }
 
 /* Grid */
