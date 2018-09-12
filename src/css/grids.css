@@ -1,0 +1,116 @@
+/* Grid */
+.kwc-k-grid {
+  position: absolute;
+  top: 52.6%;
+  left: 0;
+  width: 100%;
+  padding-top: 80.6%;
+  background-image: url('../img/k-grid.svg');
+  background-position: 0 0;
+  background-size: cover;
+}
+
+/* Container */
+.kwc-grid-k .row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+/* Cell */
+.kwc-grid-k .column {
+  width: 16.66666%;
+  padding: 1.4vw;
+  font-size: 1vw;
+  line-height: 1.6;
+  max-width: 100;
+  color: #000;
+}
+
+/* Big text */
+.kwc-grid-k .column h6 {
+  font-family: rf dewi expanded black custom;
+  display: inline-block;
+  margin-bottom: 0.5vw;
+  font-size: 5vw;
+  line-height: 1;
+}
+
+/* Strong text */
+.kwc-grid-k .column strong {
+  font-size: 1.4vw;
+  margin-bottom: 1vw;
+}
+
+/* First row */
+.kwc-grid-k .row:first-child {
+  margin-top: 1.5vw;
+  height: 22.45vw;
+}
+
+.kwc-grid-k .row:first-child .column:nth-child(2) {
+  transform: skewY(20deg);
+  transform-origin: right bottom;
+}
+
+.kwc-grid-k .row:first-child .column:nth-child(4) {
+  transform: skewY(20deg);
+  transform-origin: left bottom;
+}
+
+.kwc-grid-k .row:first-child .column:nth-child(5) {
+  margin-top: 11.9vw;
+  transform: skewY(20deg);
+  transform-origin: top right;
+}
+
+.kwc-grid-k .column:nth-child(3) img,
+.kwc-grid-k .column:nth-child(5) img {
+  margin-top: 0.5vw;
+  width: 100%;
+  display: block;
+}
+
+/* Second row */
+.kwc-grid-k .row:nth-child(2) {
+  height: 16.48vw;
+}
+
+.kwc-grid-k .row:nth-child(2) .column:nth-child(2) {
+  opacity: 0;
+}
+
+.kwc-grid-k .row:nth-child(2) .column:nth-child(5) {
+  transform: skewY(20deg);
+  transform-origin: left top;
+}
+
+.kwc-grid-k .row:nth-child(2) .column:nth-child(5) img {
+  margin: 0 auto;
+  width: 80%;
+  display: block;
+}
+
+/* Third row */
+.kwc-grid-k .row:nth-child(3) {
+  margin-bottom: 15vw;
+}
+
+.kwc-grid-k .row:nth-child(3) .column:nth-child(2) {
+  opacity: 0;
+}
+
+.kwc-grid-k .row:nth-child(3) .column:nth-child(4) {
+  opacity: 0;
+}
+
+.kwc-grid-k .row:nth-child(3) .column:nth-child(5) {
+  padding-top: 7.5vw;
+}
+
+.kwc-grid-k .row:nth-child(3) .column:nth-child(5) i * {
+  font-size: 3vw !important;
+  display: inline-block;
+  vertical-align: top;
+  font-style: normal;
+}
