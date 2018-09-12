@@ -25,6 +25,13 @@
   line-height: 1.6;
   max-width: 100;
   color: #000;
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+}
+
+.kwc-grid-k .column p {
+  font-size: 1vw !important;
 }
 
 /* Big text */
