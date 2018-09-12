@@ -6,14 +6,8 @@
   min-width: 100vw;
   min-height: 100vh;
   display: flex;
-  /* background: #000; */
   transform: translateX(-100vw);
-  transition: all ease-in-out 0.4s;
   z-index: 1001;
-}
-
-.kwc-menu.open {
-  transform: translateX(0);
 }
 
 .menu-bg {
@@ -42,8 +36,9 @@
   top: 0;
   right: 0;
   content: '';
-  height: 0;
+  height: 100%;
   width: 1px;
+  opacity: 0.3;
   background: #fff;
   z-index: 2;
 }
@@ -54,8 +49,7 @@
   letter-spacing: 3px;
   position: absolute;
   top: 100px;
-  left: -200px;
-  opacity: 0;
+  left: 30px;
   color: #fff;
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke-width: 2px;
@@ -65,16 +59,13 @@
 
 .nav-box {
   position: absolute;
-  opacity: 0;
-  left: -200px;
   z-index: 2;
   text-align: left;
-  /* transform: translateX(-250px); */
 }
 
 .nav-box p {
   display: block;
-  color: #000;
+  color: #fff;
   font-family: 'RF Dewi Custom';
   z-index: 2;
   transition: all ease-in-out 0.25s;
@@ -119,30 +110,64 @@
   cursor: pointer;
 }
 
-.menu-col-1 {
-  background: url('http://ucraft.neekeesh.com/img/mn-1.jpg');
+.menu-col {
+  position: relative;
   background-position: center;
   background-size: cover;
+}
+
+.menu-col:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.4;
+}
+
+.menu-col-1 {
+  background-image: url('http://ucraft.neekeesh.com/img/mn-1.jpg');
 }
 
 .menu-col-2 {
-  background: url('http://ucraft.neekeesh.com/img/mn-2.jpg');
-  background-position: center;
-  background-size: cover;
+  background-image: url('http://ucraft.neekeesh.com/img/mn-2.jpg');
 }
 
 .menu-col-3 {
-  background: url('http://ucraft.neekeesh.com/img/mn-3.jpg');
-  background-position: center;
-  background-size: cover;
+  background-image: url('http://ucraft.neekeesh.com/img/mn-3.jpg');
 }
 
 .menu-col-4 {
-  background: url('http://ucraft.neekeesh.com/img/mn-4.jpg');
-  background-position: center;
-  background-size: cover;
+  background-image: url('http://ucraft.neekeesh.com/img/mn-4.jpg');
 }
 
 .menu-bg canvas {
   z-index: 1;
+}
+
+/**
+ * Animations
+ */
+
+.kwc-menu {
+  transition: transform ease-in-out 0.4s;
+}
+
+.kwc-menu.open {
+  transform: translateX(0);
+}
+
+.menu-border {
+  height: 0;
+}
+
+.menu-num {
+  opacity: 0;
+}
+
+.nav-box {
+  opacity: 0;
 }

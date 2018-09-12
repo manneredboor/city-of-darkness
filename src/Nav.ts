@@ -7,84 +7,24 @@ require('./css/footer.css')
 const anime = require('vendor/anime')
 const noise = (window as any).noise
 
-const menuHtml = `
-  <div class="menu-bg"></div>
-  <div class="menu-col menu-col-1">
-    <span class="menu-border"></span>
-    <span class="menu-num">01</span>
-    <div class="nav-box">
-      <p class="nav-title">Архитектура</p>
-      <div class="nav-item-box">
-        <span class="nav-item-line"></span>
-        <p class="nav-item">Коулун</p>
-      </div>
-      <div class="nav-item-box">
-        <span class="nav-item-line"></span>
-        <p class="nav-item">Архитектура</p>
-      </div>
-      <div class="nav-item-box">
-        <span class="nav-item-line"></span>
-        <p class="nav-item">Быт</p>
-      </div>
-    </div>
-  </div>
-  <div class="menu-col menu-col-2">
-    <span class="menu-border"></span>
-    <span class="menu-num">02</span>
-    <div class="nav-box">
-      <p class="nav-title">Люди</p>
-      <div class="nav-item-box">
-        <span class="nav-item-line"></span>
-        <p class="nav-item">Население</p>
-      </div>
-      <div class="nav-item-box">
-        <span class="nav-item-line"></span>
-        <p class="nav-item">Сферы жизни</p>
-      </div>
-      <div class="nav-item-box">
-        <span class="nav-item-line"></span>
-        <p class="nav-item">История</p>
-      </div>
-    </div>
-  </div>
-  <div class="menu-col menu-col-3">
-    <span class="menu-border"></span>
-    <span class="menu-num">03</span>
-    <div class="nav-box">
-      <p class="nav-title">История</p>
-      <div class="nav-item-box">
-        <span class="nav-item-line"></span>
-        <p class="nav-item">Зарождение</p>
-      </div>
-      <div class="nav-item-box">
-        <span class="nav-item-line"></span>
-        <p class="nav-item">Развитие</p>
-      </div>
-      <div class="nav-item-box">
-        <span class="nav-item-line"></span>
-        <p class="nav-item">Снос</p>
-      </div>
-    </div>
-  </div>
-  <div class="menu-col menu-col-4">
-    <span class="menu-num">04</span>
-    <div class="nav-box">
-      <p class="nav-title">Факты</p>
-      <div class="nav-item-box">
-        <span class="nav-item-line"></span>
-        <p class="nav-item">Самолеты</p>
-      </div>
-      <div class="nav-item-box">
-        <span class="nav-item-line"></span>
-        <p class="nav-item">Парк</p>
-      </div>
-      <div class="nav-item-box">
-        <span class="nav-item-line"></span>
-        <p class="nav-item">Упоминания</p>
-      </div>
-    </div>
-  </div>
-`
+const menu = [
+  {
+    title: 'Архитектура',
+    links: [{ text: 'Коулун' }, { text: 'Архитектура' }, { text: 'Быт' }],
+  },
+  {
+    title: 'Архитектура',
+    links: [{ text: 'Коулун' }, { text: 'Архитектура' }, { text: 'Быт' }],
+  },
+  {
+    title: 'История',
+    links: [{ text: 'Зарождение' }, { text: 'Развитие' }, { text: 'Снос' }],
+  },
+  {
+    title: 'Факты',
+    links: [{ text: 'Самолеты' }, { text: 'Парк' }, { text: 'Упоминания' }],
+  },
+]
 
 interface State {
   mouse: Vector
@@ -98,6 +38,7 @@ export class NavBg {
   menuCols: NodeListOf<HTMLElement>
   navRows: NodeListOf<HTMLElement>
   isOpened: boolean = false
+  anim: any
 
   state: State = {
     mouse: vec(0, 0),
@@ -111,8 +52,34 @@ export class NavBg {
 
     this.navBtn = document.querySelector('.nav-btn')
     this.menu = document.createElement('div')
-    this.menu.innerHTML = menuHtml
     this.menu.classList.add('kwc-menu')
+    this.menu.innerHTML = `
+      <div class="menu-bg"></div>
+      ${menu
+        .map(
+          (itm, i) => `
+          <div class="menu-col menu-col-${i + 1}">
+            <span class="menu-border"></span>
+            <span class="menu-num">0${i + 1}</span>
+            <div class="nav-box">
+              <p class="nav-title">${itm.title}</p>
+              ${itm.links
+                .map(
+                  link => `
+                    <div class="nav-item-box">
+                      <span class="nav-item-line"></span>
+                      <p class="nav-item">${link.text}</p>
+                    </div>
+                  `,
+                )
+                .join('')}
+            </div>
+          </div>
+        `,
+        )
+        .join('')}
+    `
+
     document.body.appendChild(this.menu)
 
     this.menuCols = this.menu.querySelectorAll('.menu-border')
@@ -127,6 +94,7 @@ export class NavBg {
 
     bgWrap.appendChild(this.canvas)
 
+    this.createAnim()
     this.navBtn.addEventListener('click', this.handleClickNav)
 
     this.menu.addEventListener('mousemove', e => {
@@ -150,32 +118,13 @@ export class NavBg {
     resizeCanvases([{ c: this.canvas, ctx: this.ctx }])
   }
 
-  handleClickNav = () => {
-    const menu = this.menu
-    const navBtn = this.navBtn
-
-    if (!navBtn || !menu) return
-
-    if (menu.classList.contains('open')) {
-      menu.classList.remove('open')
-      navBtn.classList.remove('open')
-      unlockScroll()
-      this.isOpened = false
-      return
-    }
-
-    this.isOpened = true
-    menu.classList.add('open')
-    navBtn.classList.add('open')
-    lockScroll()
-    window.requestAnimationFrame(this.renderRaf)
-
-    anime
+  createAnim() {
+    this.anim = anime
       .timeline()
       .add({
         targets: this.menuCols,
         height: '100vh',
-        duration: 1700,
+        duration: 1200,
         easing: 'easeInOutQuart',
       })
       .add({
@@ -194,13 +143,26 @@ export class NavBg {
         easing: 'easeInOutQuart',
         offset: '0',
       })
-      .add({
-        targets: '.nav-box p',
-        color: '#fff',
-        duration: 1000,
-        easing: 'easeInOutQuart',
-        offset: '0',
-      })
+  }
+
+  handleClickNav = () => {
+    const menu = this.menu
+    const navBtn = this.navBtn
+
+    if (!navBtn || !menu) return
+
+    this.isOpened = !this.isOpened
+
+    menu.classList.toggle('open', this.isOpened)
+    navBtn.classList.toggle('open', this.isOpened)
+
+    if (this.isOpened) {
+      lockScroll()
+      window.requestAnimationFrame(this.renderRaf)
+      this.anim.restart()
+    } else {
+      unlockScroll()
+    }
   }
 
   renderRaf = (time: number) => {
