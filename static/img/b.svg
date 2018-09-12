@@ -1,1 +1,51 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 250.5" enable-background="new 0 0 720 250.5"><style type="text/css">.st0{fill:#FFFFFF;} .st1{fill:url(#Прямоугольник_x0020__1_);} .st2{fill:url(#Прямоугольник_x0020__0_1_);} .st3{fill:url(#SVGID_1_);} .st4{fill:url(#SVGID_2_);} .st5{fill:url(#Прямоугольник_x0020__1_1_);} .st6{fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;}</style><g id="Слой_x0020_1"><path class="st0" d="M0 0h360l75 27.3v21.8h60l225 81.9v120h-360l-360-131z"/><linearGradient id="Прямоугольник_x0020__1_" gradientUnits="userSpaceOnUse" x1="16048.526" y1="-133487.344" x2="16048.526" y2="-131368.75" gradientTransform="matrix(.028 0 0 -.028 -139.918 -3696.541)"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#EDEDED"/></linearGradient><path id="Прямоугольник_x0020_" class="st1" d="M195 27.3h240v60.1h-240z"/><linearGradient id="Прямоугольник_x0020__0_1_" gradientUnits="userSpaceOnUse" x1="18978.051" y1="-135220.75" x2="18978.051" y2="-133102.156" gradientTransform="matrix(.028 0 0 -.028 -139.918 -3696.541)"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#EDEDED"/></linearGradient><path id="Прямоугольник_x0020__0" class="st2" d="M330 76.4h136.1v60.1h-136.1z"/><linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="22962.031" y1="-136854.109" x2="24519.051" y2="-133186.344" gradientTransform="matrix(.028 0 0 -.028 -139.918 -3696.541)"><stop offset="0" stop-color="#FEFEFE"/><stop offset=".4" stop-color="#fff"/><stop offset="1" stop-color="#F0F0F0"/></linearGradient><path class="st3" d="M600 125.2l-133.9-48.8v60l133.9 48.8z"/><path class="st0" d="M0 0h360l75 27.3h-240l60 21.8h240l225 81.9h-360l-360-131zm466.1 76.4h-136.1l60 21.8h136.1l-60-21.8z"/><linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="9678.241" y1="-139243.969" x2="12893.761" y2="-130423.266" gradientTransform="matrix(.028 0 0 -.028 -139.918 -3696.541)"><stop offset="0" stop-color="#FEFEFE"/><stop offset=".4" stop-color="#fff"/><stop offset="1" stop-color="#F0F0F0"/></linearGradient><path class="st4" d="M360 131l-360-131v120l360 131z"/><linearGradient id="Прямоугольник_x0020__1_1_" gradientUnits="userSpaceOnUse" x1="23985.981" y1="-139261.484" x2="23985.981" y2="-135028.156" gradientTransform="matrix(.028 0 0 -.028 -139.918 -3696.541)"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#EDEDED"/></linearGradient><path id="Прямоугольник_x0020__1" class="st5" d="M360 131h360v120h-360z"/></g><path class="st6" d="M691-2852.2z"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     viewBox="0 0 720 250.5" style="enable-background:new 0 0 720 250.5;" xml:space="preserve">
+<style type="text/css">
+    .st0{fill:#FFFFFF;}
+    .st1{fill:url(#Прямоугольник_x0020__1_);}
+    .st2{fill:url(#Прямоугольник_x0020__0_1_);}
+    .st3{fill:url(#SVGID_1_);}
+    .st4{fill:url(#SVGID_2_);}
+    .st5{fill:url(#Прямоугольник_x0020__1_1_);}
+    .st6{fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;}
+</style>
+<g id="Слой_x0020_1">
+    <polygon class="st0" points="0,0 360,0 435,27.3 435,49.1 495,49.1 720,131 720,251 360,251 0,120     "/>
+
+        <linearGradient id="Прямоугольник_x0020__1_" gradientUnits="userSpaceOnUse" x1="16048.5264" y1="-133487.3438" x2="16048.5264" y2="-131368.75" gradientTransform="matrix(2.834646e-02 0 0 -2.834646e-02 -139.9181 -3696.541)">
+        <stop  offset="0" style="stop-color:#FFFFFF"/>
+        <stop  offset="1" style="stop-color:#EDEDED"/>
+    </linearGradient>
+    <rect id="Прямоугольник_x0020_" x="195" y="27.3" class="st1" width="240" height="60.1"/>
+
+        <linearGradient id="Прямоугольник_x0020__0_1_" gradientUnits="userSpaceOnUse" x1="18978.0508" y1="-135220.75" x2="18978.0508" y2="-133102.1563" gradientTransform="matrix(2.834646e-02 0 0 -2.834646e-02 -139.9181 -3696.541)">
+        <stop  offset="0" style="stop-color:#FFFFFF"/>
+        <stop  offset="1" style="stop-color:#EDEDED"/>
+    </linearGradient>
+    <rect id="Прямоугольник_x0020__0" x="330" y="76.4" class="st2" width="136.1" height="60.1"/>
+
+        <linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="22962.0313" y1="-136854.1094" x2="24519.0508" y2="-133186.3438" gradientTransform="matrix(2.834646e-02 0 0 -2.834646e-02 -139.9181 -3696.541)">
+        <stop  offset="0" style="stop-color:#FEFEFE"/>
+        <stop  offset="0.4" style="stop-color:#FFFFFF"/>
+        <stop  offset="1" style="stop-color:#F0F0F0"/>
+    </linearGradient>
+    <polygon class="st3" points="600,125.2 466.1,76.4 466.1,136.4 600,185.2     "/>
+    <path class="st0" d="M0,0h360l75,27.3H195l60,21.8h240L720,131H360L0,0L0,0z M466.1,76.4H330l60,21.8h136.1L466.1,76.4z"/>
+
+        <linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="9678.2412" y1="-139243.9688" x2="12893.7607" y2="-130423.2656" gradientTransform="matrix(2.834646e-02 0 0 -2.834646e-02 -139.9181 -3696.541)">
+        <stop  offset="0" style="stop-color:#FEFEFE"/>
+        <stop  offset="0.4" style="stop-color:#FFFFFF"/>
+        <stop  offset="1" style="stop-color:#F0F0F0"/>
+    </linearGradient>
+    <polygon class="st4" points="360,131 0,0 0,120 360,251     "/>
+
+        <linearGradient id="Прямоугольник_x0020__1_1_" gradientUnits="userSpaceOnUse" x1="23985.9805" y1="-139261.4844" x2="23985.9805" y2="-135028.1563" gradientTransform="matrix(2.834646e-02 0 0 -2.834646e-02 -139.9181 -3696.541)">
+        <stop  offset="0" style="stop-color:#FFFFFF"/>
+        <stop  offset="1" style="stop-color:#EDEDED"/>
+    </linearGradient>
+    <rect id="Прямоугольник_x0020__1" x="360" y="131" class="st5" width="360" height="120"/>
+</g>
+<polygon class="st6" points="691,-2852.2 691,-2852.2 691,-2852.2 691,-2852.2 "/>
+</svg>
