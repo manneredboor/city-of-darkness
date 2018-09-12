@@ -97,8 +97,7 @@ export class NavBg {
   menu: HTMLElement | null
   menuCols: NodeListOf<HTMLElement>
   navRows: NodeListOf<HTMLElement>
-
-  renderHooks: ((t: number) => void)[] = []
+  isOpened: boolean = false
 
   state: State = {
     mouse: vec(0, 0),
@@ -145,8 +144,6 @@ export class NavBg {
     this.ctx.imageSmoothingEnabled = true
 
     noise.seed(Math.random())
-
-    window.requestAnimationFrame(this.renderRaf)
   }
 
   updateSizes = () => {
@@ -163,11 +160,15 @@ export class NavBg {
       menu.classList.remove('open')
       navBtn.classList.remove('open')
       unlockScroll()
+      this.isOpened = false
       return
     }
+
+    this.isOpened = true
     menu.classList.add('open')
     navBtn.classList.add('open')
     lockScroll()
+    window.requestAnimationFrame(this.renderRaf)
 
     anime
       .timeline()
@@ -203,6 +204,7 @@ export class NavBg {
   }
 
   renderRaf = (time: number) => {
+    if (!this.isOpened) return
     const ctx = this.ctx
     const { mouse } = this.state
     const { w, h, scale } = sizeState
