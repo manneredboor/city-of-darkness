@@ -13,6 +13,55 @@
   padding-top: 25vh;
 }
 
+[datamodule-id='1933'],
+[datamodule-id='1922'],
+[datamodule-id='1912'],
+[datamodule-id='1906'],
+[datamodule-id='1960'],
+[datamodule-id='1947'],
+[datamodule-id='1881'],
+[datamodule-id='1867'],
+[datamodule-id='1831'],
+[datamodule-id='1814'],
+[datamodule-id='1802'],
+[datamodule-id='1799'] {
+  padding-left: 35px;
+  position: relative;
+}
+
+[datamodule-id='1933']:before,
+[datamodule-id='1922']:before,
+[datamodule-id='1912']:before,
+[datamodule-id='1906']:before,
+[datamodule-id='1960']:before,
+[datamodule-id='1947']:before,
+[datamodule-id='1881']:before,
+[datamodule-id='1867']:before,
+[datamodule-id='1831']:before,
+[datamodule-id='1814']:before,
+[datamodule-id='1802']:before,
+[datamodule-id='1799']:before {
+  content: '';
+  display: block;
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #000;
+  position: absolute;
+  left: 0;
+  top: 4px;
+}
+
+[datamodule-id='1933']:before,
+[datamodule-id='1922']:before,
+[datamodule-id='1912']:before,
+[datamodule-id='1867']:before,
+[datamodule-id='1831']:before,
+[datamodule-id='1814']:before {
+  background-color: #fff;
+}
+
 [data-id='463'] .row-container.container:before {
   content: '';
   display: block;
