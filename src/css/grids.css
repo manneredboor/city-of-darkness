@@ -46,7 +46,7 @@
 /* Strong text */
 .kwc-grid-k .column strong {
   font-size: 1.4vw;
-  margin-bottom: 1vw;
+  margin-bottom: 0.5vw;
 }
 
 /* First row */
@@ -78,6 +78,10 @@
   display: block;
 }
 
+.kwc-grid-k .column:nth-child(5) img {
+  margin-left: -1px;
+}
+
 /* Second row */
 .kwc-grid-k .row:nth-child(2) {
   height: 16.48vw;
@@ -93,9 +97,10 @@
 }
 
 .kwc-grid-k .row:nth-child(2) .column:nth-child(5) img {
-  margin: 0 auto;
-  width: 80%;
   display: block;
+  width: 100%;
+  margin-top: -1vw;
+  margin-left: -0.3vw;
 }
 
 /* Third row */

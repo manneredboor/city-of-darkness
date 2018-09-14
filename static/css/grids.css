@@ -3,6 +3,9 @@
   padding-left: 20px;
 }
 
+[datamodule-id='1940'],
+[datamodule-id='1930'],
+[datamodule-id='1919'],
 [datamodule-id='1945'],
 [datamodule-id='1883'] {
   border-left: 2px solid #000;
@@ -10,9 +13,10 @@
 }
 
 [data-id='463'] {
-  padding-top: 25vh;
+  padding-top: 30vh;
 }
 
+[datamodule-id='1980'],
 [datamodule-id='1933'],
 [datamodule-id='1922'],
 [datamodule-id='1912'],
@@ -29,6 +33,7 @@
   position: relative;
 }
 
+[datamodule-id='1980']:before,
 [datamodule-id='1933']:before,
 [datamodule-id='1922']:before,
 [datamodule-id='1912']:before,
@@ -53,6 +58,7 @@
   top: 4px;
 }
 
+[datamodule-id='1980']:before,
 [datamodule-id='1933']:before,
 [datamodule-id='1922']:before,
 [datamodule-id='1912']:before,
@@ -86,7 +92,7 @@
 
 [data-id='483'] {
   padding-top: 60px;
-  padding-bottom: 25vh;
+  padding-bottom: 30vh;
 }
 
 [data-id='483'] .row-container.container {
