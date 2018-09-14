@@ -7,6 +7,18 @@ require('./css/footer.css')
 const anime = require('vendor/anime')
 const noise = (window as any).noise
 
+// Main http://www.kwc.guide
+// http://www.kwc.guide/#letter-k - anchor to Koulun
+// http://www.kwc.guide/#letter-a - anchor to Architecture
+// http://www.kwc.guide/#letter-b - anchor to Bit
+
+// People http://www.kwc.guide/people
+// http://www.kwc.guide/people#letter-n - anchor to Population section
+// http://www.kwc.guide/people#letter-c - anchor to Sferi zhizni
+// http://www.kwc.guide/people#letter-e - anchor to People Stories
+
+// Stub 
+
 const menu = [
   {
     title: 'Архитектура',
