@@ -17,9 +17,12 @@ const noise = (window as any).noise
 // http://www.kwc.guide/people#letter-c - anchor to Sferi zhizni
 // http://www.kwc.guide/people#letter-e - anchor to People Stories
 
-// Stub 
+// Stub
 
-const menu = [
+const menu: {
+  title: string
+  links: { text: string; href?: string }[]
+}[] = [
   {
     title: 'Архитектура',
     links: [{ text: 'Коулун' }, { text: 'Архитектура' }, { text: 'Быт' }],
@@ -84,7 +87,9 @@ export class NavBg {
                   link => `
                     <div class="nav-item-box">
                       <span class="nav-item-line"></span>
-                      <a href="${link.href}"><p class="nav-item">${link.text}</p><a>
+                      <a href="${link.href}">
+                        <p class="nav-item">${link.text}</p>
+                      <a>
                     </div>
                   `,
                 )
