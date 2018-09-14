@@ -78,7 +78,7 @@
 
 .nav-title {
   font-family: rf dewi expanded black custom;
-  font-size: 36px;
+  font-size: 2.15vw;
   padding: 0 0 30px;
 }
 
@@ -106,7 +106,7 @@
 }
 
 .nav-item {
-  font-size: 18px;
+  font-size: 1.1vw;
   cursor: pointer;
 }
 
