@@ -6,6 +6,7 @@ import '../Letters'
 import '../Spinner'
 import '../Plans'
 import '../WideScroll'
+import '../Stories'
 require('../css/grids.css')
 
 new Map()

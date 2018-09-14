@@ -10,8 +10,10 @@ export class WatchedValue<T> {
   }
 
   public set(val: T) {
-    this.value = val
-    this.fire()
+    if (this.value !== val) {
+      this.value = val
+      this.fire()
+    }
   }
 
   public fire() {

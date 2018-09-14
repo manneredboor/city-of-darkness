@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 720 250.8" style="enable-background:new 0 0 720 250.8;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:url(#SVGID_1_);}
+	.st2{fill:url(#SVGID_2_);}
+	.st3{fill:url(#SVGID_3_);}
+	.st4{fill:url(#SVGID_4_);}
+</style>
+<g id="Слой_x0020_1">
+	<path class="st0" d="M360,251l120,0.2l0.5-43.7L599.9,251H720V131L540,65.5L360,0h-60h-60l0.1,43.9C200,29.3,160,14.6,119.9,0
+		c-20.1,0-40.1,0-60,0S19.9,0,0,0l0,120.2L360,251L360,251z"/>
+	
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="18144.8574" y1="-139238.2969" x2="21360.3789" y2="-130417.5938" gradientTransform="matrix(2.834646e-02 0 0 -2.834646e-02 -139.9181 -3696.3801)">
+		<stop  offset="0" style="stop-color:#FFFFFF"/>
+		<stop  offset="0.4" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#F0F0F0"/>
+	</linearGradient>
+	<polygon class="st1" points="600,131 240,0 240,120 600,251 	"/>
+	
+		<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="28217.5703" y1="-139255.8594" x2="28217.5703" y2="-135022.5156" gradientTransform="matrix(2.834646e-02 0 0 -2.834646e-02 -139.9181 -3696.3801)">
+		<stop  offset="0" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#EDEDED"/>
+	</linearGradient>
+	<rect x="599.9" y="131" class="st2" width="120.1" height="120"/>
+	<path class="st0" d="M360,131h120l-80-72.8l79.9,29.1c40,14.6,80,29.1,120,43.7c19.9,0,40,0,59.9,0c20,0,40.1,0,60.2,0L540,65.5
+		L360,0h-60h-60l80,72.8c-20-7.3-120.1-43.7-140-50.9c-20-7.3-40-14.6-60-21.9c-20.1,0-40.1,0-60,0S19.9,0,0,0
+		c59.9,21.8,120,43.7,180,65.5L360,131L360,131z"/>
+	
+		<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="19752.6172" y1="-139255.8594" x2="19752.6172" y2="-135022.5156" gradientTransform="matrix(2.834646e-02 0 0 -2.834646e-02 -139.9181 -3696.3801)">
+		<stop  offset="0" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#EDEDED"/>
+	</linearGradient>
+	<rect x="360" y="131" class="st3" width="120" height="120"/>
+	
+		<linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="9678.2188" y1="-139238.2969" x2="12893.7383" y2="-130417.5938" gradientTransform="matrix(2.834646e-02 0 0 -2.834646e-02 -139.9181 -3696.3801)">
+		<stop  offset="0" style="stop-color:#FFFFFF"/>
+		<stop  offset="0.4" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#F0F0F0"/>
+	</linearGradient>
+	<polygon class="st4" points="360,131 0,0 0,120 360,251 	"/>
+</g>
+</svg>

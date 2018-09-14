@@ -23,7 +23,7 @@
   padding: 1.4vw;
   font-size: 1vw;
   line-height: 1.6;
-  max-width: 100;
+  height: 100%;
   color: #000;
   display: flex;
   text-align: left;
@@ -46,7 +46,7 @@
 /* Strong text */
 .kwc-grid-k .column strong {
   font-size: 1.4vw;
-  margin-bottom: 1vw;
+  margin-bottom: 0.5vw;
 }
 
 /* First row */
@@ -73,9 +73,13 @@
 
 .kwc-grid-k .column:nth-child(3) img,
 .kwc-grid-k .column:nth-child(5) img {
-  margin-top: 0.5vw;
+  margin-top: 1vw;
   width: 100%;
   display: block;
+}
+
+.kwc-grid-k .column:nth-child(5) img {
+  margin-left: -1px;
 }
 
 /* Second row */
@@ -93,9 +97,10 @@
 }
 
 .kwc-grid-k .row:nth-child(2) .column:nth-child(5) img {
-  margin: 0 auto;
-  width: 80%;
   display: block;
+  width: 100%;
+  margin-top: -1vw;
+  margin-left: -0.3vw;
 }
 
 /* Third row */
