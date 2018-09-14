@@ -367,6 +367,81 @@
   width: 50%;
   top: 57.4%;
 }
+
+/**
+ * K
+ */
+
+.kwc-letter-i {
+  color: #000;
+}
+
+.kwc-letter-i-bg {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.kwc-letter-i-bg:before,
+.kwc-letter-i-bg:after {
+  content: '';
+  display: block;
+  position: absolute;
+  background-color: #000;
+}
+
+.kwc-letter-i-bg:before {
+  width: 60%;
+  top: 0;
+  left: 40%;
+  height: 60%;
+}
+
+.kwc-letter-i-bg:after {
+  width: 50%;
+  top: 0;
+  left: 0;
+  height: 20%;
+}
+
+.kwc-letter-i:after {
+  content: '';
+  display: block;
+  width: 100%;
+  position: relative;
+  padding-bottom: 35%;
+}
+
+.kwc-letter-i-text-1 {
+  left: 0;
+  width: 50%;
+  top: 57.4%;
+  transform: skewY(20deg);
+  transform-origin: top right;
+}
+
+.kwc-letter-i-text-2 {
+  left: 50%;
+  width: 16.666%;
+  top: 57.4%;
+}
+
+.kwc-letter-i-text-3 {
+  left: 50%;
+  width: 33.333%;
+  top: 57.4%;
+  transform: skewY(20deg);
+  transform-origin: top right;
+}
+
+.kwc-letter-i-text-4 {
+  right: 0;
+  width: 16.666%;
+  top: 57.4%;
+}
+
 /* Navigation */
 .nav-btn {
   position: fixed;
