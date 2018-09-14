@@ -6,7 +6,9 @@ import '../Letters'
 import '../Spinner'
 import '../Plans'
 import '../WideScroll'
+import '../Stories'
 require('../css/grids.css')
+require('../css/grid-people.css')
 
 new Map()
 new NavBg()
