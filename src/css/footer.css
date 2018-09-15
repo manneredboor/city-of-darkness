@@ -24,6 +24,7 @@
 .kwc-footer p {
   color: #fff;
   word-break: unset !important;
+  white-space: nowrap;
 }
 
 .footer-nav {
