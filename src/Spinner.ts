@@ -31,10 +31,37 @@ const removeSpinner = () => {
   const spinner = document.querySelector('.kwc-spinner-wrap')
   if (spinner && spinner.parentNode) {
     spinner.classList.add('i-hidding')
+    unlockScroll()
+    if (location.hash !== "") {
+      let el = document.querySelector(location.hash)
+      let yPos
+
+      const posGet = (el:any) => {
+        const scroll =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0
+        yPos = el.getBoundingClientRect().top + scroll;
+    
+        return yPos
+
+        window.scroll({
+          top: yPos,
+          y: 0
+        });
+      }
+
+      posGet(el)
+
+      // if (yPos !== undefined) {
+
+      // }
+    }
     spinner.addEventListener('transitionend', e => {
       if (e.propertyName === 'opacity' && spinner && spinner.parentNode) {
         spinner.parentNode.removeChild(spinner)
-        unlockScroll()
+        // unlockScroll()
       }
     })
   }
