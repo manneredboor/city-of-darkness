@@ -7,41 +7,42 @@ require('./css/footer.css')
 const anime = require('vendor/anime')
 const noise = (window as any).noise
 
-// Main http://www.kwc.guide
-// http://www.kwc.guide/#letter-k - anchor to Koulun
-// http://www.kwc.guide/#letter-a - anchor to Architecture
-// http://www.kwc.guide/#letter-b - anchor to Bit
-
-// People http://www.kwc.guide/people
-// http://www.kwc.guide/people#letter-n - anchor to Population section
-// http://www.kwc.guide/people#letter-c - anchor to Sferi zhizni
-// http://www.kwc.guide/people#letter-e - anchor to People Stories
-
-// Stub
-
 const menu: {
   title: string
+  mainLink?: string
   links: { text: string; href?: string }[]
 }[] = [
   {
     title: 'Архитектура',
-    links: [{ text: 'Коулун' }, { text: 'Архитектура' }, { text: 'Быт' }],
+    links: [
+      { text: 'Коулун', href: 'http://www.kwc.guide/#letter-k' }, 
+      { text: 'Архитектура', href: 'http://www.kwc.guide/#letter-a' }, 
+      { text: 'Быт', href: 'http://www.kwc.guide/#letter-b' }
+    ],
   },
   {
     title: 'Люди',
     links: [
-      { text: 'Население', href: 'http://www.kwc.guide/people' },
-      { text: 'Сферы жизни', href: 'http://www.kwc.guide/people' },
-      { text: 'История', href: 'http://www.kwc.guide/people' },
+      { text: 'Население', href: 'http://www.kwc.guide/people#letter-n' },
+      { text: 'Сферы жизни', href: 'http://www.kwc.guide/people#letter-c' },
+      { text: 'История', href: 'http://www.kwc.guide/people#letter-e' },
     ],
   },
   {
     title: 'История',
-    links: [{ text: 'Зарождение' }, { text: 'Развитие' }, { text: 'Снос' }],
+    links: [
+      { text: 'Зарождение', href: 'http://www.kwc.guide/%D0%BD%D0%B5-%D1%83%D1%81%D0%BF%D0%B5%D0%BB%D0%B8' }, 
+      { text: 'Развитие', href: 'http://www.kwc.guide/%D0%BD%D0%B5-%D1%83%D1%81%D0%BF%D0%B5%D0%BB%D0%B8' }, 
+      { text: 'Снос', href: 'http://www.kwc.guide/%D0%BD%D0%B5-%D1%83%D1%81%D0%BF%D0%B5%D0%BB%D0%B8' }
+    ],
   },
   {
     title: 'Факты',
-    links: [{ text: 'Самолеты' }, { text: 'Парк' }, { text: 'Упоминания' }],
+    links: [
+      { text: 'Самолеты', href: 'http://www.kwc.guide/%D0%BD%D0%B5-%D1%83%D1%81%D0%BF%D0%B5%D0%BB%D0%B8' }, 
+      { text: 'Парк', href: 'http://www.kwc.guide/%D0%BD%D0%B5-%D1%83%D1%81%D0%BF%D0%B5%D0%BB%D0%B8' }, 
+      { text: 'Упоминания', href: 'http://www.kwc.guide/%D0%BD%D0%B5-%D1%83%D1%81%D0%BF%D0%B5%D0%BB%D0%B8' }
+    ],
   },
 ]
 
