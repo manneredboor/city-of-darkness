@@ -1,6 +1,6 @@
 import { fonts } from 'utils/fontObserver'
 import { introLoading } from './Intro'
-import { unlockScroll } from 'utils/scroll'
+import { unlockScroll, scrollPos, scrollTo } from 'utils/scroll'
 import { WatchedValue } from 'utils/WatchedValue'
 require('./css/spinner.css')
 
@@ -31,37 +31,16 @@ const removeSpinner = () => {
   const spinner = document.querySelector('.kwc-spinner-wrap')
   if (spinner && spinner.parentNode) {
     spinner.classList.add('i-hidding')
-    unlockScroll()
-    if (location.hash !== "") {
-      let el = document.querySelector(location.hash)
-      let yPos
 
-      const posGet = (el:any) => {
-        const scroll =
-        window.pageYOffset ||
-        document.documentElement.scrollTop ||
-        document.body.scrollTop ||
-        0
-        yPos = el.getBoundingClientRect().top + scroll;
-    
-        return yPos
-
-        window.scroll({
-          top: yPos,
-          y: 0
-        });
-      }
-
-      posGet(el)
-
-      // if (yPos !== undefined) {
-
-      // }
+    if (location.hash !== '') {
+      const el = document.querySelector(location.hash)
+      if (el) scrollTo(el.getBoundingClientRect().top + scrollPos.value)
     }
+
     spinner.addEventListener('transitionend', e => {
       if (e.propertyName === 'opacity' && spinner && spinner.parentNode) {
         spinner.parentNode.removeChild(spinner)
-        // unlockScroll()
+        unlockScroll()
       }
     })
   }
