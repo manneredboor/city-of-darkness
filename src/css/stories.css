@@ -1,6 +1,7 @@
 .kwc-stories {
   width: 100%;
   background-color: #fff;
+  overflow: hidden;
 }
 
 .kwc-stories__inner.i-fixed {
