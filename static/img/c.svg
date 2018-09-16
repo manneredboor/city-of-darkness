@@ -1,1 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 250.9" enable-background="new 0 0 720 250.9"><style type="text/css">.st0{fill:#1F1B20;} .st1{fill:url(#SVGID_1_);} .st2{fill:url(#SVGID_2_);} .st3{fill:url(#SVGID_3_);}</style><g id="Слой_x0020_1"><path class="st0" d="M480 43.7l-120-43.7h-360v120l360 131h360v-120l-120-43.6h-120z"/><linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="17636.016" y1="-136172.828" x2="17636.016" y2="-131939.5" gradientTransform="matrix(.028 0 0 -.028 -139.918 -3696.34)"><stop offset="0"/><stop offset="1" stop-color="#333"/></linearGradient><path class="st1" d="M240 43.7h240v120h-240z"/><linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="23986.025" y1="-139254.438" x2="23986.025" y2="-135021.109" gradientTransform="matrix(.028 0 0 -.028 -139.918 -3696.34)"><stop offset="0"/><stop offset="1" stop-color="#333"/></linearGradient><path class="st2" d="M360 131h360v120h-360z"/><linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="9678.28" y1="-139236.922" x2="12893.8" y2="-130416.219" gradientTransform="matrix(.028 0 0 -.028 -139.918 -3696.34)"><stop offset="0"/><stop offset=".4"/><stop offset="1" stop-color="#333"/></linearGradient><path class="st3" d="M360 131l-360-131v120l360 131z"/><path class="st0" d="M480 43.7l-120-43.7h-360l360 131h360l-120-43.6h-240l-120-43.7z"/></g></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1440px" height="503px" viewBox="0 0 1440 503" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>C1</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50.0000591%" y1="100.000236%" x2="50.0000591%" y2="0%" id="linearGradient-1">
+            <stop stop-color="#000000" offset="0%"></stop>
+            <stop stop-color="#333333" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50.0000394%" y1="100.000236%" x2="50.0000394%" y2="0%" id="linearGradient-2">
+            <stop stop-color="#000000" offset="0%"></stop>
+            <stop stop-color="#333333" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="37.3404326%" y1="99.8021622%" x2="62.6595674%" y2="0.197837787%" id="linearGradient-3">
+            <stop stop-color="#000000" offset="0%"></stop>
+            <stop stop-color="#000000" offset="40%"></stop>
+            <stop stop-color="#333333" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Process-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="C1">
+            <polygon id="Shape" fill="#1F1B20" points="959.963718 87.4051258 719.975056 0.0561237747 0.00226762726 0.0561237747 0.00340144089 240.047053 719.973355 502.094059 1439.94501 502.094059 1439.94331 262.10313 1199.95465 174.754128 959.963718 174.754128"></polygon>
+            <rect id="Rectangle-path" fill="url(#linearGradient-1)" x="479.981859" y="87.4051258" width="479.981292" height="239.990363"></rect>
+            <rect id="Rectangle-path" fill="url(#linearGradient-2)" x="719.973355" y="262.10313" width="719.971088" height="239.990363"></rect>
+            <polygon id="Shape" fill="url(#linearGradient-3)" points="719.972788 262.10313 0.00340144089 0.0561237747 0.00340144089 240.047053 719.972788 502.094059"></polygon>
+            <polygon id="Shape" fill="#000000" points="959.963718 87.4051258 719.975056 0.0561237747 0.00226762726 0.0561237747 719.971655 262.10313 1439.94331 262.10313 1199.95465 174.754128 719.971655 174.754128 479.982993 87.4051258"></polygon>
+        </g>
+    </g>
+</svg>

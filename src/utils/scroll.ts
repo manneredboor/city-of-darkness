@@ -35,8 +35,9 @@ const handleScroll = () => {
 
 export const scrollTo = (y: number) => {
   if (window.kwcLockerStack) {
-    if (body) body.style.top = `-${y}px`
+    body.style.top = `-${y}px`
     scrollPos.set(y)
+    savedScroll = y
   } else {
     window.scrollTo(0, y)
   }

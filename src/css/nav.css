@@ -106,8 +106,13 @@
 }
 
 .nav-item {
+  color: #fff;
   font-size: 1.1vw;
   cursor: pointer;
+}
+
+.nav-item:hover {
+  color: #fff;
 }
 
 .menu-col {

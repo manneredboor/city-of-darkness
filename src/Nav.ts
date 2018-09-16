@@ -7,6 +7,7 @@ require('./css/footer.css')
 const anime = require('vendor/anime')
 const noise = (window as any).noise
 
+// prettier-ignore
 const menu: {
   title: string
   mainLink?: string
@@ -31,16 +32,16 @@ const menu: {
   {
     title: 'История',
     links: [
-      { text: 'Зарождение', href: 'http://www.kwc.guide/%D0%BD%D0%B5-%D1%83%D1%81%D0%BF%D0%B5%D0%BB%D0%B8' }, 
-      { text: 'Развитие', href: 'http://www.kwc.guide/%D0%BD%D0%B5-%D1%83%D1%81%D0%BF%D0%B5%D0%BB%D0%B8' }, 
+      { text: 'Зарождение', href: 'http://www.kwc.guide/%D0%BD%D0%B5-%D1%83%D1%81%D0%BF%D0%B5%D0%BB%D0%B8' },
+      { text: 'Развитие', href: 'http://www.kwc.guide/%D0%BD%D0%B5-%D1%83%D1%81%D0%BF%D0%B5%D0%BB%D0%B8' },
       { text: 'Снос', href: 'http://www.kwc.guide/%D0%BD%D0%B5-%D1%83%D1%81%D0%BF%D0%B5%D0%BB%D0%B8' }
     ],
   },
   {
     title: 'Факты',
     links: [
-      { text: 'Самолеты', href: 'http://www.kwc.guide/%D0%BD%D0%B5-%D1%83%D1%81%D0%BF%D0%B5%D0%BB%D0%B8' }, 
-      { text: 'Парк', href: 'http://www.kwc.guide/%D0%BD%D0%B5-%D1%83%D1%81%D0%BF%D0%B5%D0%BB%D0%B8' }, 
+      { text: 'Самолеты', href: 'http://www.kwc.guide/%D0%BD%D0%B5-%D1%83%D1%81%D0%BF%D0%B5%D0%BB%D0%B8' },
+      { text: 'Парк', href: 'http://www.kwc.guide/%D0%BD%D0%B5-%D1%83%D1%81%D0%BF%D0%B5%D0%BB%D0%B8' },
       { text: 'Упоминания', href: 'http://www.kwc.guide/%D0%BD%D0%B5-%D1%83%D1%81%D0%BF%D0%B5%D0%BB%D0%B8' }
     ],
   },
@@ -88,9 +89,7 @@ export class NavBg {
                   link => `
                     <div class="nav-item-box">
                       <span class="nav-item-line"></span>
-                      <a href="${link.href}">
-                        <p class="nav-item">${link.text}</p>
-                      <a>
+                      <a class="nav-item" href="${link.href}">${link.text}</a>
                     </div>
                   `,
                 )
