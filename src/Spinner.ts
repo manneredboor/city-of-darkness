@@ -1,6 +1,6 @@
 import { fonts } from 'utils/fontObserver'
 import { introLoading } from './Intro'
-import { unlockScroll, scrollPos, scrollTo } from 'utils/scroll'
+import { unlockScroll} from 'utils/scroll'
 import { WatchedValue } from 'utils/WatchedValue'
 require('./css/spinner.css')
 
@@ -36,12 +36,8 @@ const removeSpinner = () => {
     setTimeout(() => {
       if (location.hash !== '') {
         const el = document.querySelector(location.hash)
-        if (el) scrollTo(el.getBoundingClientRect().top + scrollPos.value)
-      }
-
-      if (location.hash === '#letter-b' || location.hash === '#letter-a') {
-        const el = document.querySelector(location.hash)
-        if (el) scrollTo(el.getBoundingClientRect().top + scrollPos.value + 5000)
+        // if (el) scrollTo(el.getBoundingClientRect().top + scrollPos.value)
+        if (el) el.scrollIntoView(true)
       }
     }, 0)
 
