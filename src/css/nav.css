@@ -191,3 +191,7 @@
   bottom: 0;
   z-index: 1;
 }
+
+.scrollmagic-pin-spacer {
+  padding-bottom: 5000px;
+}
