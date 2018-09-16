@@ -111,6 +111,10 @@
   cursor: pointer;
 }
 
+.nav-item:hover {
+  color: #fff;
+}
+
 .menu-col {
   position: relative;
   background-position: center;

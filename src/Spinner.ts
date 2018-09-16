@@ -31,16 +31,18 @@ const removeSpinner = () => {
   const spinner = document.querySelector('.kwc-spinner-wrap')
   if (spinner && spinner.parentNode) {
     spinner.classList.add('i-hidding')
+    unlockScroll()
 
-    if (location.hash !== '') {
-      const el = document.querySelector(location.hash)
-      if (el) scrollTo(el.getBoundingClientRect().top + scrollPos.value)
-    }
+    setTimeout(() => {
+      if (location.hash !== '') {
+        const el = document.querySelector(location.hash)
+        if (el) scrollTo(el.getBoundingClientRect().top + scrollPos.value)
+      }
+    }, 0)
 
     spinner.addEventListener('transitionend', e => {
       if (e.propertyName === 'opacity' && spinner && spinner.parentNode) {
         spinner.parentNode.removeChild(spinner)
-        unlockScroll()
       }
     })
   }
