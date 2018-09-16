@@ -91,7 +91,7 @@ export class NavBg {
                       <span class="nav-item-line"></span>
                       <a href="${link.href}">
                         <p class="nav-item">${link.text}</p>
-                      <a>
+                      </a>
                     </div>
                   `,
                 )
