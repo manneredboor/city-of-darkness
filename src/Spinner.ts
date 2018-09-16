@@ -38,6 +38,11 @@ const removeSpinner = () => {
         const el = document.querySelector(location.hash)
         if (el) scrollTo(el.getBoundingClientRect().top + scrollPos.value)
       }
+
+      if (location.hash === '#letter-b' || location.hash === '#letter-a') {
+        const el = document.querySelector(location.hash)
+        if (el) scrollTo(el.getBoundingClientRect().top + scrollPos.value + 5000)
+      }
     }, 0)
 
     spinner.addEventListener('transitionend', e => {
