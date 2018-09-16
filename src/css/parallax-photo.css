@@ -1,0 +1,16 @@
+.kwc-photo {
+  width: 100%;
+  max-width: 100%;
+}
+
+.kwc-parallax-photo__wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.kwc-parallax-photo__img {
+  display: block;
+  position: absolute;
+  height: auto;
+}
