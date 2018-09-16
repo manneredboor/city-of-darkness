@@ -8,7 +8,7 @@ const MutationObserver =
   (window as any).WebKitMutationObserver ||
   (window as any).MozMutationObserver
 
-const coeff = 20
+const coeff = 30
 
 const selectors = [
   '.kwc-photo',
@@ -55,14 +55,14 @@ const initPhoto = (img: HTMLImageElement) => {
 
   const wrap = document.createElement('div')
   wrap.classList.add('kwc-parallax-photo__wrap')
-  wrap.style.paddingBottom = (img.naturalHeight / img.naturalWidth) * 100 + '%'
+  wrap.style.paddingBottom =
+    (img.naturalHeight / img.naturalWidth) * (100 - coeff) + '%'
   parent.insertBefore(wrap, img)
 
   img.classList.add('kwc-parallax-photo__img')
-  img.style.top = `-${coeff / 2}%`
-  img.style.left = `-${coeff / 2}%`
-  img.style.width = `${coeff + 100}%`
-  img.style.minWidth = `${coeff + 100}%`
+  // img.style.left = `-${coeff / 2}%`
+  // img.style.width = `${coeff + 100}%`
+  // img.style.minWidth = `${coeff + 100}%`
   wrap.appendChild(img)
 
   let lastRender = -1
@@ -73,7 +73,7 @@ const initPhoto = (img: HTMLImageElement) => {
     const path = sizeState.h + imgH
     const prog = minmax(0, (rect.top + imgH) / path, 1)
     const offset = imgH * (coeff / 100)
-    const pos = Math.round((1 - prog) * offset - offset / 2)
+    const pos = Math.round((1 - prog) * offset - offset)
     if (pos !== lastRender) {
       lastRender = pos
       img.style.transform = `translateY(${pos}px)`
