@@ -15,6 +15,7 @@ const menu: {
 }[] = [
   {
     title: 'Архитектура',
+    mainLink: 'http://www.kwc.guide',
     links: [
       { text: 'Коулун', href: 'http://www.kwc.guide/#letter-k' }, 
       { text: 'Архитектура', href: 'http://www.kwc.guide/#letter-a' }, 
@@ -23,6 +24,7 @@ const menu: {
   },
   {
     title: 'Люди',
+    mainLink: 'http://www.kwc.guide/people',
     links: [
       { text: 'Население', href: 'http://www.kwc.guide/people#letter-n' },
       { text: 'Сферы жизни', href: 'http://www.kwc.guide/people#letter-c' },
@@ -31,6 +33,7 @@ const menu: {
   },
   {
     title: 'История',
+    mainLink: 'http://www.kwc.guide/%D0%BD%D0%B5-%D1%83%D1%81%D0%BF%D0%B5%D0%BB%D0%B8',
     links: [
       { text: 'Зарождение', href: 'http://www.kwc.guide/%D0%BD%D0%B5-%D1%83%D1%81%D0%BF%D0%B5%D0%BB%D0%B8' },
       { text: 'Развитие', href: 'http://www.kwc.guide/%D0%BD%D0%B5-%D1%83%D1%81%D0%BF%D0%B5%D0%BB%D0%B8' },
@@ -39,6 +42,7 @@ const menu: {
   },
   {
     title: 'Факты',
+    mainLink: 'http://www.kwc.guide/%D0%BD%D0%B5-%D1%83%D1%81%D0%BF%D0%B5%D0%BB%D0%B8',
     links: [
       { text: 'Самолеты', href: 'http://www.kwc.guide/%D0%BD%D0%B5-%D1%83%D1%81%D0%BF%D0%B5%D0%BB%D0%B8' },
       { text: 'Парк', href: 'http://www.kwc.guide/%D0%BD%D0%B5-%D1%83%D1%81%D0%BF%D0%B5%D0%BB%D0%B8' },
@@ -82,8 +86,9 @@ export class NavBg {
           <div class="menu-col menu-col-${i + 1}">
             <span class="menu-border"></span>
             <span class="menu-num">0${i + 1}</span>
+            <a href="${itm.mainLink}" class="nav-link-mask"></a>
             <div class="nav-box">
-              <p class="nav-title">${itm.title}</p>
+              <a href="${itm.mainLink}" class="nav-title">${itm.title}</a>
               ${itm.links
                 .map(
                   link => `

@@ -77,9 +77,15 @@
 }
 
 .nav-title {
+  display: block;
+  color: #fff;
   font-family: rf dewi expanded black custom;
   font-size: 2.15vw;
   padding: 0 0 30px;
+}
+
+.nav-title:hover, .nav-title:focus, .nav-title:active, .nav-title:visited {
+  color: #fff;
 }
 
 .nav-item-box {
@@ -175,4 +181,13 @@
 
 .nav-box {
   opacity: 0;
+}
+
+.nav-link-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
 }
