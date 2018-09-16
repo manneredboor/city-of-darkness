@@ -49,7 +49,6 @@ const initPhoto = (img: HTMLImageElement) => {
     const prog = minmax(0, (rect.top + imgH) / path, 1)
     const offset = imgH * (coeff / 100)
     const pos = Math.round((1 - prog) * offset - offset / 2)
-    console.log(pos)
     if (pos !== lastRender) {
       lastRender = pos
       img.style.transform = `translateY(${pos}px)`
