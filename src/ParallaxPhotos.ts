@@ -56,10 +56,11 @@ const initPhoto = (img: HTMLImageElement) => {
   const wrap = document.createElement('div')
   wrap.classList.add('kwc-parallax-photo__wrap')
   wrap.style.paddingBottom =
-    (img.naturalHeight / img.naturalWidth) * (100 - coeff) + '%'
+    (img.naturalHeight / img.naturalWidth) * (100 - coeff / 2) + '%'
   parent.insertBefore(wrap, img)
 
   img.classList.add('kwc-parallax-photo__img')
+  // img.style.top = `-${coeff / 2}%`
   // img.style.left = `-${coeff / 2}%`
   // img.style.width = `${coeff + 100}%`
   // img.style.minWidth = `${coeff + 100}%`
