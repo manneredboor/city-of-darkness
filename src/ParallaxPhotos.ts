@@ -3,6 +3,11 @@ import { sizeState } from 'utils/resize'
 import { minmax } from 'utils/math'
 require('./css/parallax-photo.css')
 
+const MutationObserver =
+  (window as any).MutationObserver ||
+  (window as any).WebKitMutationObserver ||
+  (window as any).MozMutationObserver
+
 const coeff = 20
 
 const selectors = [
@@ -25,6 +30,26 @@ const selectors = [
 const photos = document.querySelectorAll(selectors.join(', '))
 
 const initPhoto = (img: HTMLImageElement) => {
+  if (img.dataset.original && img.src !== img.dataset.original) {
+    if (!MutationObserver) return
+
+    const observer = new MutationObserver((mutations: any) => {
+      mutations.forEach((mutation: any) => {
+        if (mutation.type == 'attributes' && mutation.attributeName === 'src') {
+          observer.disconnect()
+          initPhoto(img)
+        }
+      })
+    })
+
+    observer.observe(img, { attributes: true })
+
+    return
+  } else if (!img.complete) {
+    img.addEventListener('load', () => initPhoto(img))
+    return
+  }
+
   const parent = img.parentNode as HTMLElement
   if (!parent) return
 
@@ -58,10 +83,4 @@ const initPhoto = (img: HTMLImageElement) => {
   scrollPos.subscribe(handleScroll)
 }
 
-photos.forEach((img: HTMLImageElement) => {
-  if (img.complete) {
-    initPhoto(img)
-  } else {
-    img.addEventListener('load', () => initPhoto(img))
-  }
-})
+photos.forEach((img: HTMLImageElement) => initPhoto(img))
