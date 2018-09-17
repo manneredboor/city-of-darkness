@@ -1,6 +1,7 @@
 import { scrollPos } from 'utils/scroll'
 import { sizeState } from 'utils/resize'
 import { minmax } from 'utils/math'
+import { getPosition } from 'utils/getPosition'
 require('./css/parallax-photo.css')
 
 const MutationObserver =
@@ -69,10 +70,13 @@ const initPhoto = (img: HTMLImageElement) => {
   let lastRender = -1
 
   const handleScroll = (value: number) => {
-    const rect = wrap.getBoundingClientRect()
+    // const rect = wrap.getBoundingClientRect()
+    const rect = getPosition(wrap)
     const imgH = rect.height
+    const top = rect.top - scrollPos.value + imgH
     const path = sizeState.h + imgH
-    const prog = minmax(0, (rect.top + imgH) / path, 1)
+    // const prog = minmax(0, (rect.top + imgH) / path, 1)
+    const prog = minmax(0, top / path, 1)
     const offset = imgH * (coeff / 100)
     const pos = Math.round((1 - prog) * offset - offset)
     if (pos !== lastRender) {

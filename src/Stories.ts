@@ -3,6 +3,7 @@ import { scrollPos } from 'utils/scroll'
 import { onResize, sizeState } from 'utils/resize'
 import { narrow } from 'utils/math'
 import { easeInOutQuad } from 'utils/easings'
+import { getPosition } from 'utils/getPosition'
 
 const init = () => {
   const wrap = document.querySelector('.kwc-stories') as HTMLElement
@@ -23,9 +24,11 @@ const init = () => {
   handleResize()
 
   const handleScroll = (pos: number) => {
-    const rect = wrap.getBoundingClientRect()
-    const shouldBeLocked =
-      rect.top <= 0 && rect.top >= -(rect.height - sizeState.h)
+    // const rect = wrap.getBoundingClientRect()
+    // const top = rect.top
+    const rect = getPosition(wrap)
+    const top = rect.top - scrollPos.value
+    const shouldBeLocked = top <= 0 && top >= -(rect.height - sizeState.h)
     if (shouldBeLocked && !isLocked) {
       inner.classList.add('i-fixed')
       isLocked = true
@@ -34,7 +37,7 @@ const init = () => {
       isLocked = false
     }
 
-    const prog = (rect.top - oneLength) / -rect.height
+    const prog = (top - oneLength) / -rect.height
     const onePath = 1 / stories.length
 
     stories.forEach((story: HTMLElement, i) => {
