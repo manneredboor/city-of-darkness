@@ -8,6 +8,7 @@ import '../Plans'
 import '../WideScroll'
 import '../Stories'
 import '../ParallaxPhotos'
+import '../Link'
 require('../css/grids.css')
 require('../css/grid-people.css')
 
