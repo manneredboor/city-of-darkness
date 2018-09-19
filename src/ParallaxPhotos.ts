@@ -81,7 +81,7 @@ const initPhoto = (img: HTMLImageElement) => {
     const pos = Math.round((1 - prog) * offset - offset)
     if (pos !== lastRender) {
       lastRender = pos
-      img.style.transform = `translateY(${pos}px)`
+      img.style.transform = `translate3d(0, ${pos}px, 0)`
     }
   }
 
