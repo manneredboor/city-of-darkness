@@ -4,7 +4,10 @@ export class Delegate {
   private listeners: Listener[] = []
 
   public fire() {
-    this.listeners.forEach(fn => fn())
+    const length = this.listeners.length
+    for (let i = 0; i < length; i++) {
+      this.listeners[i]()
+    }
   }
 
   public subscribe(fn: Listener) {

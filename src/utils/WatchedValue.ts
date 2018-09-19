@@ -17,7 +17,10 @@ export class WatchedValue<T> {
   }
 
   public fire() {
-    this.listeners.forEach(fn => fn(this.value))
+    const length = this.listeners.length
+    for (let i = 0; i < length; i++) {
+      this.listeners[i](this.value)
+    }
   }
 
   public subscribe(fn: Listener<T>) {
