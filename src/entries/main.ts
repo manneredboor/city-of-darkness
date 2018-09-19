@@ -7,7 +7,7 @@ import '../Spinner'
 import '../Plans'
 import '../WideScroll'
 import '../Stories'
-import '../ParallaxPhotos'
+// import '../ParallaxPhotos'
 import '../Link'
 require('../css/grids.css')
 require('../css/grid-people.css')
