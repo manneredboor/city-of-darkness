@@ -15,11 +15,11 @@ const menu: {
 }[] = [
   {
     title: 'Архитектура',
-    mainLink: 'http://www.kwc.guide',
+    mainLink: '/',
     links: [
-      { text: 'Коулун', href: 'http://www.kwc.guide/#letter-k' }, 
-      { text: 'Архитектура', href: 'http://www.kwc.guide/#letter-a' }, 
-      { text: 'Быт', href: 'http://www.kwc.guide/#letter-b' }
+      { text: 'Kowloon', href: '/#letter-k' },
+      { text: 'Architecture', href: '/#letter-a' },
+      { text: 'Быт', href: '/#letter-b' }
     ],
   },
   {
@@ -91,7 +91,7 @@ export class NavBg {
               <a href="${itm.mainLink}" class="nav-title">${itm.title}</a>
               ${itm.links
                 .map(
-                  link => `
+                  (link) => `
                     <div class="nav-item-box">
                       <span class="nav-item-line"></span>
                       <a class="nav-item" href="${link.href}">${link.text}</a>
@@ -123,13 +123,13 @@ export class NavBg {
     this.createAnim()
     this.navBtn.addEventListener('click', this.handleClickNav)
 
-    this.menu.addEventListener('mousemove', e => {
+    this.menu.addEventListener('mousemove', (e) => {
       this.state.mouse = vec(e.clientX, e.clientY)
     })
 
     this.canvas.addEventListener(
       'touchmove',
-      e => (this.state.mouse = vec(e.touches[0].pageX, e.touches[0].pageY)),
+      (e) => (this.state.mouse = vec(e.touches[0].pageX, e.touches[0].pageY)),
     )
 
     this.updateSizes()

@@ -13,8 +13,8 @@ const noise = (window as any).noise
 require('./css/intro.css')
 
 let onLoad: () => void
-export const introLoading = new Promise(resolve => {
-  onLoad = resolve
+export const introLoading = new Promise<void>((resolve) => {
+  onLoad = () => resolve()
 })
 
 export interface TextDrawing {
@@ -87,24 +87,24 @@ export class Intro {
     this.updateSizes()
     onResize.subscribe(this.updateSizes)
 
-    window.addEventListener('mousemove', e => {
+    window.addEventListener('mousemove', (e) => {
       this.state.mouse = vec(e.pageX, e.pageY)
     })
 
     this.canvas.addEventListener(
       'touchmove',
-      e => (this.state.mouse = vec(e.touches[0].pageX, e.touches[0].pageY)),
+      (e) => (this.state.mouse = vec(e.touches[0].pageX, e.touches[0].pageY)),
     )
 
     this.updateSizes()
 
-    const introImgLoad = new Promise(resolve => {
+    const introImgLoad = new Promise<void>((resolve) => {
       const img = new Image()
-      img.src = 'http://ucraft.neekeesh.com/img/bg.jpg'
+      img.src = '/img/bg.jpg'
       if (img.complete) {
         resolve()
       } else {
-        img.onload = resolve
+        img.onload = () => resolve()
       }
     })
 
@@ -156,7 +156,7 @@ export class Intro {
       ctx.clearRect(0, 0, w, h)
       this.renderSmoke(time, now)
       if (!this.state.debugMode) this.renderDarkness(time, now)
-      this.renderHooks.forEach(hook => hook(time))
+      this.renderHooks.forEach((hook) => hook(time))
 
       ctx.restore()
       this.bufferCtx.restore()
@@ -288,7 +288,7 @@ export class Intro {
       )
 
       const maxH = medHs.reduce((max, h) => Math.max(max, h), 0)
-      const hCoeffs = medHs.map(h => h / maxH)
+      const hCoeffs = medHs.map((h) => h / maxH)
       stopBoxes.forEach(({ x1, y1, x2, y2, nx1, ny1, nx2, ny2 }, j) => {
         const h1 = y2 - y1
         const h2 = ny2 - ny1

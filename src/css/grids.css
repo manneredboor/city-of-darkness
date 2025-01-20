@@ -77,7 +77,7 @@
   position: absolute;
   top: -30px;
   left: 0;
-  background-image: url('http://ucraft.neekeesh.com/img/quote.svg');
+  background-image: url('/img/quote.svg');
   width: 359px;
   height: 324px;
 }

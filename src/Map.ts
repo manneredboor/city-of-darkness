@@ -8,17 +8,17 @@ require('./css/map.css')
 const W = 1403
 const H = 955
 // const SVG_URL = '../img/map.svg'
-const SVG_URL = 'http://ucraft.neekeesh.com/img/map.svg'
+const SVG_URL = '/img/map.svg'
 const MIN_ZOOM = 1
 const MAX_ZOOM = 3
 
 const texts: { [key: string]: string } = {
-  church: 'Храм Тин Хау',
-  school: 'Начальная школа',
-  olds: 'Центр для пожилых людей',
-  yamen: 'Храм Ямен',
-  hospital: 'Клиника',
-  well: 'Колодец',
+  church: 'Tin Hau Temple',
+  school: 'Primary school',
+  olds: 'Senior center',
+  yamen: 'Yamen Temple',
+  hospital: 'Clinic',
+  well: 'Well',
 }
 
 export class Map {
@@ -113,7 +113,7 @@ export class Map {
 
     const hovers = map.querySelectorAll('.kwc-map-hover')
 
-    hovers.forEach(el => {
+    hovers.forEach((el) => {
       const id = el.getAttribute('id')
       el.addEventListener('mouseenter', () => {
         this.hover.set(id)
@@ -144,9 +144,9 @@ export class Map {
     let downAt = vec(0, 0)
     let downOffset = vec(0, 0)
     let downTime = 0
-    isDown.subscribe(g => el.classList.toggle('i-grabbing', g))
+    isDown.subscribe((g) => el.classList.toggle('i-grabbing', g))
 
-    el.addEventListener('mousedown', e => {
+    el.addEventListener('mousedown', (e) => {
       isDown.set(true)
       const x = e.pageX
       const y = e.pageY - scrollState.pos - el.getBoundingClientRect().top
@@ -168,7 +168,7 @@ export class Map {
 
     el.addEventListener('mouseleave', () => isDown.set(false))
 
-    el.addEventListener('mousemove', e => {
+    el.addEventListener('mousemove', (e) => {
       const { w, h } = sizeState
       const x = e.pageX
       const y = e.pageY - scrollState.pos - el.getBoundingClientRect().top
@@ -185,7 +185,7 @@ export class Map {
       }
     })
 
-    el.addEventListener('contextmenu', e => e.preventDefault())
+    el.addEventListener('contextmenu', (e) => e.preventDefault())
   }
 
   createControls() {
@@ -213,7 +213,7 @@ export class Map {
     zoomBar.addEventListener('mousedown', () => (isDown = true))
     controls.addEventListener('mouseup', () => (isDown = false))
     controls.addEventListener('mouseleave', () => (isDown = false))
-    zoomBar.addEventListener('mousemove', e => {
+    zoomBar.addEventListener('mousemove', (e) => {
       if (isDown) {
         const rect = zoomBar.getBoundingClientRect()
         const zoom = 1 - (e.pageY - scrollState.pos - rect.top) / rect.height
@@ -239,7 +239,7 @@ export class Map {
     const mapMover = this.mapMover
     const hovers = this.mapEl.querySelectorAll('.kwc-map-hover')
 
-    hovers.forEach(el => {
+    hovers.forEach((el) => {
       const id = el.getAttribute('id')
       if (id === 'kwc-map-well') {
         const waves = this.createWavesItem()

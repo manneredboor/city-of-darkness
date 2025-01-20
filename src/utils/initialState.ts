@@ -1,3 +1,4 @@
+/* prettier-ignore */
 export default [
   {
     text: 'THE CITY OF DARKNESS',
@@ -59,7 +60,7 @@ export default [
     ],
   },
   {
-    text: 'ГОРОД ТЬМЫ',
+    text: 'KOWLOON',
     isChinese: false,
     dur: 9,
     delay: 3,
@@ -110,7 +111,7 @@ export default [
     ],
   },
   {
-    text: 'ГОРОД ТЬМЫ',
+    text: 'KOWLOON',
     isChinese: false,
     dur: 10,
     delay: 5,
@@ -140,7 +141,7 @@ export default [
     ],
   },
   {
-    text: 'ГОРОД ТЬМЫ',
+    text: 'KOWLOON',
     isChinese: false,
     dur: 9,
     delay: 0,
