@@ -1,0 +1,42 @@
+.section-architecture {
+  &__schemes {
+    display: flex;
+    margin: 40px -10px 60px;
+    flex-wrap: wrap;
+  }
+
+  &__schemes-item {
+    padding: 10px;
+    width: 33.333%;
+    line-height: 2;
+  }
+
+  &__schemes-image-wrap {
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      position: relative;
+      display: block;
+      width: 100%;
+    }
+  }
+
+  &__schemes-item:nth-child(1) img {
+    top: 20px;
+  }
+  &__schemes-item:nth-child(2) img {
+    top: 50px;
+  }
+  &__schemes-item:nth-child(3) img {
+    top: -55px;
+  }
+  &__schemes-item:nth-child(4) &__schemes-image-wrap {
+    height: 200px;
+  }
+  &__schemes-item:nth-child(4) img {
+      top: 0;
+  }
+}

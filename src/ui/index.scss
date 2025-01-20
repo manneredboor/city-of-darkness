@@ -1,0 +1,22 @@
+@use './styles/global.scss';
+
+@use './components/content-wrapper/content-wrapper.scss';
+@use './components/editor/editor.scss';
+@use './components/map/map.scss';
+@use './components/photo-note/photo-note.scss';
+
+@use './sections/intro/section-intro.scss';
+@use './sections/grid-intro/section-grid-intro.scss';
+@use './sections/general/section-general.scss';
+@use './sections/architecture/section-architecture.scss';
+
+@use './legacy-css/footer.scss';
+@use './legacy-css/grid-people.scss';
+@use './legacy-css/letters.scss';
+@use './legacy-css/nav.scss';
+@use './legacy-css/parallax-photo.scss';
+@use './legacy-css/plans.scss';
+@use './legacy-css/scroll-lock.scss';
+@use './legacy-css/stories.scss';
+@use './legacy-css/titles.scss';
+@use './legacy-css/wide-scroll.scss';

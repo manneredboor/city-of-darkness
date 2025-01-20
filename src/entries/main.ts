@@ -1,16 +1,14 @@
-require('vendor/parlin-noise')
-import { Intro } from '../Intro'
-import { Map } from '../Map'
-import { NavBg } from '../Nav'
-import '../Letters'
-import '../Spinner'
-import '../Plans'
-import '../WideScroll'
-import '../Stories'
-import '../ParallaxPhotos'
-import '../Link'
-require('../css/grids.css')
-require('../css/grid-people.css')
+require('modules/vendor/parlin-noise')
+import { Intro } from '../modules/Intro'
+import { Map } from '../modules/Map'
+import { NavBg } from '../modules/Nav'
+import '../modules/Letters'
+import '../modules/Spinner'
+import '../modules/Plans'
+import '../modules/WideScroll'
+import '../modules/Stories'
+import '../modules/ParallaxPhotos'
+import '../modules/Link'
 
 new Map()
 new NavBg()

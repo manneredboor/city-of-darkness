@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="201px" height="111px" viewBox="0 0 201 111" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 10</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linejoin="round">
+        <g id="Group-10" transform="translate(0.541432, -0.161867)" stroke-width="0.5">
+            <g id="Слой_1-3" transform="translate(0.000000, 60.626501)" stroke="#FFFFFF">
+                <polygon id="Shape" points="0.550129357 0.0561356487 99.9888174 0.0561356487 199.427505 36.2467883 99.9888174 36.2524019"></polygon>
+            </g>
+            <polyline id="Shape" stroke="#FFFFFF" points="199.427505 103.794814 199.427505 110.525479 99.9888174 110.525479 99.9888174 103.794814 99.9888174 110.525479 0.550129357 74.3292124 0.550129357 67.5985481"></polyline>
+            <path d="M99.9888174,96.8789024 L99.9888174,103.794814" id="Shape" stroke="#FFFFFF"></path>
+            <path d="M0.550129357,60.6826362 L0.550129357,67.5985481" id="Shape" stroke="#FFFFFF"></path>
+            <path d="M199.427505,96.8732889 L199.427505,103.794814" id="Shape" stroke="#FFFFFF"></path>
+            <path d="M107.106818,0.460312319 L92.898885,14.6626314" id="Shape" stroke="#FFFFFF"></path>
+            <path d="M107.106818,14.6626314 L92.898885,0.460312319" id="Shape" stroke="#FFFFFF"></path>
+            <path d="M100.016885,25.05334 L100.016885,43.4995141" id="Shape" stroke="#FFFFFF" fill="#666666" fill-rule="nonzero"></path>
+            <path d="M100.016885,26.7935451 L100.016885,24.7670482" id="Shape" stroke="#666666" fill="#666666" fill-rule="nonzero" stroke-linecap="round"></path>
+            <polyline id="Shape" stroke="#FFFFFF" fill="#FFFFFF" fill-rule="nonzero" stroke-linecap="round" points="97.6760287 29.9090736 100.005658 24.7670482 100.022499 28.342889 97.6760287 29.9090736"></polyline>
+            <path d="M100.016885,26.7935451 L100.016885,28.342889" id="Shape" stroke="#666666" fill="#666666" fill-rule="nonzero" stroke-linecap="round"></path>
+            <path d="M100.016885,26.7935451 L100.016885,24.7670482" id="Shape" stroke="#666666" fill="#666666" fill-rule="nonzero" stroke-linecap="round"></path>
+            <polyline id="Shape" stroke="#FFFFFF" fill="#FFFFFF" fill-rule="nonzero" stroke-linecap="round" points="102.363355 29.9090736 100.033726 24.7670482 100.022499 28.342889 102.363355 29.9090736"></polyline>
+            <path d="M100.016885,26.7935451 L100.016885,28.342889" id="Shape" stroke="#FFFFFF" fill="#666666" fill-rule="nonzero" stroke-linecap="round"></path>
+            <path d="M100.016885,43.4995141 L100.016885,52.9808252" id="Shape" stroke="#FFFFFF"></path>
+        </g>
+    </g>
+</svg>

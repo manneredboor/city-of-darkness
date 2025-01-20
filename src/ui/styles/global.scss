@@ -1,0 +1,43 @@
+@font-face {
+  font-family: 'Typeface Custom';
+  src: url('/src/assets/fonts/Chineese\ Sans.ttf');
+}
+
+@font-face {
+  font-weight: 400;
+  font-family: 'Kanit Sans';
+  src: url('/src/assets/fonts/Kanit/Kanit-Regular.ttf');
+}
+
+@font-face {
+  font-weight: 500;
+  font-family: 'Kanit Sans';
+  src: url('/src/assets/fonts/Kanit/Kanit-Medium.ttf');
+}
+
+@font-face {
+  font-weight: 800;
+  font-family: 'Kanit Sans';
+  src: url('/src/assets/fonts/Kanit/Kanit-Bold.ttf');
+}
+
+@font-face {
+  font-weight: 900;
+  font-family: 'Kanit Sans';
+  src: url('/src/assets/fonts/Kanit/Kanit-Black.ttf');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: #0d0d0d;
+  font-weight: 400;
+  overflow-x: hidden;
+  font-family: 'Kanit Sans';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

@@ -1,0 +1,17 @@
+.photo-note {
+  font-size: 12px;
+  line-height: 24px;
+
+  &__title {
+    color: #bbb;
+  }
+
+  // &__text {
+  // }
+}
+
+.photo-notes-horizontal {
+  margin-bottom: 60px;
+  display: flex;
+  gap: 60px;
+}

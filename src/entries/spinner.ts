@@ -1,4 +1,4 @@
-import { lockScroll } from 'utils/scroll'
+import { lockScroll } from 'modules/utils/scroll'
 lockScroll()
 
 // Show loader after 300 ms of loading

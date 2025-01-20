@@ -1,0 +1,146 @@
+.kwc-footer {
+  width: 100%;
+  min-height: 360px;
+  background: #000;
+  position: relative;
+  padding: 40px 0;
+  margin: 25px 0 0;
+  display: flex;
+  align-items: center;
+}
+
+.kwc-footer::before {
+  content: '';
+  position: absolute;
+  top: -22px;
+  left: 27px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 23px 22px 23px;
+  border-color: transparent transparent #000000 transparent;
+}
+
+.kwc-footer p {
+  color: #fff;
+  word-break: unset !important;
+  white-space: nowrap;
+}
+
+.footer-nav {
+  height: 280px;
+  width: 80px;
+  border-left: 2px solid #fff;
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-nav:nth-child(1), .footer-nav:nth-child(2) {
+  border-left: none;
+  border-right: 2px solid #fff;
+}
+
+.footer-nav-title {
+  transform: rotate(-90deg);
+  /* position: absolute; */
+  font-size: 24px;
+}
+
+.footer-nav-title.his {
+  margin: 34px 0 0;
+}
+
+.footer-nav-title.fact {
+  margin: 24px 0 0;
+}
+
+.footer-nav-title.arch {
+  margin: 60px 0 0;
+}
+
+.footer-nav-title.people {
+  margin: 17px 0 0;
+}
+
+.footer-curr-content {
+  flex: 1;
+  display: flex;
+  padding-left: 158px;
+  height: 280px;
+}
+
+.ft-cont-65 {
+  width: 65%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.ft-cont-65, .ft-cont-65:active, .ft-cont-65:focus, .ft-cont-65:visited {
+  outline: none;
+  text-decoration: none;
+}
+
+a {
+  outline: none !important;
+  text-decoration: none !important;
+}
+
+.ft-cont-35 {
+  width: 35%;
+  display: flex;
+  flex-flow: column;
+  /* justify-content: space-between; */
+  text-align: left;
+}
+
+.ft-cont-35 a, .ft-cont-35 a:visited, .ft-cont-35 a:focus, .ft-cont-35 a:active, .ft-cont-35 a:hover {
+  color: #fff;
+}
+
+.footer-ch {
+  font-size: 24px;
+}
+
+.ft-text-lg {
+  text-transform: uppercase;
+  font-size: 64px;
+}
+
+.ft-ch-box {
+  display: flex;
+  align-items: center;
+}
+
+.ft-ch-box img {
+  margin-left: 9px;
+}
+
+.ft-menu-num {
+  font-size: 72px;
+  line-height: .75;
+  letter-spacing: 3px;
+  color: #000;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
+    1px 1px 0 #fff;
+}
+
+.footer-text {
+  font-size: 18px;
+}
+
+.ft-cont-35 .footer-text {
+  margin-top: 15px;
+}
+
+.ft-cont-35 .footer-text:nth-last-child(1) {
+  margin-bottom: 0
+}
+
+[datacolumn-id="814"] .module-container  {
+  margin-bottom: 0 !important;
+}

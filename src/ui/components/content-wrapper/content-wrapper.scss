@@ -1,0 +1,49 @@
+.content-wrapper {
+  margin-bottom: 200px;
+
+  &__inner {
+    padding: 0 40px;
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+
+  &__photo {
+    margin-bottom: 30px;
+    display: block;
+    max-width: 100%;
+  }
+
+  &__title {
+    margin-bottom: 20px;
+    font-size: 60px;
+    font-weight: 800;
+  }
+
+  &__text,
+  &__text-style {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.8;
+  }
+
+  &__text {
+    position: relative;
+    max-width: 960px;
+  }
+
+  &__divider {
+    margin: 100px 0;
+    width: 100%;
+    height: 3px;
+    background-color: #000;
+  }
+
+  &.color--dark {
+    color: #fff;
+    background-color: #000;
+  }
+
+  &.color--dark &__divider {
+    background-color: #fff;
+  }
+}

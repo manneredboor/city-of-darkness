@@ -1,0 +1,87 @@
+.editor-window {
+  font-size: 12px;
+  position: fixed;
+  border: 2px solid #f3f3f3;
+  border-radius: 2px;
+  user-select: none;
+  background-color: #fff;
+}
+
+.editor-drag {
+  min-width: 45px;
+  width: 100%;
+  height: 10px;
+  cursor: -webkit-grab;
+  background-color: #eee;
+}
+
+.editor-drag.active {
+  cursor: -webkit-grabbing;
+  background-color: #ddd;
+}
+
+.editor-button {
+  cursor: pointer;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.editor-hierarchy-item {
+  padding: 10px 15px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.editor-props-grp {
+  padding: 5px 5px 0 5px;
+}
+
+.editor-props-grp input,
+.editor-props-grp select {
+  width: 100px;
+  margin: 0 5px 5px 0;
+}
+
+.editor-props-btn {
+  text-align: center;
+  cursor: pointer;
+}
+
+.editor-popup {
+  width: 60%;
+  height: 60%;
+  position: fixed;
+  left: 20%;
+  top: 20%;
+  border: 2px solid #f3f3f3;
+  border-radius: 2px;
+  background-color: #fff;
+}
+
+.editor-popup textarea {
+  display: block;
+  width: 100%;
+  height: calc(100% - 60px);
+}
+
+.editor-popup button {
+  display: block;
+  padding: 10px 20px;
+  margin: 10px auto;
+}
+
+.editor-hierarchy-row {
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+}
+
+.editor-hierarchy-row button {
+  width: 20px;
+  cursor: pointer;
+}
+
+.editor-debug .kwc-intro,
+.editor-debug .kwc-intro__canvas {
+  cursor: default;
+}

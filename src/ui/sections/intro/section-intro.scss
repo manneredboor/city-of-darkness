@@ -1,0 +1,117 @@
+@keyframes kwc-text-move {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+}
+
+
+.kwc-intro {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 100vh;
+  background-image: url('/src/assets/img/photo/intro-background.jpg');
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20vh;
+    pointer-events: none;
+    background: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 0)),
+      to(rgba(0, 0, 0, 255))
+    );
+    background: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 255));
+    background: -o-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 255));
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 255));
+  }
+
+  &__text-perspective {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #fff;
+    overflow: hidden;
+    -webkit-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    transform-origin: 0 0;
+  }
+
+  &__text-mover {
+    position: relative;
+    -webkit-animation-name: kwc-text-move;
+    animation-name: kwc-text-move;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+  }
+
+  &__text {
+    position: relative;
+    line-height: 1;
+    font-weight: 800;
+    text-align: left;
+  }
+
+  &__text-chinese {
+    font-family: 'Typeface Custom';
+    font-weight: 400;
+    letter-spacing: 0.1em;
+  }
+
+  &__canvas {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &__body {
+    pointer-events: none;
+    width: 100%;
+    max-width: 100%;
+    height: 100vh;
+  }
+
+  &__description {
+    background-color: #000;
+  }
+
+  &__description-inner {
+    margin: 0 auto;
+    padding: 200px 40px;
+    color: #fff;
+    max-width: 1100px;
+    font-size: 36px;
+    line-height: 1.4;
+  }
+
+  &__lights {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-image: url('/src/assets/img/photo/dark.png');
+    opacity: 1;
+  }
+}
